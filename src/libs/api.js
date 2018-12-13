@@ -36,15 +36,35 @@ const api = {
         login: 'genogram/userLogin/login', //登录
         reg: 'genogram/userLogin/signIn', //注册
         reset: 'genogram/userLogin/updatePassword', //修改密码
-        info: 'genogram/user/getAllUserReg', //用户信息
         regcode: 'genogram/userLogin/sendVerificationCode', //注册验证码
+        info: 'genogram/user/getAllUserReg', //用户信息
         update: 'genogram/user/updatePersonVo', //修改用户资料
         pay: {
             ali: 'genogram/pay/aLiPay', //支付宝支付
             wx: 'genogram/pay/weChatPay', //微信支付
         },
-        shuoshuo_list:'genogram/user/getAllUserSaysList',//说说列表
-        shuoshuo_add: 'genogram/user/insertAllUserSays', //说说
+        pay_list: 'genogram/user/getPayInList', //捐款记录
+
+        shuoshuo_list: 'genogram/user/getAllUserSaysList', //说说列表
+        shuoshuo_add: 'genogram/user/insertAllUserSays', //发布
+        shuoshuo_info: 'genogram/user/getAllUserSays', //详情
+        shuoshuo_del: 'genogram/user/deleteAllUserSays', //删除
+
+        picture_list: 'genogram/user/getAllUserPicsList', //图片
+        picture_add: 'genogram/user/insertOrUpdateAllUserPics', //发表图片
+        picture_info: 'genogram/user/getAllUserPics', //详情
+        picture_del: 'genogram/user/deleteAllUserPics', //删除图片
+
+        rizhi_list: '/genogram/user/insertAllUserNewsInfo', //日志
+        rizhi_add: 'genogram/user/deleteAllUserNewsInfo', //发布
+        rizhi_info: 'genogram/user/getAllUserNewsInfo', //详情
+        rizhi_del: 'genogram/user/deleteAllUserNewsInfo', //删除
+
+        video_list: '/genogram/user/getAllUserVideosList', //视频
+        video_add: 'genogram/user/insertAllUserVideos', //发布
+        video_info: '/genogram/user/getAllUserVideos', //详情
+        video_del: 'genogram/user/deleteAllUserVideos', //删除
+
     },
     admin: {
         base: urls.admin.county,
