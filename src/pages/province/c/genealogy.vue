@@ -1,0 +1,152 @@
+<template>
+    <div class="charity">
+        <div class="sort">
+            <div class="searchbar">
+                <Button class="link">搜索</Button>
+                <Input type="text" placeholder="输入搜索关键词" v-model="fileName" @keyup.enter.native="getList" />
+            </div>
+            <Select v-model="status" style="width:120px;margin-right:8px;" @on-change="getList">
+                <Option :value="0">全部</Option>
+                <Option :value="1">公开</Option>
+                <Option :value="2">密码访问</Option>
+            </Select>
+            <al-cascader v-model="area" @on-change="handleChange" :level="2" style="width:240px;display:inline-block;" placeholder="筛选地区"/>
+        </div>
+        <div style="minHeight:450px">
+            <Row :gutter="16" class="items">
+                <i-col :span="4" v-for="v in list" :key="v.id">
+                    <div class="item" @click="openFile(v)">
+                        <div class="img">
+                            <img src="http://iph.href.lu/300x400">
+                        </div>
+                        <div class="name">{{v.fileName}}</div>
+                        <div class="site">区域：{{api.formatArea(v.regionCode)}}</div>
+                        <div class="date">创建时间：{{dayjs(v.updateTime).format("YYYY-MM-DD")}}</div>
+                    </div>
+                </i-col>
+            </Row>
+            <Page :total="total" @on-change="chgPage" :page-size="8" v-if="total"/>
+        </div>
+    </div>
+</template>
+<script>
+export default {
+    data() {
+        return {
+            fileName: "",
+            status: 0,
+            area: [],
+            areacode: 0,
+            list: [],
+            page: 1,
+            total: 0
+        };
+    },
+    computed: {},
+    mounted: function() {
+        this.getList();
+    },
+    methods: {
+        getList() {
+            this.api
+                .get(this.api.county.base + this.api.county.genealogy_list, {
+                    pageNo: this.page,
+                    siteId: this.$store.state.county.id,
+                    fileName: this.fileName,
+                    status: this.status ? this.status : "",
+                    regionCode: this.areacode ? this.areacode : ""
+                })
+                .then(res => {
+                    if (res.code == 200) {
+                        this.list = res.data.records;
+                        this.total = res.data.total;
+                    }
+                });
+        },
+        chgPage(e) {
+            this.page = e;
+            this.getList();
+        },
+        openFile(e) {},
+        handleChange(e) {
+            this.areacode = e.length ? e[2].code : '';
+            this.getList();
+        }
+    }
+};
+</script>
+
+<style lang="scss" scoped>
+@import "@/assets/css/var.scss";
+.sort {
+    padding: 8px 16px;
+    margin: 16px 0;
+    overflow: hidden;
+    border-radius: 8px;
+    background: #eee;
+    .searchbar {
+        float: right;
+        input {
+            line-height: 28px;
+            padding: 0 8px;
+            border-radius: 4px;
+            border: 0;
+        }
+        .link {
+            float: right;
+            padding: 0 8px;
+            line-height: 28px;
+            background: $color;
+            color: #fff;
+            border-radius: 4px;
+            margin-left: 4px;
+        }
+    }
+    .item {
+        float: left;
+        width: 80px;
+        text-align: center;
+        span {
+            cursor: pointer;
+            padding: 4px 8px;
+        }
+        &.label {
+            text-align: left;
+        }
+        &.curr,
+        &:hover {
+            span {
+                background: $color;
+                color: #fff;
+                border-radius: 4px;
+            }
+        }
+    }
+}
+.items {
+    .item {
+        text-align: center;
+        margin: 8px 0;
+        border-radius: 4px;
+        text-align: left;
+        font-size: 12px;
+        .img {
+            background: whitesmoke no-repeat center / cover;
+            width: 100%;
+            img {
+                width: 100%;
+                visibility: hidden;
+            }
+        }
+        .name {
+            font-size: 14px;
+        }
+        .site {
+            color: #999;
+        }
+        .date {
+            color: #999;
+        }
+    }
+}
+</style>
