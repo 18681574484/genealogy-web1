@@ -30,88 +30,8 @@ export default {
 @import "@/assets/css/var.scss";
 .page-user {
     background: whitesmoke;
-    .sub {
-        padding: 32px 0 0;
-        background-color: whitesmoke;
-
-        .inner {
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .grid {
-            width: 49%;
-            background: #fff;
-            height: 400px;
-
-            .h {
-                font-size: 16px;
-                line-height: 40px;
-                padding: 0 16px;
-
-                .tit {
-                    border-bottom: 1px solid #eee;
-                }
-            }
-
-            .b {
-                overflow-y: auto;
-                height: 360px;
-
-                .text {
-                    padding: 16px;
-                }
-
-                .item {
-                    white-space: nowrap;
-                    overflow: hidden;
-                    padding: 8px 16px;
-
-                    .img {
-                        width: 64px;
-                        height: 64px;
-                        float: left;
-                        margin-right: 16px;
-                        background: whitesmoke no-repeat center / cover;
-                        border-radius: 50%;
-                    }
-
-                    .obj {
-                        overflow: hidden;
-
-                        .name {
-                            font-size: 16px;
-                        }
-
-                        .intro {
-                            color: #666;
-                        }
-
-                        .tag {
-                            overflow: hidden;
-                            color: #666;
-
-                            i {
-                                color: #999;
-                                margin-left: 16px;
-                            }
-
-                            .appreciate {
-                                float: right;
-                            }
-
-                            .mark {
-                                float: right;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-
     .suc {
-        padding: 32px 0;
+        padding: 16px 0;
 
         & + .suc {
             padding-top: 0;

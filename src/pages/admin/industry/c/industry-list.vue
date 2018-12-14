@@ -220,7 +220,7 @@ export default {
                 showId: this.type,
                 newsTitle: this.formData.newsTitle,
                 newsText: this.formData.newsText,
-                industryLocation: this.formData.industryLocation,
+                industryLocation: this.formData.industryLocation || '',
                 visitNum: this.formData.visitNum ? this.formData.visitNum : 0,
                 fileName: this.fileName,
                 filePath: this.filePath
@@ -258,7 +258,7 @@ export default {
                 showId: this.type,
                 newsTitle: this.formData.newsTitle,
                 newsText: this.formData.newsText,
-                industryLocation: this.formData.industryLocation,
+                industryLocation: this.formData.industryLocation || '',
                 visitNum: this.formData.visitNum ? this.formData.visitNum : 0,
                 fileName: this.fileName,
                 filePath: this.filePath

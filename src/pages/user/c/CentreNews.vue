@@ -2,19 +2,11 @@
     <div class="grid">
         <div class="h">
             <div class="more">更多</div>
-            <div class="tit">精彩说说</div>
+            <div class="tit">最新文章</div>
         </div>
         <div class="b">
-            <div class="item" v-for="v in list" :key="v.id">
-                <div class="img" :style="api.imgBG(v.newsFaceUrl)"></div>
-                <div class="obj">
-                    <div class="name">{{v.title}}</div>
-                    <div class="intro">{{v.content}}</div>
-                    <div class="tag">
-                        <div class="date">2018-10-10 16:12</div>
-                    </div>
-                </div>
-            </div>
+            <div class="title">{{info.title}}</div>
+            <div class="text">{{info.content}}</div>
         </div>
     </div>
 </template>
@@ -23,8 +15,7 @@ export default {
     components: {},
     data() {
         return {
-            list: [],
-            total: 0
+            info: {}
         };
     },
     computed: {},
@@ -35,12 +26,14 @@ export default {
         getList() {
             this.api
                 .post(this.api.user.base + this.api.user.rizhi_list, {
-                    pageNo: this.page
+                    pageSize: 1,
+                    pageNo: 1
                 })
                 .then(res => {
                     if (res.code == 200) {
-                        this.list = res.data.records;
-                        this.total = res.data.total;
+                        if (res.data.records.length) {
+                            this.info = res.data.records[0];
+                        }
                     } else {
                     }
                 });
@@ -59,7 +52,7 @@ export default {
         padding: 0 16px;
         .more {
             float: right;
-            color: #999;
+            color:#999;
         }
         .tit {
             font-size: 16px;
@@ -70,8 +63,14 @@ export default {
     .b {
         overflow-y: auto;
         height: 360px;
+        padding: 8px 16px;
+        .title {
+            line-height: 32px;
+            font-size: 16px;
+        }
         .text {
-            padding: 16px;
+            color: #666;
+            padding: 8px 0;
         }
 
         .item {
@@ -90,22 +89,31 @@ export default {
 
             .obj {
                 overflow: hidden;
-                min-height: 64px;
+
                 .name {
                     font-size: 16px;
-                    overflow: hidden;
-                    width: 100%;
-                    text-overflow: ellipsis;
                 }
 
                 .intro {
-                    white-space: normal;
                     color: #666;
                 }
 
                 .tag {
                     overflow: hidden;
                     color: #666;
+
+                    i {
+                        color: #999;
+                        margin-left: 16px;
+                    }
+
+                    .appreciate {
+                        float: right;
+                    }
+
+                    .mark {
+                        float: right;
+                    }
                 }
             }
         }

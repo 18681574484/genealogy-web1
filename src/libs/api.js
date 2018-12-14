@@ -54,9 +54,9 @@ const api = {
         picture_add: 'genogram/user/insertOrUpdateAllUserPics', //发表图片
         picture_info: 'genogram/user/getAllUserPics', //详情
         picture_del: 'genogram/user/deleteAllUserPics', //删除图片
-
-        rizhi_list: '/genogram/user/insertAllUserNewsInfo', //日志
-        rizhi_add: 'genogram/user/deleteAllUserNewsInfo', //发布
+        
+        rizhi_list: '/genogram/user/getAllUserNewsInfoList', //日志
+        rizhi_add: 'genogram/user/insertAllUserNewsInfo', //发布
         rizhi_info: 'genogram/user/getAllUserNewsInfo', //详情
         rizhi_del: 'genogram/user/deleteAllUserNewsInfo', //删除
 

@@ -17,10 +17,11 @@
                     <div class="item" @click="openFile(v)">
                         <div class="book">
                             <img src="http://iph.href.lu/300x400">
-                            <div class="tit">{{v.fileName}}</div>
+                            <div class="tit kt">{{v.fileName}}</div>
                             <div class="lines">
                                 <div class="line" v-for="n in 5" :key="n"></div>
                             </div>
+                            <div class="first kt">{{v.familyName}}</div>
                             <div class="flag">{{v.status == 1 ? '公开':'密码访问'}}</div>
                         </div>
                         <div class="name">{{v.fileName}}</div>
@@ -142,6 +143,9 @@ export default {
                 visibility: hidden;
                 overflow: hidden;
             }
+            .tit {
+                color: #fff;
+            }
             .lines {
                 position: absolute;
                 z-index: 1;
@@ -167,14 +171,22 @@ export default {
                 background: $color;
                 width: 64px;
                 text-align: center;
-                line-height: 32px;
-                border-radius: 0 0 32px 0;
+                line-height: 24px;
+                border-radius: 0 0 16px 0;
+            }
+            .first {
+                position: absolute;
+                top: 32px;
+                left: 32px;
+                font-size: 64px;
+                color: rgba(#fff, 0.2);
             }
             .tit {
                 position: absolute;
                 top: 16px;
                 right: 16px;
                 width: 24px;
+                line-height: 1.5;
                 padding: 8px 0;
                 font-size: 14px;
                 text-align: center;

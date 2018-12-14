@@ -16,6 +16,11 @@
                 <FormItem label="联系人">
                     <Input v-model="formData.contactUser" placeholder="联系人"/>
                 </FormItem>
+                <FormItem label="姓氏">
+                    <Select v-model="formData.familyCode" filterable remote clearable :remote-method="remoteMethod" :loading="loading" placeholder="搜索姓氏">
+                        <Option v-for="v in options" :value="v.id" :key="v.id">{{v.value}}</Option>
+                    </Select>
+                </FormItem>
                 <FormItem label="地区">
                     <al-cascader v-model="selected" :level="2" style="width:100%" placeholder="请选择地区"/>
                 </FormItem>
@@ -55,6 +60,8 @@ export default {
             page: 1,
             formData: {},
             selected: [],
+            loading: false,
+            options: [],
             columns: [
                 { title: "ID", width: 80, key: "id" },
                 {
@@ -188,6 +195,20 @@ export default {
                         }
                     });
             }
+        },
+        remoteMethod(e) {
+            this.options = [];
+            this.loading = true;
+            this.api
+                .get(this.api.user.base + this.api.user.firstname, {
+                    value: e
+                })
+                .then(res => {
+                    if (res.code == 200) {
+                        this.loading = false;
+                        this.options = res.data;
+                    }
+                });
         },
         resetSelect(e) {
             if (e) {
