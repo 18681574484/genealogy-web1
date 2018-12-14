@@ -11,7 +11,7 @@
                         <div class="tit">日志</div>
                     </div>
                     <div class="bd" style="min-height:450px;">
-                        <div class="item" v-for="v in list" :key="v.id">
+                        <router-link :to="'detail?id='+v.id" class="item" v-for="v in list" :key="v.id">
                             <div class="img" :style="api.imgBG(v.newsFaceUrl)"></div>
                             <div class="obj">
                                 <div class="tit">{{v.title}}</div>
@@ -20,7 +20,7 @@
                                     <span class="del" @click="onDel(v.id)">删除</span>
                                 </div>
                             </div>
-                        </div>
+                        </router-link>
                     </div>
                 </div>
             </div>

@@ -31,6 +31,14 @@ export default [{
     },
     component: () => import('@/pages/user/Note')
 }, {
+    path: 'detail',
+    name: 'u_detail',
+    meta: {
+        title: "日志详情",
+        role: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+    },
+    component: () => import('@/pages/user/detail')
+}, {
     path: 'msg',
     name: 'u_msg',
     meta: {

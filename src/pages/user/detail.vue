@@ -1,18 +1,15 @@
 <template>
     <div class="main">
-        <div class="adlinks">
-            <img src="./img/detail.jpg">
-        </div>
         <div class="inner">
             <Breadcrumb>
-                <BreadcrumbItem to="/c">首页</BreadcrumbItem>
+                <BreadcrumbItem to="/u">首页</BreadcrumbItem>
                 <BreadcrumbItem>详情</BreadcrumbItem>
             </Breadcrumb>
         </div>
         <div class="inner">
             <div class="detail" v-if="isload">
                 <div class="h">
-                    <div class="tit" v-html="info.newsTitle || info.personName"></div>
+                    <div class="tit" v-html="info.title"></div>
                     <div class="tag">
                         <div class="item">
                             <span>时间：</span>
@@ -29,66 +26,10 @@
                     </div>
                 </div>
                 <div class="b">
-                    <div class="content" v-html="info.newsText || info.personSummary"></div>
-                </div>
-                <div class="f">
-                    <div class="share" v-show="false">
-                        <span>分享到：</span>
-                        <iconfont name="weibo"/>
-                    </div>
-                    <div class="link">
-                        <span>赏</span>
-                    </div>
-                    <div class="total">
-                        <span>收到打赏</span>
-                        <span class="num">0</span>
-                        <span>次</span>
-                    </div>
+                    <div class="content" v-html="info.content"></div>
                 </div>
             </div>
             <Spin size="large" fix v-else></Spin>
-            <div class="feedback" v-if="1 == 2">
-                <div class="h">
-                    <div class="img"></div>
-                    <div class="obj">
-                        <div class="user">
-                            <div class="count">0/300</div>
-                            <span>张三</span>
-                            <iconfont name="crownfill"/>
-                        </div>
-                        <div class="textarea">
-                            <textarea name id rows="4"></textarea>
-                        </div>
-                    </div>
-                </div>
-                <div class="b">
-                    <div class="item" v-for="v in 5" :key="v">
-                        <div class="img"></div>
-                        <div class="obj">
-                            <div class="user">
-                                <span class="name">用户名</span>
-                                <iconfont name="crownfill"/>
-                                <span class="date">昨天</span>
-                            </div>
-                            <div class="text">描述描述</div>
-                            <div class="tag">
-                                <div class="itm">
-                                    <iconfont name="appreciate_light"/>
-                                    <span>150</span>
-                                </div>
-                                <div class="itm">
-                                    <iconfont name="footprint"/>
-                                    <span>199</span>
-                                </div>
-                                <div class="itm">
-                                    <iconfont name="message_light"/>
-                                    <span>199</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </template>
@@ -96,55 +37,21 @@
 export default {
     data() {
         return {
-            url: "",
             info: {},
             isload: false
         };
     },
-    computed: {
-        apiList() {
-            return this.$store.state.county.apiList;
-        }
-    },
+    computed: {},
     mounted: function() {
-        this.resetUrl();
         this.getInfo();
-        let url =
-            "https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js";
-        let script = document.createElement("script");
-        script.setAttribute("src", url);
-        document.getElementsByTagName("head")[0].appendChild(script);
     },
     methods: {
-        resetUrl() {
-            this.url =
-                this.api.county.base +
-                this.api.county.detail[this.$route.query.type];
-            switch (this.$route.query.type) {
-                case "culture":
-                    this.navcurr = 2;
-                    break;
-                case "charity":
-                    this.navcurr = 3;
-                    break;
-                case "industry":
-                    this.navcurr = 4;
-                    break;
-                case "famous":
-                    this.navcurr = 5;
-                    break;
-                case "records":
-                    this.navcurr = 6;
-                    break;
-            }
-        },
         getInfo() {
             this.api
-                .get(this.url, {
+                .post(this.api.user.base + this.api.user.rizhi_info, {
                     id: this.$route.query.id
                 })
                 .then(res => {
-                    console.log(res.data);
                     this.isload = true;
                     if (res.code == 200) {
                         this.info = res.data;
