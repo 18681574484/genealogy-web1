@@ -10,7 +10,7 @@
                         </div>
                         <div class="tit">日志</div>
                     </div>
-                    <div class="bd">
+                    <div class="bd" style="min-height:450px;">
                         <div class="item" v-for="v in list" :key="v.id">
                             <div class="img" :style="api.imgBG(v.newsFaceUrl)"></div>
                             <div class="obj">
@@ -27,7 +27,7 @@
             <Page :total="total" @on-change="chgPage" :page-size="6"/>
         </div>
         <Modal v-model="isAdd" title="写日志" width="640px" :footer-hide="true">
-            <Form :model="formData" class="b">
+            <Form :model="formData">
                 <FormItem label="标题">
                     <Input v-model="formData.title" placeholder="输入标题" clearable :maxlength="11" @keyup.enter.native="toSubmit"/>
                 </FormItem>
@@ -74,6 +74,7 @@ export default {
         getList() {
             this.api
                 .post(this.api.user.base + this.api.user.rizhi_list, {
+                    pageSize:6,
                     pageNo: this.page
                 })
                 .then(res => {

@@ -2,12 +2,12 @@
     <div class="suc">
         <div class="grid">
             <div class="h">
-                <div class="more">全部</div>
+                <router-link class="more" to="video">更多</router-link>
                 <div class="tit">视频</div>
             </div>
             <div class="b">
                 <Row :gutter="16">
-                    <i-col :xs="12" :sm="6" :md="4" class="item" v-for="v in list" :key="v.id">
+                    <i-col :xs="12" :sm="6" :md="6" class="item" v-for="v in list" :key="v.id">
                         <div class="img" :style="api.imgBG(v.videoPicUrl)">
                             <img src="http://iph.href.lu/80x45">
                             <div class="hover" @click="toShow(v.videoPicUrl)">

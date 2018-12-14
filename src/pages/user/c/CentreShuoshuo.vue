@@ -1,7 +1,7 @@
 <template>
     <div class="grid">
         <div class="h">
-            <div class="more">更多</div>
+            <router-link class="more" to="msg">更多</router-link>
             <div class="tit">精彩说说</div>
         </div>
         <div class="b">
@@ -11,7 +11,7 @@
                     <div class="name">{{v.title}}</div>
                     <div class="intro">{{v.content}}</div>
                     <div class="tag">
-                        <div class="date">2018-10-10 16:12</div>
+                        <span class="date">{{dayjs(v.createTime).format("YYYY-MM-DD")}}</span>
                     </div>
                 </div>
             </div>

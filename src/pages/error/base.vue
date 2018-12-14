@@ -1,7 +1,6 @@
 <template>
     <div class="content">
         <section>
-            <Qrcode :text="'http://www.baidu.com/'"/>
             <div class="h">县级联谊会</div>
             <div class="b">
                 <div class="item" @click="link(v,1)" v-for="(v,i) in list.county" :key="i">

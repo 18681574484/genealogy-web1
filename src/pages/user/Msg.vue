@@ -1,72 +1,143 @@
 <template>
     <div class="main">
-        <div class="suc">
-            <div class="inner grid">
-                <div class="h">
-                    <div class="more link">
-                        <iconfont name="edit"/>
-                        <span>发布</span>
+        <div class="inner">
+            <div class="suc">
+                <div class="grid">
+                    <div class="h">
+                        <div class="more link" @click="isAdd = true;">
+                            <iconfont name="edit"/>
+                            <span>发布</span>
+                        </div>
+                        <div class="tit">说说</div>
                     </div>
-                    <div class="tit">说说</div>
-                </div>
-                <div class="bd">
-                    <div class="item" v-for="v in 5" :key="v">
-                        <div class="img"></div>
-                        <div class="obj">
-                            <div class="txt">文字描述文字描述</div>
-                            <div class="date">2018-10-10</div>
+                    <div class="b" style="min-height:450px;">
+                        <div class="item" v-for="v in list" :key="v.id">
+                            <div class="obj">
+                                <div class="intro">{{v.content}}</div>
+                                <div class="tag">
+                                    <span class="link" style="float:right" @click="onDel(v.id)">删除</span>
+                                    <span class="date">{{dayjs(v.createTime).format("YYYY-MM-DD")}}</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <Page :total="total" @on-change="chgPage" :page-size="8"/>
         </div>
+        <Modal v-model="isAdd" title="说点什么" width="640px" :footer-hide="true">
+            <Form :model="formData">
+                <FormItem>
+                    <Input type="textarea" v-model="formData.content" placeholder="输入标题" clearable :maxlength="140" :rows="8" @keyup.enter.native="toSubmit"/>
+                </FormItem>
+                <FormItem>
+                    <Button type="primary" @click="toSubmit" style="margin-right:16px;">提交</Button>
+                    <Button @click="isAdd = false">关闭</Button>
+                </FormItem>
+            </Form>
+        </Modal>
     </div>
 </template>
 <script>
 export default {
     components: {},
     data() {
-        return {};
+        return {
+            isAdd: false,
+            list: [],
+            total: 0,
+            formData: {
+                picUrl: ""
+            },
+            page: 1
+        };
     },
     computed: {},
-    mounted: function() {},
-    methods: {}
+    mounted: function() {
+        this.getList();
+    },
+    methods: {
+        getList() {
+            this.api
+                .post(this.api.user.base + this.api.user.shuoshuo_list, {
+                    pageNo: this.page
+                })
+                .then(res => {
+                    if (res.code == 200) {
+                        this.list = res.data.records;
+                        this.total = res.data.total;
+                    } else {
+                    }
+                });
+        },
+        onDel(e) {
+            this.$Modal.confirm({
+                title: "提示",
+                content: "确定删除这个图片？",
+                onOk: () => {
+                    this.api
+                        .post(this.api.user.base + this.api.user.shuoshuo_del, {
+                            id: e
+                        })
+                        .then(res => {
+                            this.getList();
+                        });
+                }
+            });
+        },
+        toSubmit() {
+            if (!this.formData.content) {
+                this.$Message.error("未输入内容");
+                return;
+            }
+            this.api
+                .post(this.api.user.base + this.api.user.shuoshuo_add, {
+                    status: 1,
+                    content: this.formData.content || ""
+                })
+                .then(res => {
+                    if (res.code === 200) {
+                        this.$Message.success("添加成功");
+                        this.getList();
+                        this.isAdd = false;
+                    } else {
+                        this.$Message.warning(res.msg);
+                        return;
+                    }
+                });
+        },
+        chgPage(e) {
+            this.page = e;
+            this.getList();
+        }
+    }
 };
 </script>
 <style lang="scss" scoped>
-.suc {
-    .grid {
-        background: transparent;
-        display: block;
-        overflow: hidden;
-        .h {
-            background: #fff;
-        }
-    }
-}
-.bd {
-    background: whitesmoke;
+.b {
     .item {
-        display: block;
-        overflow: hidden;
-        background: #fff;
-        box-shadow: 0 1px 4px rgba(#000, 0.1);
-        border-radius: 8px;
-        margin: 16px 0;
-        padding: 16px;
         white-space: nowrap;
-        .img {
-            height: 64px;
-            width: 64px;
-            float: left;
-            margin-right: 16px;
-            background: whitesmoke no-repeat center;
-            border-radius: 50%;
-        }
+        overflow: hidden;
+        padding: 8px 16px;
+        border-bottom: 1px solid #eee;
         .obj {
-            overflow: hidden;
-            .date {
-                color: #999;
+            .name {
+                font-size: 16px;
+                overflow: hidden;
+                width: 100%;
+                text-overflow: ellipsis;
+            }
+
+            .intro {
+                white-space: normal;
+                font-size: 14px;
+                line-height: 32px;
+                color: #666;
+            }
+
+            .tag {
+                overflow: hidden;
+                color: #666;
             }
         }
     }

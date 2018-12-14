@@ -1,7 +1,7 @@
 <template>
     <div class="grid">
         <div class="h">
-            <div class="more">更多</div>
+            <router-link class="more" to="note">更多</router-link>
             <div class="tit">最新文章</div>
         </div>
         <div class="b">
