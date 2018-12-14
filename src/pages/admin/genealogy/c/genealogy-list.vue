@@ -256,6 +256,10 @@ export default {
                 this.$Message.error("请输入联系人");
                 return;
             }
+            if (!this.formData.familyCode) {
+                this.$Message.error("请搜索姓氏并选择");
+                return;
+            }
             if (this.selected.length < 2) {
                 this.$Message.error("请选择地区");
                 return;
@@ -265,6 +269,7 @@ export default {
                 fileName: this.formData.fileName,
                 contactUser: this.formData.contactUser,
                 regionCode: this.selected[this.selected.length - 1].code,
+                familyCode: this.formData.familyCode,
                 status: this.formData.status,
                 password: this.formData.password || "",
                 filePath: this.formData.filePath,

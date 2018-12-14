@@ -66,7 +66,7 @@ export default {
                 this.$Message.warning("暂未开放");
             } else {
                 this.api
-                    .post(this.api.user.base + this.api.user.pay.ali, {
+                    .post(this.api.county.base + this.api.user.pay.ali, {
                         siteId: this.$store.state.county.id,
                         payAmount: this.form.num,
                         anonymous: this.form.anonymous ? 1 : 0,
