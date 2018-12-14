@@ -4,7 +4,7 @@
             <i-col :sm="24" :md="12" :lg="8">
                 <Card class="userinfo">
                     <div class="h">
-                        <Avatar icon="ios-person" size="large"/>
+                        <Avatar :src="api.imgurl(user.picSrc)" size="large"/>
                         <div class="name">{{user.nickName}}</div>
                         <div class="welcome">欢迎登录「{{siteinfo.siteName}}」管理后台!</div>
                         <div class="intro">炎黄统谱网修家谱具有亲缘一目了然、世系查阅快捷、增修纠错方便、添加照片、丰富人生、完善自传、资料永久保存、世代传承、亲情交流边界、智慧相传、子孙世袭等诸多优点。</div>

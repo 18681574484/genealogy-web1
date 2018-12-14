@@ -3,7 +3,7 @@
         <Sider hide-trigger collapsible :width="256" :collapsed-width="48" v-model="collapsed" class="left-sider" :style="{overflow: 'hidden'}">
             <side-menu accordion ref="sideMenu" :active-name="$route.name" :collapsed="collapsed" @on-select="turnToPage" :menu-list="menuList">
                 <div class="logo-con">
-                    <img :src="Logo" key="Logo">
+                    <img :src="api.imgurl(siteinfo.totemPicSrc)" />
                     <div v-if="!collapsed">{{siteinfo.siteName}}</div>
                 </div>
             </side-menu>
@@ -38,7 +38,6 @@ import User from "./c/user.vue";
 import Fullscreen from "./c/fullscreen.vue";
 import { mapMutations, mapActions, mapGetters } from "vuex";
 import { getNewTagList, getNextRoute, routeEqual } from "@/libs/util";
-import Logo from "./img/logo.png";
 export default {
     name: "Main",
     components: {
@@ -51,7 +50,6 @@ export default {
     data() {
         return {
             collapsed: false,
-            Logo,
             isFullscreen: false,
             siteinfo: {}
         };

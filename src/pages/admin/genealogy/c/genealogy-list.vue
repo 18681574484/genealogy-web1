@@ -6,7 +6,7 @@
         <Drawer :mask-closable="false" :title="formData.id ? '修改':'添加'" width="50%" v-model="isedit">
             <Form :model="formData" :label-width="80">
                 <FormItem label="文件名">
-                    <Input v-model="formData.fileName" placeholder="文件名"/>
+                    <Input v-model="formData.fileName" placeholder="文件名" :maxlength="8"/>
                 </FormItem>
                 <FormItem label="文件">
                     <Upload :action="api.admin.base + api.admin.upload_img" name="file" :show-upload-list="true" :on-success="uploadFile">

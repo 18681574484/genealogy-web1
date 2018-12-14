@@ -71,7 +71,7 @@ const api = {
         upload_img: 'fan/uploadFastdfs', //图片上传
         site_list: 'genogram/admin/person/getSysSite', //网站列表
         site_creat: 'genogram/admin/sysSite/insertSysSite', //开通网站
-        users: {
+        user: {
             base: urls.admin.county,
             firstname: 'genogram/admin/sysSite/getAllFamily', //姓氏列表
             list: 'genogram/admin/person/getUserLoginList', //用户列表

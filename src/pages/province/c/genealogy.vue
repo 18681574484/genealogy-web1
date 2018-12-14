@@ -131,7 +131,7 @@ export default {
         text-align: left;
         font-size: 12px;
         .img {
-            background: whitesmoke no-repeat center / cover;
+            background: #224671 no-repeat center / cover;
             width: 100%;
             img {
                 width: 100%;

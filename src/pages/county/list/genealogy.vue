@@ -12,15 +12,20 @@
             </Select>
         </div>
         <div style="minHeight:450px">
-            <Row :gutter="16" class="items">
+            <Row :gutter="32" class="items">
                 <i-col :span="4" v-for="v in list" :key="v.id">
                     <div class="item" @click="openFile(v)">
-                        <div class="img">
+                        <div class="book">
                             <img src="http://iph.href.lu/300x400">
+                            <div class="tit">{{v.fileName}}</div>
+                            <div class="lines">
+                                <div class="line" v-for="n in 5" :key="n"></div>
+                            </div>
+                            <div class="flag">{{v.status == 1 ? '公开':'密码访问'}}</div>
                         </div>
                         <div class="name">{{v.fileName}}</div>
                         <div class="site">区域：{{api.formatArea(v.regionCode)}}</div>
-                        <div class="date">创建时间：{{dayjs(v.updateTime).format("YYYY-MM-DD")}}</div>
+                        <div class="date">创建时间：{{dayjs(v.createTime).format("YYYY-MM-DD")}}</div>
                     </div>
                 </i-col>
             </Row>
@@ -124,15 +129,60 @@ export default {
         border-radius: 4px;
         text-align: left;
         font-size: 12px;
-        .img {
-            background: whitesmoke no-repeat center / cover;
+        .book {
+            position: relative;
+            background: #224671 url(../img/cloud.png) no-repeat 20% 90% / 50%
+                auto;
             width: 100%;
+            border-radius: 4px;
+            overflow: hidden;
+            color: #fff;
             img {
                 width: 100%;
                 visibility: hidden;
+                overflow: hidden;
+            }
+            .lines {
+                position: absolute;
+                z-index: 1;
+                border-right: 1px solid #aaa;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                height: 100%;
+                width: 16px;
+                .line {
+                    height: 20%;
+                    width: 16px;
+                    & + .line {
+                        border-top: 1px solid #aaa;
+                    }
+                }
+            }
+            .flag {
+                position: absolute;
+                z-index: 1;
+                top: 0;
+                left: 0;
+                background: $color;
+                width: 64px;
+                text-align: center;
+                line-height: 32px;
+                border-radius: 0 0 32px 0;
+            }
+            .tit {
+                position: absolute;
+                top: 16px;
+                right: 16px;
+                width: 24px;
+                padding: 8px 0;
+                font-size: 14px;
+                text-align: center;
+                border: 1px solid #999;
             }
         }
         .name {
+            line-height: 32px;
             font-size: 14px;
         }
         .site {

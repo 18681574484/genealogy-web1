@@ -66,7 +66,7 @@ export default {
                         }
                         return h("Icon", {
                             props: {
-                                type: "ios-lock",
+                                type: "ios-filing-outline",
                                 size: "20"
                             }
                         });

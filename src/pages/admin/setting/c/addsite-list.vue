@@ -25,6 +25,11 @@
                     <Input type="textarea" :rows="6" v-model="formData.description" placeholder="祖先描述" style="font-size:12px;" :maxlength="300" @keyup.enter.native="toSubmit"/>
                     {{formData.description ? formData.description.length :0}} / 300
                 </FormItem>
+                <FormItem label="选择管理员">
+                    <Select v-model="formData.role" style="width:200px;margin-right:16px;" @on-change="getSiteInfo">
+                        <Option v-for="v in roleList" :value="v.value" :key="v.value" :disabled="v.disabled">{{ v.label }}</Option>
+                    </Select>
+                </FormItem>
                 <FormItem label>
                     <Button type="primary" @click="toSubmit" style="margin-right:16px;">提交</Button>
                     <Button @click="isedit = false">关闭</Button>
