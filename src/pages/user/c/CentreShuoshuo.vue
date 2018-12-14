@@ -50,23 +50,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .grid {
-    width: 49%;
-    background: #fff;
     height: 400px;
-
-    .h {
-        line-height: 40px;
-        padding: 0 16px;
-        .more {
-            float: right;
-            color: #999;
-        }
-        .tit {
-            font-size: 16px;
-            border-bottom: 1px solid #eee;
-        }
-    }
-
     .b {
         overflow-y: auto;
         height: 360px;

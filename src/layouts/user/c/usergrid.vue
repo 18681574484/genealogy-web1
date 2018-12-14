@@ -97,6 +97,7 @@ export default {
 @import "@/assets/css/var.scss";
 .usergrid {
     background: #fff;
+    margin-bottom: 16px;
     .bg {
         height: 120px;
         background: url(../img/background.png) no-repeat center bottom;

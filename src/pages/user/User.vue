@@ -1,12 +1,14 @@
 <template>
     <div class="main">
-        <div class="cards">
-            <div class="inner">
-                <News/>
-                <Shuoshuo/>
-            </div>
-        </div>
         <div class="inner">
+            <Row :gutter="16">
+                <i-col :span="12">
+                    <News/>
+                </i-col>
+                <i-col :span="12">
+                    <Shuoshuo/>
+                </i-col>
+            </Row>
             <Videos/>
             <Images/>
         </div>
@@ -32,14 +34,3 @@ export default {
     methods: {}
 };
 </script>
-<style lang="scss" scoped>
-.cards {
-    padding: 16px 0 0;
-    background-color: whitesmoke;
-
-    .inner {
-        display: flex;
-        justify-content: space-between;
-    }
-}
-</style>

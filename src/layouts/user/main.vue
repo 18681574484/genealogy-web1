@@ -30,67 +30,20 @@ export default {
 @import "@/assets/css/var.scss";
 .page-user {
     background: whitesmoke;
-    .suc {
-        padding: 16px 0;
-
-        & + .suc {
-            padding-top: 0;
+    .h {
+        line-height: 40px;
+        padding: 0 16px;
+        .more {
+            float: right;
+            color: #999;
         }
-
-        .grid {
-            background: #fff;
-        }
-
-        .h {
+        .tit {
             font-size: 16px;
-            line-height: 48px;
-            padding: 0 16px;
-
-            .tit {
-                border-bottom: 1px solid #eee;
-            }
-
-            .more {
-                float: right;
-                font-size: 12px;
-                cursor: pointer;
-                display: block;
-                &.link {
-                    color: $color;
-                }
-            }
+            border-bottom: 1px solid #eee;
         }
-
-        .b {
-            display: flex;
-            padding: 16px;
-            justify-content: space-between;
-
-            .item {
-                width: 19%;
-
-                .img {
-                    height: 120px;
-                    width: 100%;
-                    background: whitesmoke no-repeat center / cover;
-                }
-
-                .obj {
-                    white-space: nowrap;
-                    line-height: 24px;
-
-                    .total {
-                        float: right;
-                        color: #999;
-                        font-size: 12px;
-                    }
-
-                    .tit {
-                        overflow: hidden;
-                    }
-                }
-            }
-        }
+    }
+    .grid {
+        background-color: #fff;
     }
 }
 </style>
