@@ -18,21 +18,16 @@
                 </div>
             </div>
         </div>
-        <Modal v-model="handleTopay" width="480px" :footer-hide="true" class="g-pay">
-            <topay/>
-        </Modal>
     </div>
 </template>
 <script>
 import CharityList from "./list/charity-list";
 import CharityUser from "./list/charity-user";
-import topay from "_c/common/topay.vue";
 export default {
     name: "Charity",
     components: {
         CharityList,
-        CharityUser,
-        topay
+        CharityUser
     },
     computed: {
         apiList() {

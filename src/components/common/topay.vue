@@ -17,7 +17,7 @@
                 </i-input>
             </FormItem>
             <FormItem label="支付平台">
-                <RadioGroup v-model="form.paytype" type="button">
+                <RadioGroup v-model="form.paytype" type="button" @on-change="text=''">
                     <Radio :label="0">
                         <iconfont name="alipay"/>
                         <span>支付宝</span>
@@ -45,6 +45,7 @@
 </template>
 <script>
 import Qrcode from "_c/qrcode";
+import { async } from "q";
 export default {
     components: {
         Qrcode
@@ -56,14 +57,29 @@ export default {
                 anonymous: false,
                 paytype: 0
             },
-            text: ""
+            text: "",
+            loop: null,
+            count: 1
         };
     },
     mounted: function() {},
-    destroyed: function() {
-        this.text = "";
-    },
     methods: {
+        loopData() {
+            this.api
+                .post(this.api.county.base + this.api.county.pay.wxorder, {
+                    outTradeNo: "2018121515335822"
+                })
+                .then(res => {
+                    if (res.code == 200) {
+                        this.$Modal.success({
+                            title: "提示",
+                            content: "支付成功"
+                        });
+                        clearInterval(this.loop);
+                        this.loop = null;
+                    }
+                });
+        },
         toSubmit() {
             this.text = "";
             if (!this.form.num) {
@@ -76,7 +92,7 @@ export default {
             }
             if (this.form.paytype) {
                 this.api
-                    .get(this.api.county.base + this.api.county.pay.wx, {
+                    .post(this.api.county.base + this.api.county.pay.wx, {
                         siteId: this.$store.state.county.id,
                         payAmount: this.form.num,
                         anonymous: this.form.anonymous ? 1 : 0,
@@ -84,13 +100,10 @@ export default {
                     })
                     .then(res => {
                         if (res.code == 200) {
-                            console.log(res);
                             this.text = res.data.code_url;
-                            // sessionStorage.callback = 1;
-                            // const div = document.createElement("div");
-                            // div.innerHTML = res.data;
-                            // document.body.appendChild(div);
-                            // document.forms.punchout_form.submit();
+                            this.loop = setInterval(() => {
+                                this.loopData();
+                            }, 3000);
                         }
                     });
             } else {

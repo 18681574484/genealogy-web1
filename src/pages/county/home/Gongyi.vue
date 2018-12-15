@@ -77,17 +77,10 @@
                 </Row>
             </div>
         </div>
-        <Modal v-model="handleTopay" width="480px" :footer-hide="true" class="g-pay">
-            <topay/>
-        </Modal>
     </div>
 </template>
 <script>
-import topay from "_c/common/topay.vue";
 export default {
-    components: {
-        topay
-    },
     computed: {
         apiList() {
             return this.$store.state.county.apiList;
@@ -95,7 +88,6 @@ export default {
     },
     data() {
         return {
-            handleTopay: false,
             index_fund_2: {},
             index_architecture_pay_in_person_2: {},
             index_architecture_pay_in: {},

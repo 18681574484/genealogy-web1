@@ -22,6 +22,7 @@ const api = {
         pay: {
             ali: 'genogram/pay/aLiPay', //支付宝支付
             wx: 'genogram/pay/weChatPay', //微信支付
+            wxorder:'genogram/pay/getFanNewsCharityPayIn',//微信支付订单校验
         },
         ancestor_list: '/genogram/proNewsAncestor/getFamousAncestorPage', //祖先名人列表
         ancestor_info: '/genogram/proNewsAncestor/getFamousAncestorDetails', //祖先名人详情
