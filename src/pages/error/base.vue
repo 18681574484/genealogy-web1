@@ -27,11 +27,7 @@
 
 <script>
 import { pca, pcaa } from "area-data";
-import Qrcode from "_c/qrcode";
 export default {
-    components: {
-        Qrcode
-    },
     data() {
         return {
             list: {

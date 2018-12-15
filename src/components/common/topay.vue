@@ -28,6 +28,9 @@
                     </Radio>
                 </RadioGroup>
             </FormItem>
+            <FormItem label="微信扫一扫" v-if="text">
+                <Qrcode :text="text"/>
+            </FormItem>
             <FormItem label="是否匿名">
                 <i-switch v-model="form.anonymous">
                     <span slot="open">是</span>
@@ -41,19 +44,28 @@
     </div>
 </template>
 <script>
+import Qrcode from "_c/qrcode";
 export default {
+    components: {
+        Qrcode
+    },
     data() {
         return {
             form: {
                 num: "",
                 anonymous: false,
                 paytype: 0
-            }
+            },
+            text: ""
         };
     },
     mounted: function() {},
+    destroyed: function() {
+        this.text = "";
+    },
     methods: {
         toSubmit() {
+            this.text = "";
             if (!this.form.num) {
                 this.$Message.error("请选择支付金额");
                 return;
@@ -63,10 +75,27 @@ export default {
                 return;
             }
             if (this.form.paytype) {
-                this.$Message.warning("暂未开放");
+                this.api
+                    .get(this.api.county.base + this.api.county.pay.wx, {
+                        siteId: this.$store.state.county.id,
+                        payAmount: this.form.num,
+                        anonymous: this.form.anonymous ? 1 : 0,
+                        url: location.href + "?back=pay&"
+                    })
+                    .then(res => {
+                        if (res.code == 200) {
+                            console.log(res);
+                            this.text = res.data.code_url;
+                            // sessionStorage.callback = 1;
+                            // const div = document.createElement("div");
+                            // div.innerHTML = res.data;
+                            // document.body.appendChild(div);
+                            // document.forms.punchout_form.submit();
+                        }
+                    });
             } else {
                 this.api
-                    .post(this.api.county.base + this.api.user.pay.ali, {
+                    .post(this.api.county.base + this.api.county.pay.ali, {
                         siteId: this.$store.state.county.id,
                         payAmount: this.form.num,
                         anonymous: this.form.anonymous ? 1 : 0,

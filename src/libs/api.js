@@ -19,6 +19,10 @@ const api = {
             famous: 'genogram/fanNewsFamous/getFamilyFamilyDetail', //家族名人
             family_record: 'genogram/fanNewsFamilyRecord/getFamilyRecordDetail', //家族动态
         },
+        pay: {
+            ali: 'genogram/pay/aLiPay', //支付宝支付
+            wx: 'genogram/pay/weChatPay', //微信支付
+        },
         ancestor_list: '/genogram/proNewsAncestor/getFamousAncestorPage', //祖先名人列表
         ancestor_info: '/genogram/proNewsAncestor/getFamousAncestorDetails', //祖先名人详情
         genealogy_list: '/genogram/fanNewsUploadTreeFile/getFanNewsUploadTreeFileList', //家谱列表
@@ -39,10 +43,6 @@ const api = {
         regcode: 'genogram/userLogin/sendVerificationCode', //注册验证码
         info: 'genogram/user/getAllUserReg', //用户信息
         update: 'genogram/user/updatePersonVo', //修改用户资料
-        pay: {
-            ali: 'genogram/pay/aLiPay', //支付宝支付
-            wx: 'genogram/pay/weChatPay', //微信支付
-        },
         pay_list: 'genogram/user/getPayInList', //捐款记录
 
         shuoshuo_list: 'genogram/user/getAllUserSaysList', //说说列表
