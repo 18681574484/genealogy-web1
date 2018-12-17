@@ -7,7 +7,7 @@
                         <div class="tit">捐款记录</div>
                     </div>
                     <div class="b" style="min-height:450px;">
-                        <div class="item" v-for="v in list[1]" :key="v.id">
+                        <div class="item" v-for="v in list" :key="v.id">
                             <div class="number itm">{{v.orderId}}</div>
                             <div class="type itm">
                                 {{dayjs(v.payTime).format(

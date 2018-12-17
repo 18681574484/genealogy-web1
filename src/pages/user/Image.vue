@@ -3,7 +3,7 @@
         <div class="suc">
             <div class="grid">
                 <div class="h">
-                    <div class="more link" @click="isAdd = true;formData.picUrl=''">
+                    <div class="more link" @click="onAdd">
                         <iconfont name="upload"/>
                         <span>上传</span>
                     </div>
@@ -89,6 +89,10 @@ export default {
             if (res.code == 200) {
                 this.formData.picUrl = res.data.file_path;
             }
+        },
+        onAdd(e) {
+            this.formData = { picUrl: "" };
+            this.isAdd = true;
         },
         onDel(e) {
             this.$Modal.confirm({

@@ -6,9 +6,7 @@
         </div>
         <div class="b">
             <div class="item" v-for="v in list" :key="v.id">
-                <div class="img" :style="api.imgBG(v.newsFaceUrl)"></div>
                 <div class="obj">
-                    <div class="name">{{v.title}}</div>
                     <div class="intro">{{v.content}}</div>
                     <div class="tag">
                         <span class="date">{{dayjs(v.createTime).format("YYYY-MM-DD")}}</span>
@@ -34,7 +32,7 @@ export default {
     methods: {
         getList() {
             this.api
-                .post(this.api.user.base + this.api.user.rizhi_list, {
+                .post(this.api.user.base + this.api.user.shuoshuo_list, {
                     pageNo: this.page
                 })
                 .then(res => {
@@ -59,37 +57,14 @@ export default {
         }
 
         .item {
-            white-space: nowrap;
-            overflow: hidden;
             padding: 8px 16px;
-
-            .img {
-                width: 64px;
-                height: 64px;
-                float: left;
-                margin-right: 16px;
-                background: whitesmoke no-repeat center / cover;
-                border-radius: 50%;
-            }
-
+            border-bottom: 1px dashed #eee;
             .obj {
                 overflow: hidden;
-                min-height: 64px;
-                .name {
-                    font-size: 16px;
-                    overflow: hidden;
-                    width: 100%;
-                    text-overflow: ellipsis;
-                }
-
-                .intro {
-                    white-space: normal;
-                    color: #666;
-                }
 
                 .tag {
                     overflow: hidden;
-                    color: #666;
+                    color: #999;
                 }
             }
         }

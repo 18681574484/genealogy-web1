@@ -15,12 +15,12 @@ const api = {
         detail: {
             culture: 'genogram/fanNewsCulture/getFamilyCultureDetail', //家族文化
             charity: 'genogram/fanNewsCharity/getFanNewsCharityDetail', //慈善公益详情
+            charitable: 'genogram/fanSysCharitableDeclare/getFamilyStructureDetails', //慈善帮扶详情
             industry: 'genogram/fanNewsIndustry/getFamilyIndustryDetail', //家族产业详情
             famous: 'genogram/fanNewsFamous/getFamilyFamilyDetail', //家族名人
-            family_record: 'genogram/fanNewsFamilyRecord/getFamilyRecordDetail', //家族动态
+            records: 'genogram/fanNewsFamilyRecord/getFamilyRecordDetail', //家族动态
         },
         charitable_list: 'genogram/fanSysCharitableDeclare/getSysCharitableDeclare', //慈善帮扶
-        charitable_info: 'genogram/fanSysCharitableDeclare/getFamilyStructureDetails', //慈善帮扶详情
 
         pay: {
             ali: 'genogram/pay/aLiPay', //支付宝支付
@@ -96,6 +96,7 @@ const api = {
             base: urls.admin.county,
             firstname: 'genogram/admin/sysSite/getAllFamily', //姓氏列表
             list: 'genogram/admin/person/getUserLoginList', //用户列表
+            list_role: 'genogram/admin/person/getUserLoginRoleList', //管理员列表
             info: 'genogram/admin/person/getUserLogin', //用户信息
             edit: 'genogram/admin/person/updatePerson', //用户修改
         },
@@ -175,15 +176,24 @@ const api = {
             culture_news_edit: 'genogram/admin/fanNewsCulture/addOrUpdateCulture', //家族文化添加
             culture_news_drft: 'genogram/admin/fanNewsCulture/addOrUpdateCultureDrft', //家族文化草稿
             culture_news_del: 'genogram/admin/fanNewsCulture/deleteCulturById', //家族文化删除
+
             charity_list_info: 'genogram/admin/fanNewsCharity/getFanNewsCharityDetail', //财务收支详情
             charity_list_edit: 'genogram/admin/fanNewsCharity/insertOrUpdateFanNewsCharityOut', //财务收支增加
             charity_list_drft: 'genogram/admin/fanNewsCharity/insertOrUpdateFanNewsCharityOutDrft', //财务收支草稿
             charity_list_del: 'genogram/admin/fanNewsCharity/deleteFanNewsCharityOut', //财务收支删除
 
+            charity_help_info: 'genogram/admin/fanSysCharitableDeclare/getFamilyStructureDetails', //慈善帮扶列表
+            charity_help_edit: 'genogram/admin/fanSysCharitableDeclare/addCharityAssist', //慈善帮扶添加
+            charity_help_drft: 'genogram/admin/fanSysCharitableDeclare/draftCharityAssist', //慈善帮扶草稿
+            charity_help_del: 'genogram/admin/fanSysCharitableDeclare/deleteSysCharitableDeclare', //慈善帮扶删除
+            charity_help_back: 'genogram/admin/fanSysCharitableDeclare/addCharityAssistFeedback', //慈善帮扶反馈
+
             industry_info: 'genogram/admin/fanNewsIndustry/getFamilyIndustryDetail', //家族产业详情
             industry_edit: 'genogram/admin/fanNewsIndustry/addOrUpdateIndustry', //家族产业添加
             industry_drft: 'genogram/admin/fanNewsIndustry/addOrUpdateIndustryDrft', //家族产业草稿
             industry_del: 'genogram/admin/fanNewsIndustry/deleteIndustryById', //家族产业删除
+
+
 
             genealogy_list: 'genogram/admin/fanNewsUploadTreeFile/getFanNewsUploadTreeFileList', //电子家谱列表
             genealogy_info: 'genogram/admin/fanNewsUploadTreeFile/getFanNewsUploadTreeFile', //电子家谱详情

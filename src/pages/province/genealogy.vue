@@ -11,7 +11,7 @@
     </div>
 </template>
 <script>
-import Genealogy from "./c/genealogy.vue";
+import Genealogy from "./list/genealogy.vue";
 export default {
     name: "Home",
     components: {

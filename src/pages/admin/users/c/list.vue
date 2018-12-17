@@ -101,6 +101,9 @@ export default {
         }
     },
     computed: {
+        admin() {
+            return this.$store.state.admin;
+        },
         user() {
             return this.$store.state.user;
         }
@@ -110,8 +113,11 @@ export default {
     },
     methods: {
         getList() {
+            let type = ["", "fan", "pro"];
             this.api
                 .post(this.url, {
+                    siteId: this.admin.id,
+                    siteType: type[this.admin.step],
                     pageNo: this.page
                 })
                 .then(res => {
@@ -190,10 +196,7 @@ export default {
                 data.siteId = this.formData.siteId;
             }
             this.api
-                .post(
-                    this.api.admin.user.base + this.api.admin.user.edit,
-                    data
-                )
+                .post(this.api.admin.user.base + this.api.admin.user.edit, data)
                 .then(res => {
                     if (res.code === 200) {
                         if (data.id) {

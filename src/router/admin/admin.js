@@ -115,40 +115,6 @@ export default [{
         }]
     },
     {
-        path: 'podium',
-        name: '_podium',
-        redirect: 'podium/podium',
-        component: Manager,
-        meta: {
-            icon: 'ios-podium',
-            title: '数据中心',
-            role: [1, 2, 3, 9],
-            type: [1, 2, 3]
-        },
-
-        children: [{
-            path: 'podium',
-            name: 'podium',
-            meta: {
-                icon: 'md-podium',
-                title: '数据中心',
-                role: [1, 2, 3, 9],
-                type: [1, 2, 3]
-            },
-            component: () => import('@/pages/admin/podium/podium')
-        }, {
-            path: 'outline',
-            name: 'outline',
-            meta: {
-                icon: 'ios-infinite',
-                title: '线下捐款',
-                role: [1, 2, 3, 9],
-                type: [1, 2, 3]
-            },
-            component: () => import('@/pages/admin/podium/outline')
-        }]
-    },
-    {
         path: 'culture',
         name: '_culture',
         redirect: '/culture/list',
@@ -214,6 +180,26 @@ export default [{
                 type: [1, 2, 3]
             },
             component: () => import('@/pages/admin/charitable/out')
+        }, {
+            path: 'outline',
+            name: 'outline',
+            meta: {
+                icon: 'ios-rose',
+                title: '捐款名录',
+                role: [1, 2, 3, 9],
+                type: [1, 2, 3]
+            },
+            component: () => import('@/pages/admin/charitable/outline')
+        }, {
+            path: 'help',
+            name: 'charitable-help',
+            meta: {
+                icon: 'ios-leaf',
+                title: '慈善帮扶',
+                role: [1, 2, 3, 9],
+                type: [1, 2, 3]
+            },
+            component: () => import('@/pages/admin/charitable/help')
         }]
     },
     {

@@ -92,6 +92,7 @@ export default {
                         content: "确定退出账号？",
                         onOk: () => {
                             this.$store.commit("updateUser", []);
+                            this.$router.push("/");
                         }
                     });
                     break;
@@ -125,6 +126,11 @@ export default {
                                             "请先返回相应联谊会，再进入管理后台"
                                     });
                                     return;
+                                } else {
+                                    com_data = {
+                                        id: this.admin.id,
+                                        step: this.admin.step
+                                    };
                                 }
                                 break;
                         }

@@ -14,7 +14,7 @@
                         <i-col :xs="12" :sm="6" :md="6" class="item" v-for="v in list" :key="v.id">
                             <div class="img" :style="api.imgBG(v.videoPicUrl)">
                                 <img src="http://iph.href.lu/80x45">
-                                <div class="hover" @click="toShow(v.videoPicUrl)">
+                                <div class="hover" @click="toShow(v.videoUrl)">
                                     <Icon type="ios-videocam"/>
                                 </div>
                             </div>

@@ -15,6 +15,7 @@
                 <div v-if="menucurr && url">
                     <CharityList :url="url" v-if="menucurr.menuType == 'charity_news'"/>
                     <CharityUser :url="url" v-else-if="menucurr.menuType == 'charity_person'"/>
+                    <CharityHelp :url="url" v-else-if="menucurr.menuType == 'charity_help'"/>
                 </div>
             </div>
         </div>
@@ -23,11 +24,13 @@
 <script>
 import CharityList from "./list/charity-list";
 import CharityUser from "./list/charity-user";
+import CharityHelp from "./list/charity-help";
 export default {
     name: "Charity",
     components: {
         CharityList,
-        CharityUser
+        CharityUser,
+        CharityHelp
     },
     computed: {
         apiList() {

@@ -4,23 +4,23 @@
             <div class="suc">
                 <div class="grid">
                     <div class="h">
-                        <div class="more link" @click="isAdd = true">
+                        <div class="more link" @click="onAdd">
                             <iconfont name="edit"/>
                             <span>写日志</span>
                         </div>
                         <div class="tit">日志</div>
                     </div>
                     <div class="bd" style="min-height:450px;">
-                        <router-link :to="'detail?id='+v.id" class="item" v-for="v in list" :key="v.id">
-                            <div class="img" :style="api.imgBG(v.newsFaceUrl)"></div>
+                        <div class="item" v-for="v in list" :key="v.id">
+                            <div class="img" :style="api.imgBG(v.newsFaceUrl)" @click="link(v.id)"></div>
                             <div class="obj">
-                                <div class="tit">{{v.title}}</div>
-                                <div class="intro">{{v.content}}</div>
+                                <div class="tit" @click="link(v.id)">{{v.title}}</div>
+                                <div class="intro" @click="link(v.id)">{{v.content}}</div>
                                 <div class="tag">
                                     <span class="del" @click="onDel(v.id)">删除</span>
                                 </div>
                             </div>
-                        </router-link>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -41,7 +41,7 @@
                     </Upload>
                 </FormItem>
                 <FormItem>
-                    <editor ref="editor" @on-change="handleChange"/>
+                    <editor ref="editor" @on-change="handleChange" v-model="formData.content"/>
                 </FormItem>
                 <FormItem>
                     <Button type="primary" @click="toSubmit" style="margin-right:16px;">提交</Button>
@@ -63,7 +63,10 @@ export default {
             list: [],
             total: 0,
             page: 1,
-            formData: {}
+            formData: {
+                newsFaceUrl: "",
+                content: ""
+            }
         };
     },
     computed: {},
@@ -74,7 +77,7 @@ export default {
         getList() {
             this.api
                 .post(this.api.user.base + this.api.user.rizhi_list, {
-                    pageSize:6,
+                    pageSize: 6,
                     pageNo: this.page
                 })
                 .then(res => {
@@ -95,6 +98,10 @@ export default {
             if (res.code == 200) {
                 this.formData.newsFaceUrl = res.data.file_path;
             }
+        },
+        onAdd() {
+            this.formData = { newsFaceUrl: "", content: "" };
+            this.isAdd = true;
         },
         onDel(e) {
             this.$Modal.confirm({
@@ -123,9 +130,9 @@ export default {
             this.api
                 .post(this.api.user.base + this.api.user.rizhi_add, {
                     status: 1,
-                    title: this.formData.title || '',
-                    newsFaceUrl: this.formData.newsFaceUrl || '',
-                    content: this.formData.content || ''
+                    title: this.formData.title || "",
+                    newsFaceUrl: this.formData.newsFaceUrl || "",
+                    content: this.formData.content || ""
                 })
                 .then(res => {
                     if (res.code === 200) {
@@ -137,6 +144,9 @@ export default {
                         return;
                     }
                 });
+        },
+        link(e) {
+            this.$router.push("detail?id=" + e);
         }
     }
 };
@@ -169,6 +179,7 @@ export default {
             .intro {
                 height: 72px;
                 line-height: 24px;
+                overflow: hidden;
                 color: #999;
                 white-space: normal;
             }

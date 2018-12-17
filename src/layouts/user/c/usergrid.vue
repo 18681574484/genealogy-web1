@@ -8,13 +8,13 @@
                     <span>{{user.nickName}}</span>
                     <iconfont name="writefill"/>
                 </div>
-                <div class="info" v-if="false">
+                <div class="info">
                     <div class="item">英文名：</div>
                     <div class="item">国籍：</div>
                     <div class="item">出生地：</div>
                     <div class="item">职业：</div>
                 </div>
-                <div class="tag" v-if="false">
+                <div class="tag">
                     <div class="item">
                         <iconfont name="medalfill"/>
                         <span>诚信值：100</span>
@@ -28,40 +28,36 @@
                         <span>粉丝：0</span>
                     </div>
                 </div>
-                <div class="flag" v-if="false">
-                    <div class="item">现居：</div>
-                    <div class="item">故居：</div>
-                    <div class="item">现居古城：</div>
+                <div class="flag">
+                    <div class="item">现居：{{user.presentAddress}}</div>
+                    <div class="item">故居：{{user.oldAddress}}</div>
+                    <div class="item">现居古城：{{user.alias}}</div>
                 </div>
-                <div class="flag" v-if="false">
-                    <div class="item">历代：</div>
-                    <div class="item">近世：</div>
-                    <div class="item">老派：</div>
-                    <div class="item">新派：</div>
-                    <div class="item">统派：</div>
+                <div class="flag">
+                    <div class="item">历代：{{user.lidai}}</div>
+                    <div class="item">近世：{{user.jinshi}}</div>
+                    <div class="item">老派：{{user.laopai}}</div>
+                    <div class="item">新派：{{user.xinpai}}</div>
+                    <div class="item">统派：{{user.tongpai}}</div>
                 </div>
-                <div class="more">
-                    <router-link to="note" class="item">
+                <ButtonGroup style="margin-top:16px;" shape="circle" size="small">
+                    <Button to="note" class="item">
                         <iconfont name="formfill"/>
                         <span>日志</span>
-                        <span>0</span>
-                    </router-link>
-                    <router-link to="image" class="item">
+                    </Button>
+                    <Button to="image" class="item">
                         <iconfont name="picfill"/>
                         <span>照片</span>
-                        <span>0</span>
-                    </router-link>
-                    <router-link to="video" class="item">
+                    </Button>
+                    <Button to="video" class="item">
                         <iconfont name="video_fill_light"/>
                         <span>视频</span>
-                        <span>0</span>
-                    </router-link>
-                    <router-link to="msg" class="item">
+                    </Button>
+                    <Button to="msg" class="item">
                         <iconfont name="communityfill"/>
                         <span>说说</span>
-                        <span>0</span>
-                    </router-link>
-                </div>
+                    </Button>
+                </ButtonGroup>
             </div>
         </div>
         <Modal title="修改资料" v-model="isedit" width="640px" :footer-hide="true">
@@ -104,7 +100,7 @@ export default {
     }
     .card {
         margin-top: -48px;
-        padding-bottom: 64px;
+        padding-bottom: 16px;
         text-align: center;
 
         .img {
@@ -170,15 +166,6 @@ export default {
         }
 
         .more {
-            margin: 16px auto;
-            .item {
-                display: inline-block;
-                padding: 0 16px;
-
-                i {
-                    color: #999;
-                }
-            }
         }
     }
 }

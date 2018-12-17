@@ -4,7 +4,7 @@
             <div class="suc">
                 <div class="grid">
                     <div class="h">
-                        <div class="more link" @click="isAdd = true;">
+                        <div class="more link" @click="onAdd">
                             <iconfont name="edit"/>
                             <span>发布</span>
                         </div>
@@ -46,9 +46,7 @@ export default {
             isAdd: false,
             list: [],
             total: 0,
-            formData: {
-                picUrl: ""
-            },
+            formData: {},
             page: 1
         };
     },
@@ -84,6 +82,10 @@ export default {
                         });
                 }
             });
+        },
+        onAdd(e) {
+            this.formData = {};
+            this.isAdd = true;
         },
         toSubmit() {
             if (!this.formData.content) {

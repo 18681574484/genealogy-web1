@@ -118,9 +118,12 @@ export default {
             margin: 0 auto;
         }
         .txt {
-            font-size: 24px;
+            font-size: 20px;
             color: #fff;
             font-weight: 700;
+            white-space: normal;
+            padding: 4px 16px;
+            line-height: 1.2;
         }
         .site {
             font-size: 12px;

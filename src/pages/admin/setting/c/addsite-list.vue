@@ -8,7 +8,7 @@
                 <FormItem label="网站名">
                     <Row :gutter="16">
                         <i-col :span="12">
-                            <Input v-model="formData.siteName" placeholder="标题" :maxlength="6" @keyup.enter.native="toSubmit"/>
+                            <Input v-model="formData.siteName" placeholder="网站名" :maxlength="10" @keyup.enter.native="toSubmit"/>
                         </i-col>
                         <i-col :span="6">{{formData.siteName ? formData.siteName.length : 0}} / 6</i-col>
                     </Row>
@@ -52,8 +52,11 @@
                         <Option v-for="v in options" :value="v.id" :key="v.id">{{v.value}}</Option>
                     </Select>
                 </FormItem>
-                <FormItem label="地区">
+                <FormItem label="地区" v-if="data.type == 'fan'">
                     <al-cascader v-model="selected" :level="2" style="width:100%" placeholder="请选择地区"/>
+                </FormItem>
+                <FormItem label="省份" v-else>
+                    <al-cascader v-model="selected_pro" :level="0" style="width:100%" placeholder="请选择省份"/>
                 </FormItem>
                 <FormItem label>
                     <Button type="primary" @click="toCreat" style="margin-right:16px;">提交</Button>
@@ -83,6 +86,7 @@ export default {
                 totemPicSrc: ""
             },
             selected: [],
+            selected_: [],
             loading: false,
             options: [],
             columns: [
@@ -211,9 +215,12 @@ export default {
             this.options = [];
             this.loading = true;
             this.api
-                .post(this.api.admin.user.base + this.api.admin.user.firstname, {
-                    value: e
-                })
+                .post(
+                    this.api.admin.user.base + this.api.admin.user.firstname,
+                    {
+                        value: e
+                    }
+                )
                 .then(res => {
                     if (res.code == 200) {
                         this.loading = false;
@@ -273,7 +280,10 @@ export default {
                 .post(this.api.admin.base + this.api.admin.site_creat, {
                     name: this.formAdd.name,
                     familyCode: this.formAdd.familyCode,
-                    regionCode: this.selected[this.selected.length - 1].code,
+                    regionCode:
+                        this.data == "fan"
+                            ? this.selected[this.selected.length - 1].code
+                            : this.selected_pro[0].code,
                     siteType: this.data.type
                 })
                 .then(res => {

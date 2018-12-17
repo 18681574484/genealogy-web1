@@ -109,11 +109,6 @@ export default {
     mounted: function() {
         this.resetUrl();
         this.getInfo();
-        let url =
-            "https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js";
-        let script = document.createElement("script");
-        script.setAttribute("src", url);
-        document.getElementsByTagName("head")[0].appendChild(script);
     },
     methods: {
         resetUrl() {
