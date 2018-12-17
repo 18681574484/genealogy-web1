@@ -9,10 +9,10 @@
                     <iconfont name="writefill"/>
                 </div>
                 <div class="info">
-                    <div class="item">英文名：</div>
-                    <div class="item">国籍：</div>
-                    <div class="item">出生地：</div>
-                    <div class="item">职业：</div>
+                    <div class="item">英文名：{{user.englishName}}</div>
+                    <div class="item">国籍：{{user.nation}}</div>
+                    <div class="item">出生地：{{user.birthplace}}</div>
+                    <div class="item">职业：{{user.job}}</div>
                 </div>
                 <div class="tag">
                     <div class="item">
@@ -163,9 +163,6 @@ export default {
                 width: 20%;
                 float: left;
             }
-        }
-
-        .more {
         }
     }
 }

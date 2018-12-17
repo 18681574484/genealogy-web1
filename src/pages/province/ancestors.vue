@@ -40,7 +40,5 @@ export default {
         background: url("./img/title-dot.png") no-repeat left center;
         font-size: 20px;
     }
-    .b {
-    }
 }
 </style>

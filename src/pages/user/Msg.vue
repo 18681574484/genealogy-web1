@@ -8,7 +8,10 @@
                             <iconfont name="edit"/>
                             <span>发布</span>
                         </div>
-                        <div class="tit">说说</div>
+                        <div class="tit">
+                            说说
+                            <small>[ {{total}} ]</small>
+                        </div>
                     </div>
                     <div class="b" style="min-height:450px;">
                         <div class="item" v-for="v in list" :key="v.id">

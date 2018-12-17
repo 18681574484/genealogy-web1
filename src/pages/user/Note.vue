@@ -8,7 +8,10 @@
                             <iconfont name="edit"/>
                             <span>写日志</span>
                         </div>
-                        <div class="tit">日志</div>
+                        <div class="tit">
+                            日志
+                            <small>[ {{total}} ]</small>
+                        </div>
                     </div>
                     <div class="bd" style="min-height:450px;">
                         <div class="item" v-for="v in list" :key="v.id">

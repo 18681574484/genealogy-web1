@@ -7,7 +7,10 @@
                         <iconfont name="upload"/>
                         <span>上传</span>
                     </div>
-                    <div class="tit">图片</div>
+                    <div class="tit">
+                        图片
+                        <small>[ {{total}} ]</small>
+                    </div>
                 </div>
                 <div class="b" style="minHeight:450px;">
                     <Row :gutter="16">
