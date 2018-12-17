@@ -19,21 +19,41 @@ const api = {
             famous: 'genogram/fanNewsFamous/getFamilyFamilyDetail', //家族名人
             family_record: 'genogram/fanNewsFamilyRecord/getFamilyRecordDetail', //家族动态
         },
+        charitable_list: 'genogram/fanSysCharitableDeclare/getSysCharitableDeclare', //慈善帮扶
+        charitable_info: 'genogram/fanSysCharitableDeclare/getFamilyStructureDetails', //慈善帮扶详情
+
         pay: {
             ali: 'genogram/pay/aLiPay', //支付宝支付
             wx: 'genogram/pay/weChatPay', //微信支付
-            wxorder:'genogram/pay/getFanNewsCharityPayIn',//微信支付订单校验
+            wxorder: 'genogram/pay/getFanNewsCharityPayIn', //微信支付订单校验
         },
-        ancestor_list: '/genogram/proNewsAncestor/getFamousAncestorPage', //祖先名人列表
-        ancestor_info: '/genogram/proNewsAncestor/getFamousAncestorDetails', //祖先名人详情
-        genealogy_list: '/genogram/fanNewsUploadTreeFile/getFanNewsUploadTreeFileList', //家谱列表
-        genealogy_info: '/genogram/fanNewsUploadTreeFile/getFanNewsUploadTreeFile', //家谱详情
+        ancestor_list: 'genogram/proNewsAncestor/getFamousAncestorPage', //祖先名人列表
+        ancestor_info: 'genogram/proNewsAncestor/getFamousAncestorDetails', //祖先名人详情
+        genealogy_list: 'genogram/fanNewsUploadTreeFile/getFanNewsUploadTreeFileList', //家谱列表
+        genealogy_info: 'genogram/fanNewsUploadTreeFile/getFanNewsUploadTreeFile', //家谱详情
     },
     province: {
         base: urls.main.province,
         site_home: urls.main.province + 'genogram/proMenu/getIndexMenuBySiteId', //首页api
         site_menus: 'genogram/proMenu/getTitlesByMenuId', //导航栏
         site_feeds: 'genogram/allMessageBoard/addMessage', //留言板
+        detail: {
+            culture: 'genogram/proNewsCulture/getFamilyCultureDetail', //家族文化
+            charity: 'genogram/proNewsCharity/getNewsDetail', //慈善公益详情
+            famous: 'genogram/proNewsFamous/getFamilyPersionDetail', //家族名人
+            family_record: 'genogram/proNewsFamilyRecord/getProFamilyRecord', //家族动态
+        },
+        charitable_list: 'genogram/fanSysCharitableDeclare/getSysCharitableDeclare', //慈善帮扶
+        charitable_info: 'genogram/fanSysCharitableDeclare/getFamilyStructureDetails', //慈善帮扶详情
+        pay: {
+            ali: 'genogram/pay/aLiPay', //支付宝支付
+            wx: 'genogram/pay/weChatPay', //微信支付
+            wxorder: 'genogram/pay/getFanNewsCharityPayIn', //微信支付订单校验
+        },
+        ancestor_list: 'genogram/proNewsAncestor/getFamousAncestorPage', //祖先名人列表
+        ancestor_info: 'genogram/proNewsAncestor/getFamousAncestorDetails', //祖先名人详情
+        genealogy_list: 'genogram/proNewsUploadTreeFile/getProNewsUploadTreeFileList', //家谱列表
+        genealogy_info: 'genogram/proNewsUploadTreeFile/getProNewsUploadTreeFile', //家谱详情
     },
     user: {
         base: urls.main.user,
@@ -55,7 +75,7 @@ const api = {
         picture_add: 'genogram/user/insertOrUpdateAllUserPics', //发表图片
         picture_info: 'genogram/user/getAllUserPics', //详情
         picture_del: 'genogram/user/deleteAllUserPics', //删除图片
-        
+
         rizhi_list: '/genogram/user/getAllUserNewsInfoList', //日志
         rizhi_add: 'genogram/user/insertAllUserNewsInfo', //发布
         rizhi_info: 'genogram/user/getAllUserNewsInfo', //详情

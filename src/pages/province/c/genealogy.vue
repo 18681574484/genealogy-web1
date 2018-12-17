@@ -2,26 +2,31 @@
     <div class="charity">
         <div class="sort">
             <div class="searchbar">
+                <Input type="text" placeholder="输入搜索关键词" v-model="fileName" @keyup.enter.native="getList"/>
                 <Button class="link">搜索</Button>
-                <Input type="text" placeholder="输入搜索关键词" v-model="fileName" @keyup.enter.native="getList" />
             </div>
             <Select v-model="status" style="width:120px;margin-right:8px;" @on-change="getList">
                 <Option :value="0">全部</Option>
                 <Option :value="1">公开</Option>
                 <Option :value="2">密码访问</Option>
             </Select>
-            <al-cascader v-model="area" @on-change="handleChange" :level="2" style="width:240px;display:inline-block;" placeholder="筛选地区"/>
         </div>
         <div style="minHeight:450px">
-            <Row :gutter="16" class="items">
+            <Row :gutter="32" class="items">
                 <i-col :span="4" v-for="v in list" :key="v.id">
                     <div class="item" @click="openFile(v)">
-                        <div class="img">
+                        <div class="book">
                             <img src="http://iph.href.lu/300x400">
+                            <div class="tit kt">{{v.fileName}}</div>
+                            <div class="lines">
+                                <div class="line" v-for="n in 5" :key="n"></div>
+                            </div>
+                            <div class="first kt">{{v.familyName}}</div>
+                            <div class="flag">{{v.status == 1 ? '公开':'密码访问'}}</div>
                         </div>
                         <div class="name">{{v.fileName}}</div>
                         <div class="site">区域：{{api.formatArea(v.regionCode)}}</div>
-                        <div class="date">创建时间：{{dayjs(v.updateTime).format("YYYY-MM-DD")}}</div>
+                        <div class="date">创建时间：{{dayjs(v.createTime).format("YYYY-MM-DD")}}</div>
                     </div>
                 </i-col>
             </Row>
@@ -30,6 +35,7 @@
     </div>
 </template>
 <script>
+import { pca, pcaa } from "area-data";
 export default {
     data() {
         return {
@@ -49,9 +55,9 @@ export default {
     methods: {
         getList() {
             this.api
-                .get(this.api.county.base + this.api.county.genealogy_list, {
+                .get(this.api.province.base + this.api.province.genealogy_list, {
                     pageNo: this.page,
-                    siteId: this.$store.state.county.id,
+                    siteId: this.$store.state.province.id,
                     fileName: this.fileName,
                     status: this.status ? this.status : "",
                     regionCode: this.areacode ? this.areacode : ""
@@ -69,7 +75,7 @@ export default {
         },
         openFile(e) {},
         handleChange(e) {
-            this.areacode = e.length ? e[2].code : '';
+            this.areacode = e.length ? e[2].code : "";
             this.getList();
         }
     }
@@ -86,14 +92,8 @@ export default {
     background: #eee;
     .searchbar {
         float: right;
-        input {
-            line-height: 28px;
-            padding: 0 8px;
-            border-radius: 4px;
-            border: 0;
-        }
+        display: flex;
         .link {
-            float: right;
             padding: 0 8px;
             line-height: 28px;
             background: $color;
@@ -130,15 +130,71 @@ export default {
         border-radius: 4px;
         text-align: left;
         font-size: 12px;
-        .img {
-            background: #224671 no-repeat center / cover;
+        .book {
+            position: relative;
+            background: #224671 url(../img/cloud.png) no-repeat 20% 90% / 50%
+                auto;
             width: 100%;
+            border-radius: 4px;
+            overflow: hidden;
+            color: #fff;
             img {
                 width: 100%;
                 visibility: hidden;
+                overflow: hidden;
+            }
+            .tit {
+                color: #fff;
+            }
+            .lines {
+                position: absolute;
+                z-index: 1;
+                border-right: 1px solid #aaa;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                height: 100%;
+                width: 16px;
+                .line {
+                    height: 20%;
+                    width: 16px;
+                    & + .line {
+                        border-top: 1px solid #aaa;
+                    }
+                }
+            }
+            .flag {
+                position: absolute;
+                z-index: 1;
+                top: 0;
+                left: 0;
+                background: $color;
+                width: 64px;
+                text-align: center;
+                line-height: 24px;
+                border-radius: 0 0 16px 0;
+            }
+            .first {
+                position: absolute;
+                top: 32px;
+                left: 32px;
+                font-size: 64px;
+                color: rgba(#fff, 0.2);
+            }
+            .tit {
+                position: absolute;
+                top: 16px;
+                right: 16px;
+                width: 24px;
+                line-height: 1.5;
+                padding: 8px 0;
+                font-size: 14px;
+                text-align: center;
+                border: 1px solid #999;
             }
         }
         .name {
+            line-height: 32px;
             font-size: 14px;
         }
         .site {
