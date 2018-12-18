@@ -42,9 +42,9 @@
                 <FormItem label="网站名">
                     <Row>
                         <i-col :span="12" style="padding-right:16px">
-                            <Input v-model="formAdd.name" placeholder="标题" :maxlength="6" @keyup.enter.native="toCreat"/>
+                            <Input v-model="formAdd.name" placeholder="标题" :maxlength="10" @keyup.enter.native="toCreat"/>
                         </i-col>
-                        <i-col :span="6">{{formAdd.name.length}} / 6</i-col>
+                        <i-col :span="6">{{formAdd.name.length}} / 10</i-col>
                     </Row>
                 </FormItem>
                 <FormItem label="姓氏">
@@ -56,7 +56,7 @@
                     <al-cascader v-model="selected" :level="2" style="width:100%" placeholder="请选择地区"/>
                 </FormItem>
                 <FormItem label="省份" v-else>
-                    <al-cascader v-model="selected_pro" :level="0" style="width:100%" placeholder="请选择省份"/>
+                    <al-selector v-model="selected_pro" level="0" placeholder="请选择省份" style="width:80%;display:inline-block"/>
                 </FormItem>
                 <FormItem label>
                     <Button type="primary" @click="toCreat" style="margin-right:16px;">提交</Button>
@@ -86,7 +86,7 @@ export default {
                 totemPicSrc: ""
             },
             selected: [],
-            selected_: [],
+            selected_pro: [],
             loading: false,
             options: [],
             columns: [

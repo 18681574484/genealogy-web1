@@ -3,7 +3,7 @@
         <Sider hide-trigger collapsible :width="256" :collapsed-width="48" v-model="collapsed" class="left-sider" :style="{overflow: 'hidden'}">
             <side-menu accordion ref="sideMenu" :active-name="$route.name" :collapsed="collapsed" @on-select="turnToPage" :menu-list="menuList">
                 <div class="logo-con">
-                    <img :src="api.imgurl(siteinfo.totemPicSrc)" />
+                    <img :src="api.imgurl(siteinfo.totemPicSrc)">
                     <div v-if="!collapsed">{{siteinfo.siteName}}</div>
                 </div>
             </side-menu>
@@ -165,6 +165,9 @@ export default {
     }
 };
 </script>
+<style lang="less">
+@import "../../assets/theme/admin.less";
+</style>
 <style lang="scss" scoped>
 .main {
     .logo-con {

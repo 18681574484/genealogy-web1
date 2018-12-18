@@ -58,8 +58,9 @@ export default {
                 paytype: 0
             },
             text: "",
+            order_no: "",
             loop: null,
-            count: 1
+            count: 0
         };
     },
     mounted: function() {},
@@ -67,7 +68,7 @@ export default {
         loopData() {
             this.api
                 .post(this.api.county.base + this.api.county.pay.wxorder, {
-                    outTradeNo: "2018121515335822"
+                    outTradeNo: this.order_no
                 })
                 .then(res => {
                     if (res.code == 200) {
@@ -76,7 +77,13 @@ export default {
                             content: "支付成功"
                         });
                         clearInterval(this.loop);
+                        this.count = 0;
                         this.loop = null;
+                    } else {
+                        this.count++;
+                        if (this.count > 50) {
+                            clearInterval(this.loop);
+                        }
                     }
                 });
         },
@@ -90,6 +97,7 @@ export default {
                 this.$Message.error("请输入正确的金额");
                 return;
             }
+            clearInterval(this.loop);
             if (this.form.paytype) {
                 this.api
                     .post(this.api.county.base + this.api.county.pay.wx, {
@@ -101,6 +109,7 @@ export default {
                     .then(res => {
                         if (res.code == 200) {
                             this.text = res.data.code_url;
+                            this.order_no = res.data.out_trade_no;
                             this.loop = setInterval(() => {
                                 this.loopData();
                             }, 3000);

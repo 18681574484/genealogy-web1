@@ -16,10 +16,10 @@
                 <Input placeholder="行不更名 坐不改姓" v-model="user.realName" @keyup.enter.native="toSubmit"/>
             </FormItem>
             <FormItem label="英文名">
-                <Input placeholder="英文名" :maxlength="2" v-model="user.englishName" @keyup.enter.native="toSubmit"/>
+                <Input placeholder="英文名" v-model="user.englishName" @keyup.enter.native="toSubmit"/>
             </FormItem>
             <FormItem label="国籍">
-                <Input placeholder="国籍" :maxlength="2" v-model="user.nation" @keyup.enter.native="toSubmit"/>
+                <Input placeholder="国籍" :maxlength="6" v-model="user.nation" @keyup.enter.native="toSubmit"/>
             </FormItem>
             <FormItem label="出生地">
                 <Input placeholder="出生地" :maxlength="6" v-model="user.birthplace" @keyup.enter.native="toSubmit"/>
@@ -37,16 +37,16 @@
                 <Input placeholder="现居古城" :maxlength="6" v-model="user.alias" @keyup.enter.native="toSubmit"/>
             </FormItem>
             <FormItem label="历代">
-                <Input placeholder="历代" :maxlength="2" v-model="user.lidai" @keyup.enter.native="toSubmit"/>
+                <Input placeholder="历代" :maxlength="4" v-model="user.lidai" @keyup.enter.native="toSubmit"/>
             </FormItem>
             <FormItem label="近世">
-                <Input placeholder="近世" :maxlength="2" v-model="user.jinshi" @keyup.enter.native="toSubmit"/>
+                <Input placeholder="近世" :maxlength="4" v-model="user.jinshi" @keyup.enter.native="toSubmit"/>
             </FormItem>
             <FormItem label="老派">
-                <Input placeholder="老派" :maxlength="2" v-model="user.laopai" @keyup.enter.native="toSubmit"/>
+                <Input placeholder="老派" :maxlength="4" v-model="user.laopai" @keyup.enter.native="toSubmit"/>
             </FormItem>
             <FormItem label="新派">
-                <Input placeholder="新派" :maxlength="2" v-model="user.xinpai" @keyup.enter.native="toSubmit"/>
+                <Input placeholder="新派" :maxlength="4" v-model="user.xinpai" @keyup.enter.native="toSubmit"/>
             </FormItem>
             <FormItem label="统派">
                 <Input placeholder="统派" :maxlength="2" v-model="user.tongpai" @keyup.enter.native="toSubmit"/>

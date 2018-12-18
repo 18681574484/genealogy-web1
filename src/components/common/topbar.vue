@@ -136,7 +136,8 @@ export default {
                         }
                     }
                     this.$store.commit("updateAdminId", com_data);
-                    this.$router.push("/a");
+                    let url = this.$router.resolve("/a");
+                    window.open(url.href, "_blank");
                     break;
                 case "resetPsw":
                     this.isreset = true;

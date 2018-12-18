@@ -25,7 +25,9 @@ export default {
     beforeCreate() {}
 };
 </script>
-
+<style lang="less">
+@import "../../assets/theme/iview.less";
+</style>
 <style lang="scss">
 @import "@/assets/css/var.scss";
 .page-user {

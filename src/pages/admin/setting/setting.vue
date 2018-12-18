@@ -6,7 +6,7 @@
                     <i-col :span="12">
                         <Input v-model="formData.siteName" placeholder="网站名" :maxlength="10" @keyup.enter.native="toSubmit"/>
                     </i-col>
-                    <i-col :span="6">{{formData.siteName ? formData.siteName.length : 0}} / 6</i-col>
+                    <i-col :span="6">{{formData.siteName ? formData.siteName.length : 0}} / 10</i-col>
                 </Row>
             </FormItem>
             <FormItem label="徽标">
