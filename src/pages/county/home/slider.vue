@@ -72,7 +72,7 @@ export default {
         overflow: hidden;
         color: #fff;
         padding: 80px 16px 32px;
-        background: #000 url(../img/bg-famous.png) no-repeat center / cover;
+        background: #000 url(../img/bg-famous.jpg) no-repeat center / cover;
         box-shadow: 0 2px 5px rgba(#000, 0.5);
         border-radius: 32px 1px 32px 1px;
         .tit {

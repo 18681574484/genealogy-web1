@@ -69,7 +69,6 @@ export default {
 </script>
 <style lang="scss" scoped>
 .sib {
-    background: url(./img/bg-ancestors.png) no-repeat center / 100% auto;
     color: #fff;
     text-align: center;
     padding-bottom: 128px;

@@ -1,5 +1,5 @@
 <template>
-    <div class="content">
+    <div class="content" v-if="this.list.county.length">
         <section>
             <div class="h">县级联谊会</div>
             <div class="b">
@@ -38,9 +38,25 @@ export default {
     },
     computed: {},
     mounted: function() {
-        this.getList();
+        if (this.api.getUrlParam("code")) {
+            this.regSite();
+        } else {
+            this.getList();
+        }
     },
     methods: {
+        regSite() {
+            this.api
+                .post(this.api.county.base + this.api.county.site_reg, {
+                    fanUrlCode: this.api.getUrlParam("code")
+                })
+                .then(res => {
+                    if (res.code == 200) {
+                        this.$store.commit("updateCountyId", res.data.id);
+                        this.$router.push("/c");
+                    }
+                });
+        },
         getList() {
             this.api
                 .post(this.api.county.base + this.api.county.site_list, {

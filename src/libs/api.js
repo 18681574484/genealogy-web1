@@ -10,6 +10,7 @@ const api = {
         base: urls.main.county,
         site_home: urls.main.county + 'genogram/fanMenu/getIndexMenuBySiteId', //首页api
         site_menus: 'genogram/fanMenu/getTitlesByMenuId', //导航栏
+        site_reg: '/genogram/sysSite/person/getSysSiteByCode', //查询站点
         site_list: 'genogram/sysSite/person/getSysSite', //网站列表
         site_feeds: 'genogram/allMessageBoard/addMessage', //留言板
         detail: {

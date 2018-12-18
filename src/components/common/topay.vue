@@ -79,6 +79,7 @@ export default {
                         clearInterval(this.loop);
                         this.count = 0;
                         this.loop = null;
+                        this.$emit('reloadApi')
                     } else {
                         this.count++;
                         if (this.count > 50) {

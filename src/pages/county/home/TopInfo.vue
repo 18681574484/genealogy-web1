@@ -71,7 +71,7 @@
             </div>
         </div>
         <Modal v-model="handleTopay" width="480px" :footer-hide="true" class="g-pay">
-            <topay/>
+            <topay @reloadApi="reloadApi"/>
         </Modal>
     </div>
 </template>
@@ -102,6 +102,11 @@ export default {
         this.get_index_architecture_pay_in_person_1();
     },
     methods: {
+        reloadApi() {
+            this.get_index_fan_summary();
+            this.get_index_fund();
+            this.get_index_architecture_pay_in_person_1();
+        },
         get_index_fan_summary() {
             this.api
                 .get(
@@ -162,9 +167,6 @@ export default {
             padding: 0 16px;
             line-height: 40px;
             font-size: 16px;
-            padding-left: 24px;
-            background: no-repeat left center url("../img/titlebar.png") / auto
-                20px;
             span {
                 display: inline-block;
             }

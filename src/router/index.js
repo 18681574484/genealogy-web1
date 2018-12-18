@@ -4,7 +4,7 @@ import routes from './routers'
 Vue.use(Router)
 export default new Router({
     routes,
-    // mode: 'history',
+    mode: 'history',
     scrollBehavior(to, from, savedPosition) {
         document.title = to.meta.title
     }

@@ -193,7 +193,7 @@ export default {
                     return;
                 }
                 data.role = this.formData.role;
-                data.siteId = this.formData.siteId;
+                data.siteId = data.role == 9 ? 0 : this.formData.siteId;
             }
             this.api
                 .post(this.api.admin.user.base + this.api.admin.user.edit, data)

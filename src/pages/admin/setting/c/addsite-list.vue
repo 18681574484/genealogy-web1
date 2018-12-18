@@ -121,6 +121,7 @@ export default {
                         return h("div", this.api.formatArea(e.row.regionCode));
                     }
                 },
+                { title: "网站标识码", key: "fanUrlCode", width: 160 },
                 { title: "状态", key: "status", width: 72 },
                 {
                     title: "操作",
@@ -128,21 +129,37 @@ export default {
                     width: 160,
                     align: "center",
                     render: (h, e) => {
-                        return h("Button", {
-                            props: {
-                                type: "primary",
-                                size: "small",
-                                icon: "ios-create"
-                            },
-                            style: {
-                                marginRight: "5px"
-                            },
-                            on: {
-                                click: () => {
-                                    this.toEdit(e.row.id);
+                        return h("div", [
+                            h("Button", {
+                                props: {
+                                    type: "success",
+                                    size: "small",
+                                    icon: "ios-eye"
+                                },
+                                style: {
+                                    marginRight: "5px"
+                                },
+                                on: {
+                                    click: () => {
+                                        this.$router.push(
+                                            "/?code=" + e.row.fanUrlCode
+                                        );
+                                    }
                                 }
-                            }
-                        });
+                            }),
+                            h("Button", {
+                                props: {
+                                    type: "primary",
+                                    size: "small",
+                                    icon: "ios-create"
+                                },
+                                on: {
+                                    click: () => {
+                                        this.toEdit(e.row.id);
+                                    }
+                                }
+                            })
+                        ]);
                     }
                 }
             ]
@@ -272,18 +289,25 @@ export default {
                 this.$Message.error("请搜索姓氏并选择");
                 return;
             }
-            if (this.selected.length < 2) {
-                this.$Message.error("请选择地区");
-                return;
+            let regionCode = 0;
+            if (this.data == "fan") {
+                if (this.selected.length < 2) {
+                    this.$Message.error("请选择地区");
+                    return;
+                }
+                regionCode = this.selected[this.selected.length - 1].code;
+            } else {
+                if (!this.selected_pro.length) {
+                    this.$Message.error("请选择地区");
+                    return;
+                }
+                regionCode = this.selected_pro[0].code;
             }
             this.api
                 .post(this.api.admin.base + this.api.admin.site_creat, {
                     name: this.formAdd.name,
                     familyCode: this.formAdd.familyCode,
-                    regionCode:
-                        this.data == "fan"
-                            ? this.selected[this.selected.length - 1].code
-                            : this.selected_pro[0].code,
+                    regionCode: regionCode,
                     siteType: this.data.type
                 })
                 .then(res => {
