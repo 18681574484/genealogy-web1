@@ -5,6 +5,7 @@ import App from './App.vue'
 import iView from 'iview'
 import Api from './libs/api'
 import iviewArea from 'iview-area'
+import '@/assets/theme/iview.less'
 import '@/assets/icon/iconfont.css'
 import "@/assets/css/app.scss"
 import dayjs from 'dayjs'

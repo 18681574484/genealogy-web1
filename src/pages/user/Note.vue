@@ -15,10 +15,10 @@
                     </div>
                     <div class="bd" style="min-height:450px;">
                         <div class="item" v-for="v in list" :key="v.id">
-                            <div class="img" :style="api.imgBG(v.newsFaceUrl)" @click="link(v.id)"></div>
+                            <div class="img link" :style="api.imgBG(v.newsFaceUrl)" @click="link(v.id)"></div>
                             <div class="obj">
-                                <div class="tit" @click="link(v.id)">{{v.title}}</div>
-                                <div class="intro" @click="link(v.id)">{{v.content}}</div>
+                                <div class="tit link" @click="link(v.id)">{{v.title}}</div>
+                                <div class="intro link" @click="link(v.id)">{{v.content}}</div>
                                 <div class="tag">
                                     <span class="del" @click="onDel(v.id)">删除</span>
                                 </div>

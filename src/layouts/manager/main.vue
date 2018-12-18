@@ -165,9 +165,6 @@ export default {
     }
 };
 </script>
-<style lang="less">
-@import "../../assets/theme/admin.less";
-</style>
 <style lang="scss" scoped>
 .main {
     .logo-con {

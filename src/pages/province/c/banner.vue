@@ -1,7 +1,7 @@
 <template>
     <div class="slider">
         <Carousel loop>
-            <CarouselItem v-for="v in info" :key="v.id">
+            <CarouselItem v-for="v in list" :key="v.id">
                 <div class="img" :style="api.imgBG(v.picUrl)"></div>
             </CarouselItem>
         </Carousel>
@@ -12,26 +12,26 @@ export default {
     name: "slider",
     data() {
         return {
-            info: [],
-            slider: {}
+            list: []
         };
     },
     computed: {
-        url() {
-            return this.$store.state.province.apiList.fan_index_slide_pic
-                .apiUrl;
+        apiList() {
+            return this.$store.state.province.apiList;
         }
     },
     mounted: function() {
-        this.getInfo();
+        this.getApiData("fan_index_slide_pic");
     },
     methods: {
-        getInfo() {
-            this.api.get(this.api.province.base + this.url, {}).then(res => {
-                if (res.code == 200) {
-                    this.info = res.data;
-                }
-            });
+        getApiData(e) {
+            this.api
+                .get(this.api.province.base + this.apiList[e].apiUrl, {})
+                .then(res => {
+                    if (res.code == 200) {
+                        this.list = res.data;
+                    }
+                });
         }
     }
 };

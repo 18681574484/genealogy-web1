@@ -43,8 +43,6 @@ export default {
     .h {
         height: 48px;
         line-height: 48px;
-        padding-left: 32px;
-        background: url("./img/title-dot.png") no-repeat left center;
         font-size: 20px;
     }
     .b {

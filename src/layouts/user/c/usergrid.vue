@@ -8,13 +8,13 @@
                     <span>{{user.nickName}}</span>
                     <iconfont name="writefill"/>
                 </div>
-                <div class="info">
+                <div class="info" v-if="false">
                     <div class="item">英文名：{{user.englishName}}</div>
                     <div class="item">国籍：{{user.nation}}</div>
                     <div class="item">出生地：{{user.birthplace}}</div>
                     <div class="item">职业：{{user.job}}</div>
                 </div>
-                <div class="tag">
+                <div class="tag" v-if="false">
                     <div class="item">
                         <iconfont name="medalfill"/>
                         <span>诚信值：100</span>
@@ -28,12 +28,12 @@
                         <span>粉丝：0</span>
                     </div>
                 </div>
-                <div class="flag">
+                <div class="flag" v-if="false">
                     <div class="item">现居：{{user.presentAddress}}</div>
                     <div class="item">故居：{{user.oldAddress}}</div>
                     <div class="item">现居古城：{{user.alias}}</div>
                 </div>
-                <div class="flag">
+                <div class="flag" v-if="false">
                     <div class="item">历代：{{user.lidai}}</div>
                     <div class="item">近世：{{user.jinshi}}</div>
                     <div class="item">老派：{{user.laopai}}</div>

@@ -1,58 +1,71 @@
 <template>
-    <div class="main">
-        <div class="inner">
-            <div class="sia">
+    <div class="inner">
+        <Row :gutter="32" class="grid">
+            <i-col :span="24">
                 <div class="h kt">
-                    <div class="tit">家族动态</div>
+                    <span class="more">更多</span>
+                    <div class="tit">文化</div>
                 </div>
                 <div class="b">
-                    <div class="item curr">家族头条</div>
-                    <div class="item">省级公告</div>
-                    <div class="item">家族动态</div>
+                    <div class="item curr">文化发布</div>
+                    <div class="item">祖先名人</div>
+                    <div class="item">字派</div>
+                    <div class="item">迁徙之源</div>
                 </div>
                 <div class="f">
                     <Row :gutter="32">
-                        <i-col :span="12" v-for="v in 4" :key="v">
+                        <i-col :span="12" v-for="v in 6" :key="v">
                             <div class="item">
                                 <div class="img"></div>
                                 <div class="obj">
                                     <div class="tit">标题</div>
-                                    <div class="intro">简介</div>
+                                    <div class="txt">扼要</div>
                                 </div>
                             </div>
                         </i-col>
                     </Row>
                 </div>
-            </div>
-            <div class="sib">
-                <div class="h">
-                    <div class="item curr">最新图片</div>
-                    <div class="item">最新视频</div>
-                </div>
-                <div class="b"></div>
-            </div>
-        </div>
+            </i-col>
+        </Row>
     </div>
 </template>
 <script>
 export default {
-    name: "Home",
     data() {
         return {};
     },
-    computed: {},
+    computed: {
+        apiList() {
+            return this.$store.state.province.apiList;
+        }
+    },
     mounted: function() {},
-    methods: {}
+    methods: {
+        getApiData(e) {
+            this.api
+                .get(this.api.province.base + this.apiList[e].apiUrl, {})
+                .then(res => {
+                    if (res.code == 200) {
+                        this.apiData[e] = res.data;
+                    }
+                });
+        }
+    }
 };
 </script>
 <style lang="scss" scoped>
 @import "@/assets/css/var.scss";
-.sia {
+
+.grid {
     padding: 16px 0;
     .h {
         height: 48px;
         line-height: 48px;
         font-size: 20px;
+        .more {
+            float: right;
+            font-size: 14px;
+        }
     }
     .b {
         overflow: hidden;
@@ -72,11 +85,11 @@ export default {
     }
     .f {
         .item {
-            overflow: hidden;
             padding: 8px 0;
             white-space: nowrap;
+            overflow: hidden;
             .img {
-                width: 120px;
+                width: 90px;
                 height: 90px;
                 float: left;
                 margin-right: 16px;
@@ -86,33 +99,23 @@ export default {
                 overflow: hidden;
                 height: 90px;
                 .tit {
+                    line-height: 32px;
                     font-size: 16px;
+                    color: $colorp;
                 }
-                .intro {
-                    white-space: normal;
+                .txt {
+                    margin-top: 10px;
+                    line-height: 16px;
                     color: #999;
+                    white-space: normal;
+                    height: 80px;
+                    overflow: hidden;
                 }
             }
         }
     }
-}
-.sib {
-    padding: 32px 0;
-    .h {
-        overflow: hidden;
-        border-bottom: 1px solid #ddd;
-        .item {
-            float: left;
-            width: 120px;
-            line-height: 32px;
-            text-align: center;
-            cursor: pointer;
-            &.curr,
-            &:hover {
-                background: $colorp;
-                color: #fff;
-            }
-        }
+    .ivu-col:nth-child(2) .f .img {
+        width: 120px;
     }
 }
 </style>
