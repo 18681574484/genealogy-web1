@@ -160,8 +160,8 @@ export default {
 
             .img {
                 float: left;
-                height: 120px;
-                width: 160px;
+                height: 60px;
+                width: 80px;
                 background: whitesmoke no-repeat center / cover;
                 margin-right: 16px;
             }

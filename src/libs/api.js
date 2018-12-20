@@ -22,7 +22,6 @@ const api = {
             records: 'genogram/fanNewsFamilyRecord/getFamilyRecordDetail', //家族动态
         },
         charitable_list: 'genogram/fanSysCharitableDeclare/getSysCharitableDeclare', //慈善帮扶
-
         pay: {
             ali: 'genogram/pay/aLiPay', //支付宝支付
             wx: 'genogram/pay/weChatPay', //微信支付

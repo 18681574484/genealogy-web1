@@ -38,7 +38,7 @@ export default {
     },
     computed: {},
     mounted: function() {
-        if (this.api.getUrlParam("code")) {
+        if (this.$route.query.code) {
             this.regSite();
         } else {
             this.getList();
@@ -48,7 +48,7 @@ export default {
         regSite() {
             this.api
                 .post(this.api.county.base + this.api.county.site_reg, {
-                    fanUrlCode: this.api.getUrlParam("code")
+                    fanUrlCode: this.$route.query.code
                 })
                 .then(res => {
                     if (res.code == 200) {

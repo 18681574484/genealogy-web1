@@ -15,7 +15,7 @@ let urls = {
 //     imghost: 'http://47.105.177.1:6090/', //图片服务器地址
 //     main: {
 //         province: 'http://47.105.177.1:8070/', //省级前台地址
-//         county: 'http://47.105.177.1:8090/', //联谊会前台地址
+//         county: 'http://yhtpw.com/fanApiWebService/', //联谊会前台地址
 //         user: 'http://47.105.177.1:8060/', //用户中心
 //     },
 //     admin: {

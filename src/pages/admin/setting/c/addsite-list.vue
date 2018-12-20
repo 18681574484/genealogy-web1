@@ -290,7 +290,7 @@ export default {
                 return;
             }
             let regionCode = 0;
-            if (this.data == "fan") {
+            if (this.data.type == "fan") {
                 if (this.selected.length < 2) {
                     this.$Message.error("请选择地区");
                     return;
