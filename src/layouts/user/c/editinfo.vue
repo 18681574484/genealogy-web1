@@ -50,7 +50,7 @@
             </FormItem>
             <FormItem label="统派">
                 <Input placeholder="统派" :maxlength="8" v-model="user.tongpai" @keyup.enter.native="toSubmit"/>
-            </FormItem> -->
+            </FormItem>-->
             <FormItem>
                 <Button type="primary" @click="toSubmit">保存</Button>
             </FormItem>
@@ -79,6 +79,7 @@ export default {
                 .post(this.api.user.base + this.api.user.update, {
                     nickName: this.user.nickName,
                     realName: this.user.realName,
+                    summary: "暂无信息",
                     // englishName: this.user.englishName,
                     // nation: this.user.nation,
                     // birthplace: this.user.birthplace,
