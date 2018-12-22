@@ -3,10 +3,10 @@
         <div class="inner">
             <Row :gutter="16">
                 <i-col :span="12">
-                    <News/>
+                    <Blog/>
                 </i-col>
                 <i-col :span="12">
-                    <Shuoshuo/>
+                    <Note/>
                 </i-col>
             </Row>
             <Videos/>
@@ -15,10 +15,10 @@
     </div>
 </template>
 <script>
-import News from "./c/CentreNews.vue";
-import Shuoshuo from "./c/CentreShuoshuo.vue";
-import Images from "./c/CentreImages.vue";
-import Videos from "./c/CentreVideos.vue";
+import Blog from "./c/blog.vue";
+import Note from "./c/note.vue";
+import Images from "./c/image.vue";
+import Videos from "./c/video.vue";
 export default {
     components: {
         Shuoshuo,

@@ -10,7 +10,7 @@ import {
     getRouteTitleHandled
 } from '@/libs/util'
 import router from '@/router'
-import routersAdmin from '@/router/admin/admin'
+import routersAdmin from '@/router/child/admin'
 
 const closePage = (state, route) => {
     const nextRoute = getNextRoute(state.tagNavList, route)

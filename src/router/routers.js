@@ -1,8 +1,8 @@
-import admin from './admin/admin'
-import nation from './nation/nation'
-import province from './province/province'
-import county from './county/county'
-import user from './user/user'
+import admin from './child/admin'
+import nation from './child/nation'
+import province from './child/province'
+import county from './child/county'
+import user from './child/user'
 export default [{
         path: "/",
         redirect: "/base"

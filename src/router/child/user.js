@@ -5,7 +5,7 @@ export default [{
         title: "个人中心",
         role: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
     },
-    component: () => import('@/pages/user/User')
+    component: () => import('@/pages/user/user')
 }, {
     path: 'family',
     name: 'u_family',
@@ -13,7 +13,7 @@ export default [{
         title: "我的家谱",
         role: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
     },
-    component: () => import('@/pages/user/Family')
+    component: () => import('@/pages/user/family')
 }, {
     path: 'donate',
     name: 'u_donate',
@@ -21,15 +21,15 @@ export default [{
         title: "捐赠记录",
         role: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
     },
-    component: () => import('@/pages/user/Donate')
+    component: () => import('@/pages/user/donate')
 }, {
-    path: 'note',
+    path: 'blog',
     name: 'u_note',
     meta: {
         title: "我的日志",
         role: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
     },
-    component: () => import('@/pages/user/Note')
+    component: () => import('@/pages/user/blog')
 }, {
     path: 'detail',
     name: 'u_detail',
@@ -39,13 +39,13 @@ export default [{
     },
     component: () => import('@/pages/user/detail')
 }, {
-    path: 'msg',
+    path: 'note',
     name: 'u_msg',
     meta: {
-        title: "我的消息",
+        title: "我的说说",
         role: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
     },
-    component: () => import('@/pages/user/Msg')
+    component: () => import('@/pages/user/note')
 }, {
     path: 'video',
     name: 'u_video',
@@ -53,13 +53,13 @@ export default [{
         title: "我的视频",
         role: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
     },
-    component: () => import('@/pages/user/Video')
+    component: () => import('@/pages/user/video')
 }, {
     path: 'image',
     name: 'u_image',
     meta: {
-        title: "我的图片",
+        title: "我的图册",
         role: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
     },
-    component: () => import('@/pages/user/Image')
+    component: () => import('@/pages/user/image')
 }]

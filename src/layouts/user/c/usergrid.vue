@@ -41,19 +41,19 @@
                     <div class="item">统派：{{user.tongpai}}</div>
                 </div>
                 <ButtonGroup style="margin-top:16px;" shape="circle" size="small">
-                    <Button to="note" class="item">
+                    <Button to="blog" class="item">
                         <iconfont name="formfill"/>
                         <span>日志</span>
                     </Button>
                     <Button to="image" class="item">
                         <iconfont name="picfill"/>
-                        <span>照片</span>
+                        <span>图册</span>
                     </Button>
                     <Button to="video" class="item">
                         <iconfont name="video_fill_light"/>
                         <span>视频</span>
                     </Button>
-                    <Button to="msg" class="item">
+                    <Button to="note" class="item">
                         <iconfont name="communityfill"/>
                         <span>说说</span>
                     </Button>

@@ -4,7 +4,7 @@
 
 <script>
 import error404 from "./img/error-404.svg";
-import errorContent from "./error-content.vue";
+import errorContent from "./c/error-content.vue";
 export default {
     name: "error_404",
     components: {
