@@ -87,7 +87,7 @@ export default {
             total: 0,
             page: 1,
             formData: {
-                picUrl: ""
+                videoPicUrl: ""
             },
             curr: ""
         };

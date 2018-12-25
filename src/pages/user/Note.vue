@@ -74,7 +74,7 @@ export default {
         onDel(e) {
             this.$Modal.confirm({
                 title: "提示",
-                content: "确定删除这个图片？",
+                content: "确定删除这条记录？",
                 onOk: () => {
                     this.api
                         .post(this.api.user.base + this.api.user.shuoshuo_del, {
