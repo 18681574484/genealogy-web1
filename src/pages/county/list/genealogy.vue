@@ -97,7 +97,7 @@ export default {
         },
         toSubmit() {
             if (this.curr.password == this.form.password) {
-                window.open(e.url, "_blank");
+                window.open(this.curr.url, "_blank");
             } else {
                 this.$Message.error("密码错误");
             }
@@ -219,6 +219,7 @@ export default {
                 font-size: 14px;
                 text-align: center;
                 border: 1px solid #999;
+                writing-mode: vertical-rl;
             }
         }
         .name {

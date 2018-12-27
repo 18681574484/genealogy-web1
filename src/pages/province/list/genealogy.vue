@@ -191,6 +191,7 @@ export default {
                 font-size: 14px;
                 text-align: center;
                 border: 1px solid #999;
+                writing-mode: vertical-rl;
             }
         }
         .name {
