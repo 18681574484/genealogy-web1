@@ -18,7 +18,7 @@
                     <Input v-model="formData.jinshi" placeholder="输入祖先近世" @keyup.enter.native="toSubmit"/>
                 </FormItem>
                 <FormItem label="字派列表">
-                    <Tag checkable type="dot" v-for="(v,i) in formData.list" :key="i" :name="i" closable @on-close="handleClose">{{v}}</Tag>
+                    <Tag checkable type="dot" :name="i" closable @on-close="handleClose" v-for="(v,i) in formData.list" :key="v.id">{{v.label}}</Tag>
                     <Poptip width="300" title="添加字派名">
                         <Button icon="ios-add" type="dashed">添加</Button>
                         <div class="api" slot="content">
@@ -184,7 +184,10 @@ export default {
                                 this.formData.jinshi = _v[0];
                                 this.formData.lidai = _v[1];
                             }
-                            return _v[2];
+                            return {
+                                id: i + 1,
+                                label: _v[2]
+                            };
                         });
                         this.isedit = true;
                     });
@@ -273,3 +276,15 @@ export default {
     props: ["url", "menu", "type"]
 };
 </script>
+<style>
+.vddl-dragging {
+    display: inline;
+}
+.vddl-dragging {
+    opacity: 0.7;
+}
+
+.vddl-dragging-source {
+    display: none;
+}
+</style>
