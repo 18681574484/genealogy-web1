@@ -56,6 +56,7 @@ export default {
                 .then(res => {
                     if (res.code == 200) {
                         this.index_summary = res.data;
+                        document.title = this.index_summary.siteName;
                     }
                 });
         },

@@ -11,7 +11,7 @@ export default [{
         path: "/base",
         name: 'base',
         meta: {
-            title: '炎黄统谱网',
+            title: '联谊会',
         },
         component: () => import('@/pages/error/base')
     },
@@ -20,7 +20,7 @@ export default [{
         redirect: '/a/home',
         component: () => import('@/layouts/base'),
         meta: {
-            title: '炎黄统谱网',
+            title: '首页',
             hideInMenu: true,
         },
         children: admin
@@ -30,7 +30,7 @@ export default [{
         redirect: "/n/home",
         component: () => import('@/layouts/base'),
         meta: {
-            title: '炎黄统谱网',
+            title: '首页',
         },
         children: nation
     },
@@ -39,7 +39,7 @@ export default [{
         redirect: "/p/home",
         component: () => import('@/layouts/province'),
         meta: {
-            title: '炎黄统谱网',
+            title: '首页',
         },
         children: province
     },
@@ -48,7 +48,7 @@ export default [{
         redirect: "/c/home",
         component: () => import('@/layouts/county'),
         meta: {
-            title: '炎黄统谱网',
+            title: '首页',
         },
         children: county
     },
@@ -57,7 +57,7 @@ export default [{
         redirect: "/u/user",
         component: () => import('@/layouts/user'),
         meta: {
-            title: '炎黄统谱网',
+            title: '个人中心',
         },
         children: user
     },
