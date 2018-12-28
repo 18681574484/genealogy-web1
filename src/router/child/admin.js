@@ -366,7 +366,7 @@ export default [{
             meta: {
                 icon: 'ios-people-outline',
                 title: '全部用户',
-                role: [1, 2, 3, 9],
+                role: [9],
                 type: [1, 2, 3]
             },
             component: () => import('@/pages/admin/users/alluser')
@@ -386,7 +386,7 @@ export default [{
             meta: {
                 icon: 'md-code',
                 title: '管理员日志',
-                role: [1, 2, 3, 9],
+                role: [9],
                 type: [1, 2, 3]
             },
             component: () => import('@/pages/admin/users/log')
@@ -400,7 +400,7 @@ export default [{
         meta: {
             icon: 'logo-buffer',
             title: '帮助',
-            role: [1, 2, 3, 9],
+            role: [9],
             type: [1, 2, 3]
         },
         children: [{
@@ -409,7 +409,7 @@ export default [{
             meta: {
                 icon: 'md-help-circle',
                 title: '帮助',
-                role: [1, 2, 3, 9],
+                role: [9],
                 type: [1, 2, 3]
             },
             component: () => import('@/pages/admin/home/help')

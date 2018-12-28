@@ -21,10 +21,10 @@ import Images from "./c/image.vue";
 import Videos from "./c/video.vue";
 export default {
     components: {
-        Shuoshuo,
+        Blog,
+        Note,
         Images,
-        Videos,
-        News
+        Videos
     },
     data() {
         return {};
