@@ -15,7 +15,7 @@
                     <Input v-model="formData.leader" placeholder="负责人" @keyup.enter.native="toSubmit"/>
                 </FormItem>
                 <FormItem label="负责人电话">
-                    <Input v-model="formData.leaderPhone" placeholder="负责人电话" @keyup.enter.native="toSubmit"/>
+                    <Input :maxlength="11" v-model="formData.leaderPhone" placeholder="负责人电话" @keyup.enter.native="toSubmit"/>
                 </FormItem>
                 <FormItem label="膜拜" v-if="formData.id">
                     <Input v-model="formData.worshipNum" placeholder="膜拜" @keyup.enter.native="toSubmit"/>

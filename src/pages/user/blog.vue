@@ -32,7 +32,7 @@
         <Modal v-model="isAdd" title="写日志" width="640px" :footer-hide="true">
             <Form :model="formData">
                 <FormItem label="标题">
-                    <Input v-model="formData.title" placeholder="输入标题" clearable :maxlength="11" @keyup.enter.native="toSubmit"/>
+                    <Input v-model="formData.title" placeholder="输入标题" clearable :maxlength="45" @keyup.enter.native="toSubmit"/>
                 </FormItem>
                 <div class="t">预览图</div>
                 <FormItem>
