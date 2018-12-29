@@ -70,7 +70,7 @@ export default {
                 return;
             }
             this.api
-                .post(this.api.user.base + this.api.user.regcode, {
+                .post(this.api.county.base + this.api.county.regcode, {
                     mobilePhone: this.form.mobile
                 })
                 .then(res => {
@@ -128,7 +128,7 @@ export default {
                 return;
             }
             this.api
-                .post(this.api.user.base + this.api.user.reg, {
+                .post(this.api.county.base + this.api.county.reg, {
                     mobilePhone: this.form.mobile,
                     verificationCode: this.form.sms,
                     password: this.form.password,

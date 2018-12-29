@@ -18,7 +18,13 @@ export default {
         return {};
     },
     computed: {},
-    mounted: function() {},
+    mounted: function() {
+        if (
+            /iphone|ios|android|ipod/i.test(navigator.userAgent.toLowerCase())
+        ) {
+            location.href = "/mobile/";
+        }
+    },
     methods: {},
     beforeCreate() {
         this.$store.dispatch("countyHomeApi");

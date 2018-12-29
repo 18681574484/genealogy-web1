@@ -49,7 +49,7 @@ export default {
                 return;
             }
             this.api
-                .post(this.api.user.base + this.api.user.reset, {
+                .post(this.api.county.base + this.api.county.reset, {
                     oldPassword: this.form.oldpassword,
                     newPassword: this.form.newpassword
                 })

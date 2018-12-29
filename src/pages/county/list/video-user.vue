@@ -3,9 +3,9 @@
         <Row :gutter="32" class="videolist">
             <i-col :span="6" v-for="v in list" :key="v.id">
                 <div class="item">
-                    <div class="img" :style="v.fanNewsUploadFile.length ? api.imgBG(v.fanNewsUploadFile[0].filePath) : ''">
+                    <div class="img" :style="api.imgBG(v.videoPicUrl)">
                         <img src="http://iph.href.lu/80x45">
-                        <div class="hover" @click="toShow(v.fanUploadVedioList[0].filePath)">
+                        <div class="hover" @click="toShow(v.videoUrl)">
                             <Icon type="ios-videocam"/>
                         </div>
                     </div>
@@ -61,6 +61,7 @@ export default {
         getList() {
             this.api
                 .get(this.url, {
+                    siteId: this.$store.state.county.id,
                     pageNo: this.page
                 })
                 .then(res => {

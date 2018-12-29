@@ -46,7 +46,7 @@ export default {
                 return;
             }
             this.api
-                .post(this.api.user.base + this.api.user.login, {
+                .post(this.api.county.base + this.api.county.login, {
                     userName: this.form.mobile,
                     password: this.form.password
                 })

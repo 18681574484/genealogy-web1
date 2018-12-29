@@ -21,16 +21,26 @@ const api = {
             famous: 'genogram/fanNewsFamous/getFamilyFamilyDetail', //家族名人
             records: 'genogram/fanNewsFamilyRecord/getFamilyRecordDetail', //家族动态
         },
+        login: 'genogram/userLogin/login', //登录
+        reg: 'genogram/userLogin/signIn', //注册
+        reset: 'genogram/userLogin/updatePassword', //修改密码
+        regcode: 'genogram/userLogin/sendVerificationCode', //注册验证码
+
         charitable_list: 'genogram/fanSysCharitableDeclare/getSysCharitableDeclare', //慈善帮扶
         pay: {
             ali: 'genogram/pay/aLiPay', //支付宝支付
             wx: 'genogram/pay/weChatPay', //微信支付
             wxorder: 'genogram/pay/getFanNewsCharityPayIn', //微信支付订单校验
+            wechat: 'genogram/pay/orders', //微信公众号支付
+            getAuth: 'genogram/pay/GO', //获得授权
         },
         ancestor_list: 'genogram/proNewsAncestor/getFamousAncestorPage', //祖先名人列表
         ancestor_info: 'genogram/proNewsAncestor/getFamousAncestorDetails', //祖先名人详情
         genealogy_list: 'genogram/fanNewsUploadTreeFile/getFanNewsUploadTreeFileList', //家谱列表
         genealogy_info: 'genogram/fanNewsUploadTreeFile/getFanNewsUploadTreeFile', //家谱详情
+        comments_list: 'genogram/allUserComments/getAllUserComments', //评论列表
+        comments_add: 'genogram/allUserComments/addAllUserComments', //添加评论
+        comments_feeds: '/genogram/allUserComments/addAllUserReply', //回复
     },
     province: {
         base: urls.main.province,
@@ -41,7 +51,7 @@ const api = {
             culture: 'genogram/proNewsCulture/getFamilyCultureDetail', //家族文化
             charity: 'genogram/proNewsCharity/getNewsDetail', //慈善公益详情
             famous: 'genogram/proNewsFamous/getFamilyPersionDetail', //家族名人
-            family_record: 'genogram/proNewsFamilyRecord/getProFamilyRecord', //家族动态
+            records: 'genogram/proNewsFamilyRecord/getProFamilyRecord', //家族动态
         },
         charitable_list: 'genogram/fanSysCharitableDeclare/getSysCharitableDeclare', //慈善帮扶
         charitable_info: 'genogram/fanSysCharitableDeclare/getFamilyStructureDetails', //慈善帮扶详情
@@ -58,10 +68,6 @@ const api = {
     user: {
         base: urls.main.user,
         firstname: 'genogram/userLogin/getAllFamily', //姓氏列表
-        login: 'genogram/userLogin/login', //登录
-        reg: 'genogram/userLogin/signIn', //注册
-        reset: 'genogram/userLogin/updatePassword', //修改密码
-        regcode: 'genogram/userLogin/sendVerificationCode', //注册验证码
         info: 'genogram/user/getAllUserReg', //用户信息
         update: 'genogram/user/updatePersonVo', //修改用户资料
         pay_list: 'genogram/user/getPayInList', //捐款记录
@@ -76,7 +82,7 @@ const api = {
         picture_info: 'genogram/user/getAllUserPics', //详情
         picture_del: 'genogram/user/deleteAllUserPics', //删除图片
 
-        rizhi_list: '/genogram/user/getAllUserNewsInfoList', //日志
+        rizhi_list: 'genogram/user/getAllUserNewsInfoList', //日志
         rizhi_add: 'genogram/user/insertAllUserNewsInfo', //发布
         rizhi_info: 'genogram/user/getAllUserNewsInfo', //详情
         rizhi_del: 'genogram/user/deleteAllUserNewsInfo', //删除
@@ -85,7 +91,6 @@ const api = {
         video_add: 'genogram/user/insertAllUserVideos', //发布
         video_info: '/genogram/user/getAllUserVideos', //详情
         video_del: 'genogram/user/deleteAllUserVideos', //删除
-
     },
     admin: {
         base: urls.admin.county,
@@ -193,8 +198,6 @@ const api = {
             industry_drft: 'genogram/admin/fanNewsIndustry/addOrUpdateIndustryDrft', //家族产业草稿
             industry_del: 'genogram/admin/fanNewsIndustry/deleteIndustryById', //家族产业删除
 
-
-
             genealogy_list: 'genogram/admin/fanNewsUploadTreeFile/getFanNewsUploadTreeFileList', //电子家谱列表
             genealogy_info: 'genogram/admin/fanNewsUploadTreeFile/getFanNewsUploadTreeFile', //电子家谱详情
             genealogy_edit: 'genogram/admin/fanNewsUploadTreeFile/uploadFanNewsUploadTreeFile', //电子家谱列表
@@ -213,14 +216,14 @@ const api = {
             media_list: 'genogram/admin/fanNewsFamilyRecord/selectRecortVedioPage', //官方视频
             media_info: 'genogram/admin/fanNewsFamilyRecord/getFamilyRecordVedioDetail', //信息
             media_edit: 'genogram/admin/fanNewsFamilyRecord/addOrUpdateVedioRecord', //修改
-            media_del: 'genogram/admin/fanNewsFamilyRecord/deleteRecordVedioById', //删除
+            media_del: 'genogram/admin/fanNewsFamilyRecord/deleteRecordVedioById', //删除列表
         },
     },
     adminUrl: function (e, i) {
         let type = ['users', 'county', 'province']
         return e.indexOf('/') > -1 ? this.admin[type[i]].base + e : this.admin[type[i]].base + this.admin[type[i]][e];
     },
-    post: function (url, data) {
+    post: function (url, data, type) {
         if (!data.pageNo) {
             data.pageNo = 1
         }
@@ -230,9 +233,14 @@ const api = {
         if (!data.token && localStorage.user) {
             data.token = JSON.parse(localStorage.user).token
         }
-        let params = new URLSearchParams();
-        for (let v in data) {
-            params.append(v, data[v]);
+        let params = null;
+        if (type) {
+            params = data;
+        } else {
+            params = new URLSearchParams();
+            for (let v in data) {
+                params.append(v, data[v]);
+            }
         }
         return new Promise((resolve, reject) => {
             axios.post(url, params).then(res => {
@@ -241,6 +249,8 @@ const api = {
                     alert(res.data.msg)
                     history.go(-1)
                     return;
+                } else if (res.data.code == 99) {
+                    this.getAuth();
                 } else {
                     resolve(res.data);
                 }
@@ -266,6 +276,8 @@ const api = {
                     alert(res.data.msg)
                     history.go(-1)
                     return;
+                } else if (res.data.code == 99) {
+                    this.getAuth();
                 } else {
                     resolve(res.data);
                 }
@@ -291,6 +303,15 @@ const api = {
                 resolve(res.data);
             })
         })
+    },
+    getAuth: function () {
+        this.get(
+                this.county.base +
+                this.county.pay.getAuth, {}
+            )
+            .then(e => {
+                location.href = e.data;
+            });
     },
     getUrlParam: function (name, old_url = window.location.search) {
         var new_url = encodeURI(old_url);
@@ -344,10 +365,16 @@ const api = {
             return pca[86][a];
         }
         if (pcaa[b]) {
-            return pca[86][a] + " · " + pcaa[b][c];
+            return pca[86][a] + "·" + pcaa[b][c];
         } else {
-            return pca[86][a] + " · " + pcaa[a][c];
+            return pca[86][a] + "·" + pcaa[a][c];
         }
+    },
+    maxcount(e) {
+        if (!e) {
+            return 0;
+        }
+        return e > 9999 ? 9999 : e
     },
     toPagedown() {
         document.getElementsByClassName('page')[0].scrollTop = document.getElementsByClassName('page')[0].scrollHeight
@@ -393,7 +420,7 @@ const api = {
         }
     },
     onBridge: function (data, url) {
-        WeixinJSBridge.invoke('getBrandWCPayRequest', JSON.parse(data), function (res) {
+        WeixinJSBridge.invoke('getBrandWCPayRequest', data, function (res) {
             if (res.err_msg == "get_brand_wcpay_request:ok") {
                 if (!url) {
                     location.reload();

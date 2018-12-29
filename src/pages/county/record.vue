@@ -10,7 +10,10 @@
                 <span class="menu" v-for="(v,i) in menu" v-if="i > 1" :key="i" :class="v.orderIndex == menucurr.orderIndex ? 'curr':''" v-html="v.menuName" @click="chgMenu(i)"></span>
             </div>
             <div class="grid" style="minHeight:450px;">
-                <VideoList :url="url" v-if="menucurr && url.length"/>
+                <div v-if="menucurr && url.length">
+                    <VideoList :url="url" v-if="menucurr.menuCode == 'index_family_video'"/>
+                    <VideoUser :url="url" v-else/>
+                </div>
             </div>
         </div>
     </div>
@@ -18,10 +21,12 @@
 <script>
 import { Record } from "./home";
 import VideoList from "./list/video-list.vue";
+import VideoUser from "./list/video-user.vue";
 export default {
     components: {
         Record,
-        VideoList
+        VideoList,
+        VideoUser
     },
     computed: {
         apiList() {
