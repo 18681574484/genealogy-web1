@@ -64,14 +64,31 @@
                 </FormItem>
             </Form>
         </Drawer>
+        <Modal v-model="visible" width="560" :footer-hide="true">
+            <dl v-if="curr_model.id" style="fontSize:16px;">
+                <dt>pc端网址：</dt>
+                <dd>http://www.yhtpw.com/#/base?code={{curr_model.fanUrlCode}}</dd>
+                <dt>移动端网址：</dt>
+                <dd>http://www.yhtpw.com/mobile/#/base?code={{curr_model.fanUrlCode}}</dd>
+                <dd>
+                    <qrcode :text="curr_model.fanUrlCode" style="marginTop:32px;"/>
+                </dd>
+            </dl>
+        </Modal>
     </div>
 </template>
 
 <script>
 import { pca, pcaa } from "area-data";
+import qrcode from "_c/qrcode";
 export default {
+    components: {
+        qrcode
+    },
     data() {
         return {
+            visible: false,
+            curr_model: {},
             isadd: false,
             isedit: false,
             list: [],
@@ -121,7 +138,32 @@ export default {
                         return h("div", this.api.formatArea(e.row.regionCode));
                     }
                 },
-                { title: "网站标识码", key: "fanUrlCode", width: 160 },
+                {
+                    title: "网站标识码",
+                    key: "fanUrlCode",
+                    width: 200,
+                    render: (h, e) => {
+                        return h("div", [
+                            e.row.fanUrlCode,
+                            h("Button", {
+                                props: {
+                                    type: "success",
+                                    size: "small",
+                                    icon: "ios-eye"
+                                },
+                                style: {
+                                    marginLeft: "10px"
+                                },
+                                on: {
+                                    click: () => {
+                                        this.curr_model = e.row;
+                                        this.visible = true;
+                                    }
+                                }
+                            })
+                        ]);
+                    }
+                },
                 { title: "状态", key: "status", width: 72 },
                 {
                     title: "操作",

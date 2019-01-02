@@ -6,7 +6,6 @@
 <script>
 import Editor from "wangeditor";
 import "wangeditor/release/wangEditor.min.css";
-import { oneOf } from "@/libs/tools";
 export default {
     name: "Editor",
     props: {
@@ -19,10 +18,7 @@ export default {
          */
         valueType: {
             type: String,
-            default: "html",
-            validator: val => {
-                return oneOf(val, ["html", "text"]);
-            }
+            default: "html"
         },
         /**
          * @description 设置change事件触发时间间隔
@@ -123,3 +119,14 @@ export default {
     }
 };
 </script>
+<style>
+.w-e-text-container {
+    z-index: 1 !important;
+}
+.w-e-toolbar {
+    flex-wrap: wrap;
+}
+.w-e-menu {
+    z-index: 1 !important;
+}
+</style>

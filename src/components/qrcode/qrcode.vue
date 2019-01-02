@@ -21,8 +21,8 @@ export default {
     methods: {
         qrcode() {
             let qrcode = new QRCode("qrcode", {
-                width: 100,
-                height: 100,
+                width: 300,
+                height: 300,
                 text: this.text
                 // render: 'canvas' // 设置渲染方式（有两种方式 table和canvas，默认是canvas）
                 // background: '#f0f'
