@@ -47,42 +47,52 @@
                 </div>
             </div>
             <Spin size="large" fix v-else></Spin>
-            <div class="feedback" v-if="1 == 2">
-                <div class="h">
-                    <div class="img"></div>
+            <div class="feedback">
+                <div class="h" v-if="user">
+                    <div class="img" :style="api.imgBG(user.picSrc)"></div>
                     <div class="obj">
                         <div class="user">
-                            <div class="count">0/300</div>
-                            <span>张三</span>
+                            <div class="count">{{comment.length}}/140</div>
+                            <span>{{user.nickName}}</span>
                             <iconfont name="crownfill"/>
                         </div>
                         <div class="textarea">
-                            <textarea name id rows="4"></textarea>
+                            <Input v-model="comment" type="textarea" :rows="4" placeholder="发表评论..."/>
+                        </div>
+                        <Button type="primary" @click="sendComment">评论</Button>
+                    </div>
+                </div>
+                <div class="h" v-else>
+                    <div class="img"></div>
+                    <div class="obj">
+                        <div class="textarea">
+                            <Input disabled type="textarea" :rows="4" placeholder="评论请先登录"/>
                         </div>
                     </div>
                 </div>
                 <div class="b">
-                    <div class="item" v-for="v in 5" :key="v">
-                        <div class="img"></div>
+                    <div class="item" v-for="v in list" :key="v.id">
+                        <div class="img" :style="api.imgBG(v.picSrc)"></div>
                         <div class="obj">
-                            <div class="user">
-                                <span class="name">用户名</span>
-                                <iconfont name="crownfill"/>
-                                <span class="date">昨天</span>
+                            <div class="name">{{v.nickName}}</div>
+                            <div class="txt">{{v.content}}</div>
+                            <div class="feeds">
+                                <div class="textarea" v-if="v.ready">
+                                    <Input v-model="v.comment" type="textarea" :rows="4" placeholder="发表评论..."/>
+                                </div>
+                                <Button type="primary" v-if="v.ready" @click="sendReply(v)">回复</Button>
+                                <span @click="toReply(v)" v-else>回复</span>
                             </div>
-                            <div class="text">描述描述</div>
-                            <div class="tag">
-                                <div class="itm">
-                                    <iconfont name="appreciate_light"/>
-                                    <span>150</span>
-                                </div>
-                                <div class="itm">
-                                    <iconfont name="footprint"/>
-                                    <span>199</span>
-                                </div>
-                                <div class="itm">
-                                    <iconfont name="message_light"/>
-                                    <span>199</span>
+                            <div class="replays" v-if="v.next.length">
+                                <div class="row" v-for="row in v.next" :key="row.id">
+                                    <div class="name">{{row.nickName}}</div>
+                                    <div class="obj">
+                                        <div class="txt">{{row.content}}</div>
+                                        <div class="tags" v-if="false">
+                                            <span class="time">{{dayjs(row.createTime.replace("+0000", "Z")).fromNow()}}</span>
+                                            <span class="feeds" @click="toReplyAnd(v)">回复</span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -98,17 +108,31 @@ export default {
         return {
             url: "",
             info: {},
-            isload: false
+            id: this.$route.query.id,
+            comment: "",
+            entity: "",
+            comment: "",
+            reply: "",
+            list: [],
+            page: 1,
+            total: 0,
+            isload: false,
+            loading: false,
+            finished: false
         };
     },
     computed: {
         apiList() {
             return this.$store.state.county.apiList;
+        },
+        user() {
+            return this.$store.state.user;
         }
     },
     mounted: function() {
         this.resetUrl();
         this.getInfo();
+        this.getList();
     },
     methods: {
         resetUrl() {
@@ -117,18 +141,23 @@ export default {
                 this.api.county.detail[this.$route.query.type];
             switch (this.$route.query.type) {
                 case "culture":
+                    this.entity = "FanNewsCultureNews";
                     this.navcurr = 2;
                     break;
                 case "charity":
+                    this.entity = "FanNewsCharityOut";
                     this.navcurr = 3;
                     break;
                 case "industry":
+                    this.entity = "FanNewsIndustry";
                     this.navcurr = 4;
                     break;
                 case "famous":
+                    this.entity = "FanNewsFamousPerson";
                     this.navcurr = 5;
                     break;
                 case "records":
+                    this.entity = "FanNewsFamilyRecord";
                     this.navcurr = 6;
                     break;
             }
@@ -136,14 +165,111 @@ export default {
         getInfo() {
             this.api
                 .get(this.url, {
-                    id: this.$route.query.id
+                    id: this.id
                 })
                 .then(res => {
-                    console.log(res.data);
                     this.isload = true;
                     if (res.code == 200) {
                         this.info = res.data;
                     }
+                });
+        },
+        getList() {
+            this.api
+                .post(this.api.county.base + this.api.county.comments_list, {
+                    topicId: parseInt(this.id),
+                    entityName: this.entity,
+                    pageNo: this.page
+                })
+                .then(res => {
+                    if (res.code == 200) {
+                        if (res.data.records) {
+                            res.data.records.forEach(v => {
+                                v.ready = false;
+                                v.comment = "";
+                            });
+                            this.list = this.list.concat(res.data.records);
+                            this.total = res.data.total;
+                            this.page++;
+                        } else {
+                            this.finished = true;
+                        }
+                    } else {
+                        this.finished = true;
+                    }
+                    this.loading = false;
+                    this.isload = true;
+                });
+        },
+        sendComment() {
+            this.api
+                .post(
+                    this.api.county.base + this.api.county.comments_add,
+                    {
+                        createUser: 0,
+                        content: this.comment,
+                        entityName: this.entity,
+                        formUserId: this.user.id,
+                        praiseNum: 0,
+                        status: 1,
+                        topicId: this.id,
+                        createUser: this.user.id,
+                        updateUser: this.user.id
+                    },
+                    1
+                )
+                .then(res => {
+                    if (res.code == 200) {
+                        this.comment = "";
+                        this.list = [];
+                        this.page = 1;
+                        this.total = 0;
+                        this.finished = false;
+                        this.getList();
+                        this.info.commentCount++;
+                    } else {
+                        this.$toast(res.msg);
+                    }
+                });
+        },
+        toReply(e) {
+            let list = this.list;
+            list.forEach(v => {
+                if (e.id == v.id) {
+                    v.ready = true;
+                    v.comment = "";
+                }
+            });
+            this.list = list;
+        },
+        sendReply(e) {
+            this.api
+                .post(
+                    this.api.county.base + this.api.county.comments_feeds,
+                    {
+                        commentId: this.curr_feed.id,
+                        content: e.comment,
+                        createUser: this.user.id,
+                        formUserId: this.user.id,
+                        id: 0,
+                        praiseCount: 0,
+                        replyId: 0,
+                        replyType: 1,
+                        status: 0,
+                        updateUser: this.user.id
+                    },
+                    1
+                )
+                .then(res => {
+                    this.curr_feed = {};
+                    this.comment = "";
+                    this.reply = "";
+                    this.list = [];
+                    this.page = 1;
+                    this.total = 0;
+                    this.finished = false;
+                    this.getList();
+                    this.$toast("回复已提交");
                 });
         }
     }
@@ -266,7 +392,7 @@ export default {
             overflow: hidden;
 
             .user {
-                line-height: 40px;
+                line-height: 24px;
 
                 span {
                     margin-right: 16px;
@@ -284,6 +410,7 @@ export default {
             }
 
             .textarea {
+                padding: 16px 0;
                 textarea {
                     border: 1px solid #ddd;
                     width: 100%;
@@ -315,33 +442,59 @@ export default {
             .obj {
                 overflow: hidden;
 
-                .user {
+                .name {
                     line-height: 32px;
-
-                    .name {
-                        color: $color;
-                    }
-
-                    i {
-                        margin: 8px;
-                        color: orange;
-                    }
-
-                    .date {
-                        color: #999;
-                    }
+                    color: $color;
+                }
+                .time {
+                    color: #999;
                 }
 
-                .text {
+                .txt {
                     white-space: normal;
                 }
 
-                .tag {
+                .feeds {
                     color: #999;
 
                     .itm {
                         margin-right: 16px;
                         display: inline-block;
+                    }
+                }
+            }
+            .replays {
+                font-size: 0.24rem;
+                background: #f1f1f1;
+                margin: 0.1rem 0;
+                padding: 0.2rem;
+                border-radius: 0.1rem;
+                .row {
+                    line-height: 0.4rem;
+                    overflow: hidden;
+                    white-space: nowrap;
+                    .name {
+                        height: 0.48rem;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        width: 1.2rem;
+                        float: left;
+                        color: #379be9;
+                    }
+                    .txt {
+                        overflow: hidden;
+                        white-space: normal;
+                    }
+                    .tags {
+                        overflow: hidden;
+                        .time {
+                            font-size: 0.2rem;
+                            color: #999;
+                        }
+                        .feeds {
+                            color: #379be9;
+                            float: right;
+                        }
                     }
                 }
             }
