@@ -3,7 +3,7 @@
         <Button type="primary" @click="toAdd">开通网站</Button>
         <Table border :columns="columns" :data="list" style="margin:16px 0;"></Table>
         <Page :total="total" @on-change="chgPage" :page-size="8"/>
-        <Drawer :mask-closable="false" title="修改" width="50%" v-model="isedit">
+        <Drawer :mask-closable="false" title="修改" :width="80" v-model="isedit">
             <Form :model="formData" :label-width="80">
                 <FormItem label="网站名">
                     <Row :gutter="16">
@@ -36,7 +36,7 @@
                 </FormItem>
             </Form>
         </Drawer>
-        <Drawer :mask-closable="false" title="开通县级联谊会网站" width="50%" v-model="isadd">
+        <Drawer :mask-closable="false" title="开通县级联谊会网站" :width="80" v-model="isadd">
             <Form :model="formAdd" :label-width="80">
                 <FormItem label="网站类型">{{data.type=="pro" ? '省级联谊会':'县级联谊会'}}</FormItem>
                 <FormItem label="网站名">
@@ -71,7 +71,7 @@
                 <dt>移动端网址：</dt>
                 <dd>http://www.yhtpw.com/mobile/#/base?code={{curr_model.fanUrlCode}}</dd>
                 <dd>
-                    <qrcode :text="curr_model.fanUrlCode" style="marginTop:32px;"/>
+                    <qrcode :text="'http://www.yhtpw.com/mobile/#/base?code='+curr_model.fanUrlCode" style="marginTop:32px;"/>
                 </dd>
             </dl>
         </Modal>

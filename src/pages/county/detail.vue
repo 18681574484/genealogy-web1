@@ -74,18 +74,22 @@
                     <div class="item" v-for="v in list" :key="v.id">
                         <div class="img" :style="api.imgBG(v.picSrc)"></div>
                         <div class="obj">
-                            <div class="name">{{v.nickName}}</div>
+                            <div class="name">
+                                <span class="time">{{dayjs(v.createTime).format('YYYY年MM月DD日 HH:mm')}}</span>
+                                <span>{{v.nickName}}</span>
+                            </div>
                             <div class="txt">{{v.content}}</div>
                             <div class="feeds">
                                 <div class="textarea" v-if="v.ready">
                                     <Input v-model="v.comment" type="textarea" :rows="4" placeholder="发表评论..."/>
                                 </div>
-                                <Button type="primary" v-if="v.ready" @click="sendReply(v)">回复</Button>
+                                <Button type="primary" size="small" v-if="v.ready" @click="sendReply(v)">回复</Button>
+                                <span @click="v.ready = false" v-if="v.ready" style="margin-left:8px;">收起</span>
                                 <span @click="toReply(v)" v-else>回复</span>
                             </div>
                             <div class="replays" v-if="v.next.length">
                                 <div class="row" v-for="row in v.next" :key="row.id">
-                                    <div class="name">{{row.nickName}}</div>
+                                    <div class="name">{{row.nickName}}:</div>
                                     <div class="obj">
                                         <div class="txt">{{row.content}}</div>
                                         <div class="tags" v-if="false">
@@ -202,6 +206,10 @@ export default {
                 });
         },
         sendComment() {
+            if (!this.comment) {
+                this.$Message.error("未输入评论");
+                return;
+            }
             this.api
                 .post(
                     this.api.county.base + this.api.county.comments_add,
@@ -228,7 +236,7 @@ export default {
                         this.getList();
                         this.info.commentCount++;
                     } else {
-                        this.$toast(res.msg);
+                        this.$Message.error(res.msg);
                     }
                 });
         },
@@ -243,11 +251,12 @@ export default {
             this.list = list;
         },
         sendReply(e) {
+            console.log(e);
             this.api
                 .post(
                     this.api.county.base + this.api.county.comments_feeds,
                     {
-                        commentId: this.curr_feed.id,
+                        commentId: e.id,
                         content: e.comment,
                         createUser: this.user.id,
                         formUserId: this.user.id,
@@ -261,7 +270,6 @@ export default {
                     1
                 )
                 .then(res => {
-                    this.curr_feed = {};
                     this.comment = "";
                     this.reply = "";
                     this.list = [];
@@ -269,7 +277,6 @@ export default {
                     this.total = 0;
                     this.finished = false;
                     this.getList();
-                    this.$toast("回复已提交");
                 });
         }
     }
@@ -316,7 +323,6 @@ export default {
             display: block;
             padding: 32px 0;
             min-height: 450px;
-
             p {
                 margin-bottom: 1em;
             }
@@ -393,7 +399,6 @@ export default {
 
             .user {
                 line-height: 24px;
-
                 span {
                     margin-right: 16px;
                 }
@@ -433,20 +438,21 @@ export default {
             .img {
                 margin-right: 16px;
                 float: left;
-                height: 64px;
-                width: 64px;
+                height: 48px;
+                width: 48px;
                 background: whitesmoke no-repeat center / cover;
                 border-radius: 50%;
             }
 
             .obj {
                 overflow: hidden;
-
+                font-size: 12px;
                 .name {
-                    line-height: 32px;
+                    line-height: 24px;
                     color: $color;
                 }
                 .time {
+                    float: right;
                     color: #999;
                 }
 
@@ -456,7 +462,9 @@ export default {
 
                 .feeds {
                     color: #999;
-
+                    .textarea {
+                        margin: 8px 0;
+                    }
                     .itm {
                         margin-right: 16px;
                         display: inline-block;
@@ -464,20 +472,19 @@ export default {
                 }
             }
             .replays {
-                font-size: 0.24rem;
+                font-size: 12px;
                 background: #f1f1f1;
-                margin: 0.1rem 0;
-                padding: 0.2rem;
-                border-radius: 0.1rem;
+                margin: 8px 0;
+                padding: 8px 16px;
+                border-radius: 8px;
                 .row {
-                    line-height: 0.4rem;
+                    line-height: 24px;
                     overflow: hidden;
                     white-space: nowrap;
                     .name {
-                        height: 0.48rem;
                         overflow: hidden;
                         text-overflow: ellipsis;
-                        width: 1.2rem;
+                        width: 60px;
                         float: left;
                         color: #379be9;
                     }
@@ -488,7 +495,6 @@ export default {
                     .tags {
                         overflow: hidden;
                         .time {
-                            font-size: 0.2rem;
                             color: #999;
                         }
                         .feeds {

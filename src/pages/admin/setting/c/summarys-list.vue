@@ -3,7 +3,7 @@
         <Button type="primary" @click="toEdit(0)">添加</Button>
         <Table border :columns="columns" :data="list" style="margin:16px 0;"></Table>
         <Page :total="total" @on-change="chgPage" :page-size="8"/>
-        <Drawer :mask-closable="false" :title="formData.id ? '修改':'添加'" width="50%" v-model="isedit">
+        <Drawer :mask-closable="false" :title="formData.id ? '修改':'添加'" :width="80" v-model="isedit">
             <Form :model="formData" :label-width="80">
                 <FormItem label="堂">
                     <Input v-model="formData.rootGroup" placeholder="堂" @keyup.enter.native="toSubmit"/>

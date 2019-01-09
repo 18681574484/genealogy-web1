@@ -3,7 +3,7 @@
         <Button type="primary" @click="toEdit(0)">添加</Button>
         <Table border :columns="columns" :data="list" style="margin:16px 0;"></Table>
         <Page :total="total" @on-change="chgPage" :page-size="8"/>
-        <Drawer :mask-closable="false" :title="formData.id ? '修改':'添加'" width="80%" v-model="isedit">
+        <Drawer :mask-closable="false" :title="formData.id ? '修改':'添加'" :width="80" v-model="isedit">
             <Row :gutter="32">
                 <i-col :span="6">
                     <div style="text-align:center">
@@ -88,8 +88,7 @@
                             <Input v-model="formData.title" placeholder="推荐人职务" @keyup.enter.native="toSubmit"/>
                         </FormItem>
                     </Form>
-                    <Form :model="formData" :label-width="80" v-if="stepCurr == 3">
-                    </Form>
+                    <Form :model="formData" :label-width="80" v-if="stepCurr == 3"></Form>
                 </i-col>
             </Row>
         </Drawer>
@@ -125,12 +124,7 @@ export default {
                         if (e.row.status != 2) {
                             return null;
                         }
-                        return h("Icon", {
-                            props: {
-                                type: "ios-filing-outline",
-                                size: "20"
-                            }
-                        });
+                        return h("div", '草稿');
                     }
                 },
                 { title: "标题", minWidth: 320, key: "newsTitle" },

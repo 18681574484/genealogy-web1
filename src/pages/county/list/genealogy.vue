@@ -30,7 +30,7 @@
                     </div>
                 </i-col>
             </Row>
-            <Page :total="total" @on-change="chgPage" :page-size="8" v-if="total"/>
+            <Page :total="total" @on-change="chgPage" :page-size="12" v-if="total"/>
         </div>
         <Modal v-model="toPass" title="输入密码" width="320px" @on-ok="toSubmit">
             <Form :model="form">
@@ -67,6 +67,7 @@ export default {
             this.api
                 .get(this.api.county.base + this.api.county.genealogy_list, {
                     pageNo: this.page,
+                    pageSize: 12,
                     siteId: this.$store.state.county.id,
                     fileName: this.fileName,
                     status: this.status ? this.status : "",

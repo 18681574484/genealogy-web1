@@ -10,9 +10,9 @@
                     <Carousel loop v-model="summary">
                         <CarouselItem v-for="(v,i) in index_fan_summary" :key="i" class="obj">
                             <div class="intro">
-                                <div>堂：{{v.rootGroup}}</div>
-                                <div>始迁祖：{{v.rootPerson}}</div>
-                                <div>负责人：{{v.leader}}：{{v.leaderPhone}}</div>
+                                <div class="itm">堂：{{v.rootGroup}}</div>
+                                <div class="itm">始迁祖：{{v.rootPerson}}</div>
+                                <div class="itm">负责人：{{v.leader}}：{{v.leaderPhone}}</div>
                                 <div class="mobai">
                                     <span>膜拜：</span>
                                     <span class="num">+{{v.worshipNum}}</span>
@@ -188,7 +188,14 @@ export default {
             .intro {
                 float: left;
                 line-height: 32px;
-
+                .itm{
+                    line-height: 32px;
+                    font-size: 14px;
+                    height:32px;
+                    width:320px;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
                 .mobai {
                     float: left;
                     margin-right: 16px;

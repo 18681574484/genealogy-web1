@@ -3,14 +3,17 @@
         <Button type="primary" @click="toEdit(0)">添加</Button>
         <Table border :columns="columns" :data="list" style="margin:16px 0;"></Table>
         <Page :total="total" @on-change="chgPage" :page-size="8"/>
-        <Drawer :mask-closable="false" :title="formData.id ? '修改':'添加'" width="50%" v-model="isedit">
+        <Drawer :mask-closable="false" :title="formData.id ? '修改':'添加'" :width="80" v-model="isedit">
             <Form :model="formData" :label-width="80">
                 <FormItem label="文件名">
                     <Input v-model="formData.fileName" placeholder="文件名" :maxlength="8"/>
                 </FormItem>
                 <FormItem label="文件">
-                    <Upload :action="api.admin.base + api.admin.upload_img" :data="opat" name="file" :show-upload-list="true" :on-success="uploadFile">
-                        <Button type="dashed">上传</Button>
+                    <Upload :action="api.admin.base + api.admin.upload_img" :data="opat" name="file" :on-progress="spinShow = true" :show-upload-list="true" :on-success="uploadFile">
+                        <Button type="dashed" v-if="spinShow">
+                            <Spin></Spin>
+                        </Button>
+                        <Button type="dashed" v-else>上传</Button>
                     </Upload>
                 </FormItem>
                 <FormItem label="联系人">
@@ -54,6 +57,7 @@ export default {
     },
     data() {
         return {
+            spinShow: false,
             opat: {
                 isGenealogy: 2
             },
@@ -220,6 +224,7 @@ export default {
         },
         uploadFile(res, file) {
             this.formData.filePath = res.data.file_path;
+            this.spinShow = false;
         },
         remove(index) {
             this.$Modal.confirm({

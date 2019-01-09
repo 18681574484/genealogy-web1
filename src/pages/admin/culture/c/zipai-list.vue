@@ -3,7 +3,7 @@
         <Button type="primary" @click="toEdit(0)">添加字派</Button>
         <Table border :columns="columns" :data="list" style="margin:16px 0;"></Table>
         <Page :total="total" @on-change="chgPage" :page-size="8"/>
-        <Drawer :mask-closable="false" :title="formData.id ? '修改':'添加'" width="50%" v-model="isedit">
+        <Drawer :mask-closable="false" :title="formData.id ? '修改':'添加'" :width="80" v-model="isedit">
             <Form :model="formData" :label-width="80">
                 <FormItem label="字派所在地">
                     <Input v-model="formData.ziapiLocation" placeholder="输入字派所在地" @keyup.enter.native="toSubmit"/>
@@ -12,10 +12,20 @@
                     <Input v-model="formData.ancestorsName" placeholder="输入祖先名" @keyup.enter.native="toSubmit"/>
                 </FormItem>
                 <FormItem label="祖先历代">
-                    <Input v-model="formData.lidai" placeholder="输入祖先历代" @keyup.enter.native="toSubmit"/>
+                    <Row>
+                        <i-col :span="4">
+                            <Input type="number" v-model="formData.lidai" :maxlength="4" placeholder="输入祖先历代" @keyup.enter.native="toSubmit"/>
+                        </i-col>
+                        <i-col :span="16" style="padding:0 16px;">历代表示始祖至本代的代数（填数字）</i-col>
+                    </Row>
                 </FormItem>
                 <FormItem label="祖先近世">
-                    <Input v-model="formData.jinshi" placeholder="输入祖先近世" @keyup.enter.native="toSubmit"/>
+                    <Row>
+                        <i-col :span="4">
+                            <Input type="number" v-model="formData.jinshi" :maxlength="4" placeholder="输入祖先近世" @keyup.enter.native="toSubmit"/>
+                        </i-col>
+                        <i-col :span="16" style="padding:0 16px;">近世表示开基祖至本代的代数（填数字）</i-col>
+                    </Row>
                 </FormItem>
                 <FormItem label="字派列表">
                     <Tag checkable type="dot" v-for="(v,i) in formData.list" :key="i" :name="i" closable @on-close="handleClose">{{v}}</Tag>

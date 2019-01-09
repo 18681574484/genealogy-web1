@@ -2,7 +2,7 @@
     <div>
         <Table border :columns="columns" :data="list" style="margin:16px 0;"></Table>
         <Page :total="total" @on-change="chgPage" :page-size="8"/>
-        <Drawer :mask-closable="false" :title="formData.id ? '修改':'添加'" width="50%" v-model="isedit">
+        <Drawer :mask-closable="false" :title="formData.id ? '修改':'添加'" :width="80" v-model="isedit">
             <Form :model="formData" :label-width="80">
                 <FormItem label="ID">{{formData.id}}</FormItem>
                 <FormItem label="userId">{{formData.userId}}</FormItem>

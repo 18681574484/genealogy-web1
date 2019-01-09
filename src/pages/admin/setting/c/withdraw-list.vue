@@ -3,7 +3,7 @@
         <Button type="primary" @click="toEdit()">申请提现</Button>
         <Table border :columns="columns" :data="list" style="margin:16px 0;"></Table>
         <Page :total="total" @on-change="chgPage" :page-size="8"/>
-        <Drawer :mask-closable="false" title="申请提现" width="50%" v-model="isedit">
+        <Drawer :mask-closable="false" title="申请提现" :width="80" v-model="isedit">
             <Form :model="formData" :label-width="80">
                 <FormItem label="资金概况">¥ {{finance.remain}}</FormItem>
                 <FormItem label="提现金额">

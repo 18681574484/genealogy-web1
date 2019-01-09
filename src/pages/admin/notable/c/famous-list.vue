@@ -3,7 +3,7 @@
         <Button type="primary" @click="toEdit(0)">添加</Button>
         <Table border :columns="columns" :data="list" style="margin:16px 0;"></Table>
         <Page :total="total" @on-change="chgPage" :page-size="8"/>
-        <Drawer :mask-closable="false" :title="formData.id ? '提交':'添加'" width="50%" v-model="isedit">
+        <Drawer :mask-closable="false" :title="formData.id ? '提交':'添加'" :width="80" v-model="isedit">
             <Form :model="formData" :label-width="80">
                 <FormItem label="人物">
                     <Input :maxlength="20" v-model="formData.personName" placeholder="姓名" @keyup.enter.native="toSubmit"/>
@@ -61,12 +61,7 @@ export default {
                         if (e.row.status != 2) {
                             return null;
                         }
-                        return h("Icon", {
-                            props: {
-                                type: "ios-filing-outline",
-                                size: "20"
-                            }
-                        });
+                        return h("div", '草稿');
                     }
                 },
                 { title: "人物", key: "personName", minWidth: 160 },

@@ -3,7 +3,7 @@
         <Button type="primary" @click="toEdit(0)">添加</Button>
         <Table border :columns="columns" :data="list" style="margin:16px 0;"></Table>
         <Page :total="total" @on-change="chgPage" :page-size="8"/>
-        <Drawer :mask-closable="false" :title="formData.id ? '修改':'添加'" width="50%" v-model="isedit">
+        <Drawer :mask-closable="false" :title="formData.id ? '修改':'添加'" :width="80" v-model="isedit">
             <Form :model="formData" :label-width="80">
                 <FormItem label="标题">
                     <Input :maxlength="45" v-model="formData.newsTitle" placeholder="标题" @keyup.enter.native="toSubmit"/>
@@ -12,7 +12,7 @@
                     <Upload class="upload" :action="api.admin.base + api.admin.upload_img" name="file" :show-upload-list="false" :on-success="handleSuccess" :format="['jpg','jpeg','png']">
                         <Button type="dashed">
                             <div class="img" :style="api.imgBG(filePath)" v-if="filePath"/>
-                            <div class="img" :style="formData.newsUploadFileList.length ? api.imgBG(formData.newsUploadFileList[0].filePath) :''" v-else-if="formData.newsUploadFileList"></div>
+                            <div class="img" :style="formData.newsUploadFileList.length ? api.imgBG(formData.newsUploadFileList[0].filePath) :''" v-else-if="formData.newsUploadFileList.length"></div>
                             <Icon type="ios-camera" size="40" color="#ccc" v-else></Icon>
                         </Button>
                     </Upload>
@@ -62,12 +62,7 @@ export default {
                         if (e.row.status != 2) {
                             return null;
                         }
-                        return h("Icon", {
-                            props: {
-                                type: "ios-filing-outline",
-                                size: "20"
-                            }
-                        });
+                        return h("div", '草稿');
                     }
                 },
                 { title: "标题", minWidth: 320, key: "newsTitle" },

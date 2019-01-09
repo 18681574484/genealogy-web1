@@ -2,7 +2,7 @@
     <div>
         <Button type="primary" @click="toEdit(0)">添加类别</Button>
         <Table border :columns="columns" :data="list" style="margin:16px 0;"></Table>
-        <Drawer :mask-closable="false" :title="formData.id ? '修改':'添加'" width="50%" v-model="isedit">
+        <Drawer :mask-closable="false" :title="formData.id ? '修改':'添加'" :width="80" v-model="isedit">
             <Form :model="formData" :label-width="80">
                 <FormItem label="名称">
                     <Input v-model="formData.menuName" placeholder="名称" @keyup.enter.native="toSubmit"/>

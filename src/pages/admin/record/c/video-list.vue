@@ -25,7 +25,7 @@
                 <source :src="api.imgurl(curr)" type="video/mp4">
             </video>
         </Modal>
-        <Drawer :mask-closable="false" :title="formData.id ? '修改':'添加'" width="50%" v-model="isedit">
+        <Drawer :mask-closable="false" :title="formData.id ? '修改':'添加'" :width="80" v-model="isedit">
             <Form :model="formData" :label-width="80">
                 <FormItem label="标题">
                     <Input :maxlength="45" v-model="formData.title" placeholder="标题" @keyup.enter.native="toSubmit"/>
@@ -40,8 +40,11 @@
                     </Upload>
                 </FormItem>
                 <FormItem label="视频文件">
-                    <Upload :action="api.admin.base + api.admin.upload_img" name="file" :show-upload-list="true" :on-success="uploadVideo" :default-file-list="defaultList">
-                        <Button type="dashed">{{formData.fanUploadVedioList.length || vedioPath ? '替换':'上传'}}</Button>
+                    <Upload :action="api.admin.base + api.admin.upload_img" name="file" :show-upload-list="false" :on-success="uploadVideo" :on-progress="progressVideo" :default-file-list="defaultList">
+                        <Button type="dashed" v-if="spinShow">
+                            <Spin></Spin>
+                        </Button>
+                        <Button type="dashed" v-else>{{formData.fanUploadVedioList.length || vedioPath ? '替换':'上传'}}</Button>
                     </Upload>
                 </FormItem>
                 <FormItem label="浏览数" v-if="formData.id">
@@ -60,6 +63,7 @@
 export default {
     data() {
         return {
+            spinShow: false,
             isedit: false,
             list: [],
             total: 0,
@@ -74,6 +78,7 @@ export default {
             vedioFileName: "",
             vedioPath: "",
             defaultList: [],
+            msg: "",
             visible: false
         };
     },
@@ -108,6 +113,9 @@ export default {
                         return;
                     }
                 });
+        },
+        progressVideo() {
+            this.spinShow = true;
         },
         chgPage(e) {
             this.page = e;
@@ -170,8 +178,11 @@ export default {
             this.picPath = res.data.file_path;
         },
         uploadVideo(res, file) {
-            this.vedioFileName = res.data.file_name;
-            this.vedioPath = res.data.file_path;
+            if (res.code == 200) {
+                this.spinShow = false;
+                this.vedioFileName = res.data.file_name;
+                this.vedioPath = res.data.file_path;
+            }
         },
         handleFormatError(file) {
             this.$Message.warning("不支持该格式");
