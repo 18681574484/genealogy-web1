@@ -8,9 +8,7 @@
                 </router-link>
             </div>
             <div class="c">
-                <div class="img">
-                    <img src="../img/logo-white.png">
-                </div>
+                <div class="img"></div>
                 <div class="txt kt">炎黄张氏</div>
             </div>
             <div class="r">

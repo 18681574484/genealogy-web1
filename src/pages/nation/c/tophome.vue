@@ -66,7 +66,7 @@ export default {
             margin: 0 auto;
             height: 80px;
             width: 80px;
-            background: url(../img/logo-white.png) no-repeat center / cover;
+            background: no-repeat center / cover;
         }
         .obj {
             font-size: 28px;
@@ -147,7 +147,7 @@ export default {
         .brand {
             .img {
                 width: 320px;
-                background: url(../img/logo-white.png) no-repeat center;
+                background:no-repeat center / cover;
             }
         }
     }

@@ -160,7 +160,7 @@ export default {
         .brand {
             .img {
                 width: 320px;
-                background: url(../img/logo-white.png) no-repeat center;
+                background: no-repeat center;
             }
         }
     }

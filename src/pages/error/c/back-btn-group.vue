@@ -17,9 +17,7 @@ export default {
     },
     methods: {
         backHome() {
-            this.$router.replace({
-                name: "home"
-            });
+            this.$router.replace("/");
         },
         backPrev() {
             this.$router.go(-1);

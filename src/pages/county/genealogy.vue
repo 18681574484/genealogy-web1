@@ -1,7 +1,7 @@
 <template>
     <div class="main">
         <div class="adlinks">
-            <img src="./img/detail.jpg">
+            <img src="./img/genealogy.jpg">
         </div>
         <div class="inner">
             <div class="h">

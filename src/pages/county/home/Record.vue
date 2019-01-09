@@ -44,11 +44,9 @@
     </div>
 </template>
 <script>
-import imgbg from "../img/newsex.png";
 export default {
     data() {
         return {
-            imgbg: imgbg,
             menu: [],
             menucurr: {},
             curr: {

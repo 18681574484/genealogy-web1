@@ -24,7 +24,7 @@
                 <Input v-model="form.repassword" type="password" placeholder="再次输入密码" clearable :maxlength="20" @keyup.enter.native="toSubmit"/>
             </FormItem>
             <FormItem label="姓氏">
-                <Select v-model="form.familyCode" filterable remote clearable :remote-method="remoteMethod" :loading="loading" placeholder="搜索姓氏">
+                <Select v-model="form.familyCode" filterable remote :remote-method="remoteMethod" @on-query-change="onQuery" :loading="loading" placeholder="搜索姓氏">
                     <Option v-for="v in options" :value="v.id" :key="v.id">{{v.value}}</Option>
                 </Select>
             </FormItem>
@@ -105,6 +105,11 @@ export default {
                         this.options = res.data;
                     }
                 });
+        },
+        onQuery(e, r) {
+            if (this.options.length) {
+                this.form.familyCode = this.options[0].id;
+            }
         },
         toSubmit() {
             if (!this.api.isMobile(this.form.mobile)) {

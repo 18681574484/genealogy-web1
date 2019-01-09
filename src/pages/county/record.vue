@@ -1,5 +1,8 @@
 <template>
     <div class="main">
+        <div class="adlinks">
+            <img src="./img/record.jpg">
+        </div>
         <Record/>
         <div class="inner">
             <div class="h">
@@ -7,7 +10,7 @@
                 <Divider class="en">Video</Divider>
             </div>
             <div class="menus">
-                <span class="menu" v-for="(v,i) in menu" v-if="i > 1" :key="i" :class="v.orderIndex == menucurr.orderIndex ? 'curr':''" v-html="v.menuName" @click="chgMenu(i)"></span>
+                <span class="menu" v-for="(v,i) in menu" v-show="i > 1" :key="i" :class="v.orderIndex == menucurr.orderIndex ? 'curr':''" v-html="v.menuName" @click="chgMenu(i)"></span>
             </div>
             <div class="grid" style="minHeight:450px;">
                 <div v-if="menucurr && url.length">

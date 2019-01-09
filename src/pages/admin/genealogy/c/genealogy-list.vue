@@ -9,7 +9,7 @@
                     <Input v-model="formData.fileName" placeholder="文件名" :maxlength="8"/>
                 </FormItem>
                 <FormItem label="文件">
-                    <Upload :action="api.admin.base + api.admin.upload_img" name="file" :show-upload-list="true" :on-success="uploadFile">
+                    <Upload :action="api.admin.base + api.admin.upload_img" :data="opat" name="file" :show-upload-list="true" :on-success="uploadFile">
                         <Button type="dashed">上传</Button>
                     </Upload>
                 </FormItem>
@@ -54,6 +54,9 @@ export default {
     },
     data() {
         return {
+            opat: {
+                isGenealogy: 2
+            },
             isedit: false,
             list: [],
             total: 0,

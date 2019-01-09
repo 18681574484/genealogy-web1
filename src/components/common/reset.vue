@@ -19,7 +19,7 @@
 </template>
 <script>
 export default {
-    name: "AuthReg",
+    name: "AuthReset",
     data() {
         return {
             form: {

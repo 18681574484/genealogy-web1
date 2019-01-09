@@ -126,7 +126,7 @@ export default {
 .w-e-toolbar {
     flex-wrap: wrap;
 }
-.w-e-menu {
+/* .w-e-menu {
     z-index: 1 !important;
-}
+} */
 </style>

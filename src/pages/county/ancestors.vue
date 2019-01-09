@@ -1,7 +1,7 @@
 <template>
     <div class="main">
         <div class="adlinks">
-            <img src="./img/detail.jpg">
+            <img src="./img/ancestors.jpg">
         </div>
         <div class="inner" style="min-height:450px">
             <Ancestors @chgCurr="chgCurr" :url="url" v-if="url"/>

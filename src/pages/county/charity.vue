@@ -1,7 +1,7 @@
 <template>
     <div class="main">
         <div class="adlinks">
-            <img src="./img/culture.jpg">
+            <img src="./img/charity.jpg">
         </div>
         <div class="inner">
             <div class="h">
