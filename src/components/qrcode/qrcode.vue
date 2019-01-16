@@ -4,7 +4,6 @@
 <script>
 import QRCode from "qrcodejs2";
 import "wangeditor/release/wangEditor.min.css";
-import { oneOf } from "@/libs/tools";
 export default {
     name: "Editor",
     props: {
@@ -23,13 +22,18 @@ export default {
             let qrcode = new QRCode("qrcode", {
                 width: 300,
                 height: 300,
-                text: this.text
+                text: this.text,
                 // render: 'canvas' // 设置渲染方式（有两种方式 table和canvas，默认是canvas）
-                // background: '#f0f'
-                // foreground: '#ff0'
+                background: "#f0f",
+                foreground: "#ff0"
             });
             console.log(qrcode);
         }
     }
 };
 </script>
+<style >
+#qrcode img {
+    margin: 0 auto;
+}
+</style>

@@ -172,7 +172,7 @@ export default {
         padding: 16px;
         text-align: center;
         color: #fff;
-        font-size: 20px;
+        font-size: 16px;
         background: #002140;
         display: flex;
         justify-content: center;

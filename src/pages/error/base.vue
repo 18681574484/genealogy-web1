@@ -39,24 +39,13 @@ export default {
     computed: {},
     mounted: function() {
         if (this.$route.query.code) {
-            this.regSite();
+            this.$store.commit("updateCountyId", this.$route.query.code);
+            this.$router.replace("/c");
         } else {
             this.getList();
         }
     },
     methods: {
-        regSite() {
-            this.api
-                .post(this.api.county.base + this.api.county.site_reg, {
-                    fanUrlCode: this.$route.query.code
-                })
-                .then(res => {
-                    if (res.code == 200) {
-                        this.$store.commit("updateCountyId", res.data.id);
-                        this.$router.replace("/c");
-                    }
-                });
-        },
         getList() {
             this.api
                 .post(this.api.county.base + this.api.county.site_list, {

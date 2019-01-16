@@ -6,7 +6,7 @@
                 <Divider class="en">Ally</Divider>
             </div>
             <div class="b">
-                <a class="item" href="http://www.yhtpw.com/" target="_blank">炎黄统谱网</a>
+                <a class="item" href="http://yhtpw.com/" target="_blank">炎黄统谱网</a>
                 <a class="item" href="https://baike.baidu.com/item/%E5%AE%B6%E8%B0%B1/607190?fr=aladdin" target="_blank">家谱文化</a>
             </div>
         </div>

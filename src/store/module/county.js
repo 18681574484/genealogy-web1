@@ -1,6 +1,9 @@
 import api from '@/libs/api.js'
 
 function countyHomeApi(store, obj) {
+    if(!localStorage.county_id){
+        location.href = '/';
+    }
     api.get(api.county.site_home, {
         siteId: store.state.id
     }).then(res => {
@@ -9,7 +12,7 @@ function countyHomeApi(store, obj) {
 }
 export default {
     state: {
-        id: localStorage.county_id * 1 || 1,
+        id: localStorage.county_id * 1,
         apiList: null, //首页api
     },
     mutations: {

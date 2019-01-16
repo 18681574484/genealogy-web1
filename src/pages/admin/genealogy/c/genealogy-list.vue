@@ -9,12 +9,10 @@
                     <Input v-model="formData.fileName" placeholder="文件名" :maxlength="8"/>
                 </FormItem>
                 <FormItem label="文件">
-                    <Upload :action="api.admin.base + api.admin.upload_img" :data="opat" name="file" :on-progress="spinShow = true" :show-upload-list="true" :on-success="uploadFile">
-                        <Button type="dashed" v-if="spinShow">
-                            <Spin></Spin>
-                        </Button>
-                        <Button type="dashed" v-else>上传</Button>
+                    <Upload :action="api.admin.base + api.admin.upload_img" name="file" :before-upload="beforeUpload" :show-upload-list="false" :on-success="uploadFile">
+                        <Button type="dashed">{{uploading == 1 ? '上传中...':'上传'}}</Button>
                     </Upload>
+                    <a :href="formData.treePreviewPath || ''" target="_blank" v-if="formData.filePath">{{formData.filePath}}</a>
                 </FormItem>
                 <FormItem label="联系人">
                     <Input v-model="formData.contactUser" placeholder="联系人"/>
@@ -57,7 +55,7 @@ export default {
     },
     data() {
         return {
-            spinShow: false,
+            uploading: 0,
             opat: {
                 isGenealogy: 2
             },
@@ -176,12 +174,14 @@ export default {
                     }
                 });
         },
+        beforeUpload() {
+            this.uploading = 1;
+        },
         chgPage(e) {
             this.page = e;
             this.getList();
         },
         toEdit(e) {
-            this.resetSelect(e);
             if (!e) {
                 this.formData = {};
                 this.isedit = true;
@@ -217,14 +217,13 @@ export default {
                     }
                 });
         },
-        resetSelect(e) {
-            if (e) {
-            } else {
-            }
-        },
         uploadFile(res, file) {
-            this.formData.filePath = res.data.file_path;
-            this.spinShow = false;
+            console.log(res);
+            if (res.code == 200) {
+                this.formData.filePath = res.data.file_path;
+                this.uploading = 2;
+                this.$nextTick();
+            }
         },
         remove(index) {
             this.$Modal.confirm({

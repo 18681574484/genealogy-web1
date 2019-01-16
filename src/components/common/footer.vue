@@ -176,10 +176,13 @@ export default {
                 this.$Message.warning("请简要描述您的需求");
                 return;
             }
-            let url = [this.api[this.type].base + this.api[this.type].site_feeds];
+            let url = [
+                this.api[this.type].base + this.api[this.type].site_feeds
+            ];
+
             this.api
                 .post(url[0], {
-                    siteId: this.$store[this.type].state.id,
+                    siteId: this.$store.state[this.type].id,
                     name: this.form.name,
                     phone: this.form.phone,
                     content: this.form.content

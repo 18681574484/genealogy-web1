@@ -52,13 +52,13 @@ export default {
             },
             columns: [
                 { title: "ID", key: "id", width: 80 },
-                { title: "操作用户", key: "createUser", width: 160},
+                { title: "操作人", key: "createUser", width: 80},
                 { title: "提现金额", key: "drowAmount", width: 160 },
                 { title: "提现银行", key: "drowBank", width: 160 },
                 { title: "支行", key: "drowBankSub", minWidth: 160 },
                 { title: "卡号", key: "drowInAccountCard" , minWidth: 320},
-                { title: "户名", key: "drowInAccountName", width: 160 },
-                { title: "状态", key: "statusName", width: 160 },
+                { title: "户名", key: "drowInAccountName", width: 120 },
+                { title: "状态", key: "statusName", width: 80 },
                 { title: "创建时间", key: "datetime", width: 160 }
             ]
         };

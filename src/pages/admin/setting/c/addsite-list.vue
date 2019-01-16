@@ -67,11 +67,11 @@
         <Modal v-model="visible" width="560" :footer-hide="true">
             <dl v-if="curr_model.id" style="fontSize:16px;">
                 <dt>pc端网址：</dt>
-                <dd>http://www.yhtpw.com/#/base?code={{curr_model.fanUrlCode}}</dd>
+                <dd>http://yhtpw.com/#/base?type=c&code={{curr_model.id}}</dd>
                 <dt>移动端网址：</dt>
-                <dd>http://www.yhtpw.com/mobile/#/base?code={{curr_model.fanUrlCode}}</dd>
+                <dd>http://yhtpw.com/mobile/#/base?type=c&code={{curr_model.id}}</dd>
                 <dd>
-                    <qrcode :text="'http://www.yhtpw.com/mobile/#/base?code='+curr_model.fanUrlCode" style="marginTop:32px;"/>
+                    <qrcode :text="'http://yhtpw.com/mobile/#/base?type=c&code='+curr_model.id" style="marginTop:32px;"/>
                 </dd>
             </dl>
         </Modal>
@@ -144,7 +144,7 @@ export default {
                     width: 200,
                     render: (h, e) => {
                         return h("div", [
-                            e.row.fanUrlCode,
+                            e.row.id,
                             h("Button", {
                                 props: {
                                     type: "success",
@@ -184,7 +184,7 @@ export default {
                                 on: {
                                     click: () => {
                                         this.$router.push(
-                                            "/?code=" + e.row.fanUrlCode
+                                            "/?type=c&code=" + e.row.id
                                         );
                                     }
                                 }

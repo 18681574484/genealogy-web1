@@ -1,6 +1,9 @@
 import api from '@/libs/api.js'
 
 function provinceHomeApi(store, obj) {
+    if(!localStorage.province_id){
+        location.href = '/';
+    }
     api.get(api.province.site_home, {
         siteId: store.state.id
     }).then(res => {
@@ -9,7 +12,7 @@ function provinceHomeApi(store, obj) {
 }
 export default {
     state: {
-        id: localStorage.province_id * 1 || 1,
+        id: localStorage.province_id * 1,
         apiList: null, //首页api
     },
     mutations: {
