@@ -125,7 +125,6 @@ export default {
 @import "@/assets/css/var.scss";
 .list {
     overflow: hidden;
-    padding: 32px 0;
     .h {
         text-align: center;
         padding: 32px 0;

@@ -14,7 +14,7 @@
                 <FormItem label="祖先历代">
                     <Row>
                         <i-col :span="4">
-                            <Input type="number" v-model="formData.lidai" :maxlength="4" placeholder="输入祖先历代" @keyup.enter.native="toSubmit"/>
+                            <Input type="text" v-model="formData.lidai" :maxlength="4" placeholder="输入祖先历代" @keyup.enter.native="toSubmit"/>
                         </i-col>
                         <i-col :span="16" style="padding:0 16px;">历代表示始祖至本代的代数（填数字）</i-col>
                     </Row>
@@ -22,7 +22,7 @@
                 <FormItem label="祖先近世">
                     <Row>
                         <i-col :span="4">
-                            <Input type="number" v-model="formData.jinshi" :maxlength="4" placeholder="输入祖先近世" @keyup.enter.native="toSubmit"/>
+                            <Input type="text" v-model="formData.jinshi" :maxlength="4" placeholder="输入祖先近世" @keyup.enter.native="toSubmit"/>
                         </i-col>
                         <i-col :span="16" style="padding:0 16px;">近世表示开基祖至本代的代数（填数字）</i-col>
                     </Row>

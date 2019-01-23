@@ -323,8 +323,11 @@ export default {
             display: block;
             padding: 32px 0;
             min-height: 450px;
+            line-height: 2;
+            font-size: 16px;
+            text-indent: 2em;
             p {
-                margin-bottom: 1em;
+                margin-bottom: 2em;
             }
             iframe {
                 width: 100%;

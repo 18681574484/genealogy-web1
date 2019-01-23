@@ -33,16 +33,27 @@ export default {
                     menuId: 3
                 })
                 .then(res => {
-                    this.menu = res.data;
-                    this.chgMenu(3);
+                    if (res.code == 200) {
+                        this.menu = res.data;
+                        this.chgMenu(3);
+                    } else {
+                    }
                 });
         },
         chgMenu(e) {
             this.menucurr = this.menu[e];
+            if (!this.menucurr) {
+                this.$Modal.info({
+                    title: "提示",
+                    content: "发生数据错误，请联系管理员"
+                });
+                return;
+            }
             this.url = this.api.adminUrl(
                 this.menucurr.apiAdminUrl,
                 this.admin.step
             );
+            console.log(this.url)
         }
     }
 };

@@ -146,9 +146,6 @@ export default {
                         });
                         this.list = list;
                         this.total = res.data.total;
-                    } else {
-                        this.$Message.warning(res.msg);
-                        return;
                     }
                 });
         },

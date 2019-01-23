@@ -108,9 +108,6 @@ export default {
                     if (res.code == 200) {
                         this.list = res.data.records;
                         this.total = res.data.total;
-                    } else {
-                        this.$Message.warning(res.msg);
-                        return;
                     }
                 });
         },

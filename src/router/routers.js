@@ -1,5 +1,4 @@
 import admin from './child/admin'
-import nation from './child/nation'
 import province from './child/province'
 import county from './child/county'
 import user from './child/user'
@@ -24,15 +23,6 @@ export default [{
             hideInMenu: true,
         },
         children: admin
-    },
-    {
-        path: "/n",
-        redirect: "/n/home",
-        component: () => import('@/layouts/base'),
-        meta: {
-            title: '首页',
-        },
-        children: nation
     },
     {
         path: "/p",

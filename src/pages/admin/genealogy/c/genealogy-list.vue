@@ -9,7 +9,7 @@
                     <Input v-model="formData.fileName" placeholder="文件名" :maxlength="8"/>
                 </FormItem>
                 <FormItem label="文件">
-                    <Upload :action="api.admin.base + api.admin.upload_img" name="file" :before-upload="beforeUpload" :show-upload-list="false" :on-success="uploadFile">
+                    <Upload :action="api.admin.base + api.admin.upload_img" :data="opat" name="file" :before-upload="beforeUpload" :show-upload-list="false" :on-success="uploadFile">
                         <Button type="dashed">{{uploading == 1 ? '上传中...':'上传'}}</Button>
                     </Upload>
                     <a :href="formData.treePreviewPath || ''" target="_blank" v-if="formData.filePath">{{formData.filePath}}</a>

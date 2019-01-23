@@ -138,9 +138,6 @@ export default {
                         });
                         this.list = list;
                         this.total = res.data.total;
-                    } else {
-                        this.$Message.warning(res.msg);
-                        return;
                     }
                 });
         },
@@ -175,7 +172,7 @@ export default {
                             this.$refs.editor.setHtml(this.formData.newsText);
                             this.isedit = true;
                         } else {
-                            this.$Message.warning(res.msg);
+                            this.$Message.error(res.msg);
                             return;
                         }
                     });
@@ -244,7 +241,7 @@ export default {
                         this.getList();
                         this.isedit = false;
                     } else {
-                        this.$Message.warning(res.msg);
+                        this.$Message.error(res.msg);
                         return;
                     }
                 });
@@ -284,7 +281,7 @@ export default {
                         this.getList();
                         this.isedit = false;
                     } else {
-                        this.$Message.warning(res.msg);
+                        this.$Message.error(res.msg);
                         return;
                     }
                 });

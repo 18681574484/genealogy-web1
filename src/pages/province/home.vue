@@ -1,8 +1,28 @@
 <template>
     <div class="main">
         <Banner/>
+        <div class="inner">
+            <div class="card">
+                <div class="card_item">
+                    <Charitable/>
+                </div>
+                <div class="card_item">
+                    <Payers/>
+                </div>
+            </div>
+        </div>
         <div class="adlinks">
             <img src="./img/adlinkb.png">
+        </div>
+        <div class="inner">
+            <div class="card">
+                <div class="card_item">
+                    <Topnews/>
+                </div>
+                <div class="card_item">
+                    <Records/>
+                </div>
+            </div>
         </div>
         <div class="sid">
             <div class="inner">
@@ -14,22 +34,26 @@
 <script>
 import { ChartMap } from "_c/charts";
 import Banner from "./c/banner.vue";
+import Charitable from "./c/charitable.vue";
+import Payers from "./c/payers.vue";
+import Topnews from "./c/topnews.vue";
+import Records from "./c/records.vue";
 export default {
     name: "Home",
     components: {
         Banner,
+        Charitable,
+        Payers,
+        Topnews,
+        Records,
         ChartMap
     },
     data() {
-        return {
-            apiData: {}
-        };
+        return {};
     },
     computed: {},
-    mounted: function() {
-    },
-    methods: {
-    }
+    mounted: function() {},
+    methods: {}
 };
 </script>
 <style lang="scss" scoped>
@@ -40,4 +64,13 @@ export default {
         overflow: hidden;
     }
 }
+.card {
+    display: flex;
+    justify-content: space-between;
+    .card_item {
+        padding: 8px 0;
+        width: 560px;
+    }
+}
 </style>
+

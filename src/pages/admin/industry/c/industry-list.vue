@@ -12,7 +12,7 @@
                     <Upload class="upload" :action="api.admin.base + api.admin.upload_img" name="file" :show-upload-list="false" :on-success="handleSuccess" :format="['jpg','jpeg','png']">
                         <Button type="dashed">
                             <div class="img" :style="api.imgBG(filePath)" v-if="filePath"/>
-                            <div class="img" :style="formData.newsUploadFileList.length ? api.imgBG(formData.newsUploadFileList[0].filePath) :''" v-else-if="formData.newsUploadFileList.length"></div>
+                            <div class="img" :style="formData.fanNewsUploadFileList.length ? api.imgBG(formData.fanNewsUploadFileList[0].filePath) :''" v-else-if="formData.fanNewsUploadFileList"></div>
                             <Icon type="ios-camera" size="40" color="#ccc" v-else></Icon>
                         </Button>
                     </Upload>
