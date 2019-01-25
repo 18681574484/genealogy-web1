@@ -24,11 +24,28 @@
                 </div>
             </div>
         </div>
-        <div class="sid">
-            <div class="inner">
-                <ChartMap style="height:640px;width:100%"/>
+        <div class="adlinks">
+            <img src="./img/adlinkb.png">
+        </div>
+        <div class="inner">
+            <div class="card">
+                <div class="card_item">
+                    <News/>
+                </div>
+                <div class="card_item">
+                    <Human/>
+                </div>
             </div>
         </div>
+        <div class="inner">
+            <div class="card">
+                <Culture/>
+            </div>
+            <div class="card">
+                <Famous/>
+            </div>
+        </div>
+        <Friends/>
     </div>
 </template>
 <script>
@@ -38,6 +55,12 @@ import Charitable from "./c/charitable.vue";
 import Payers from "./c/payers.vue";
 import Topnews from "./c/topnews.vue";
 import Records from "./c/records.vue";
+import Human from "./c/human.vue";
+import News from "./c/news.vue";
+import Famous from "./c/famous.vue";
+import Culture from "./c/culture.vue";
+import Friends from "./c/friends.vue";
+
 export default {
     name: "Home",
     components: {
@@ -46,6 +69,11 @@ export default {
         Payers,
         Topnews,
         Records,
+        Human,
+        News,
+        Famous,
+        Friends,
+        Culture,
         ChartMap
     },
     data() {
@@ -65,6 +93,7 @@ export default {
     }
 }
 .card {
+    width: 100%;
     display: flex;
     justify-content: space-between;
     .card_item {

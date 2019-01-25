@@ -64,6 +64,9 @@ const api = {
         ancestor_info: 'genogram/proNewsAncestor/getFamousAncestorDetails', //祖先名人详情
         genealogy_list: 'genogram/proNewsUploadTreeFile/getProNewsUploadTreeFileList', //家谱列表
         genealogy_info: 'genogram/proNewsUploadTreeFile/getProNewsUploadTreeFile', //家谱详情
+        comments_list: 'genogram/allUserComments/getAllUserComments', //评论列表
+        comments_add: 'genogram/allUserComments/addAllUserComments', //添加评论
+        comments_feeds: '/genogram/allUserComments/addAllUserReply', //回复
     },
     user: {
         base: urls.main.user,
@@ -135,7 +138,7 @@ const api = {
 
             genealogy_list: 'genogram/admin/proNewsUploadTreeFile/getProNewsUploadTreeFileList', //电子家谱列表
             genealogy_info: 'genogram/admin/proNewsUploadTreeFile/getProNewsUploadTreeFile', //电子家谱详情
-            genealogy_edit: 'genogram/admin/fanNewsUploadTreeFile/uploadFanNewsUploadTreeFile', //电子家谱修改
+            genealogy_edit: '/genogram/admin/proNewsUploadTreeFile/updateProNewsUploadTreeFile', //电子家谱修改
             genealogy_del: 'genogram/admin/proNewsUploadTreeFile/deleteProNewsUploadTreeFile', //电子家谱删除
             famous_list: 'genogram/admin/ProNewsFamous/getFamilyPersonPage', //家族名人列表
             famous_info: 'genogram/admin/ProNewsFamous/getFamilyPersonDetail', //家族名人详情

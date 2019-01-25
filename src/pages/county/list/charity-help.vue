@@ -1,6 +1,6 @@
 <template>
     <div class="newslist">
-        <router-link :to="'/c/detail?type=charity&id='+v.id" class="item" v-for="(v,i) in list" :key="i">
+        <router-link :to="'detail?type=charity&id='+v.id" class="item" v-for="(v,i) in list" :key="i">
             <div class="img"/>
             <div class="obj">
                 <div class="tit" v-html="v.newsTitle"></div>

@@ -27,6 +27,13 @@ export default [{
     },
     component: () => import('@/pages/province/famous')
 }, {
+    path: 'frame',
+    name: 'p_frame',
+    meta: {
+        title: "组织架构"
+    },
+    component: () => import('@/pages/province/frame')
+}, {
     path: 'ancestors',
     name: 'p_ancestors',
     meta: {

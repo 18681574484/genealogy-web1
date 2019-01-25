@@ -10,11 +10,11 @@
 export default {
     data() {
         return {
-            menu: ["联谊会发布", "个人发布"],
+            menu: ["家族长老", "家族栋梁"],
             menucurr: 0,
             apiData: {
-                aa: {},
-                index_fan_news_recommend: {}
+                index_architecture_pay_in: {},
+                index_charity_pay_out: {}
             },
             list: []
         };
@@ -24,9 +24,7 @@ export default {
             return this.$store.state.province.apiList;
         }
     },
-    mounted: function() {
-        this.getApiData("index_fan_news_recommend");
-    },
+    mounted: function() {},
     methods: {
         getApiData(e) {
             this.api
@@ -38,10 +36,11 @@ export default {
                 });
         },
         chgMenu(i) {
-            let keys = Object.keys(this.apiData);
             this.list = [];
             this.menucurr = i;
-            this.list = this.apiData[keys[i]];
+            this.list = i
+                ? this.apiData.index_charity_pay_out
+                : this.apiData.index_architecture_pay_in;
         }
     }
 };

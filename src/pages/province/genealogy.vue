@@ -1,21 +1,19 @@
 <template>
     <div class="main">
         <div class="inner">
-            <div class="sia">
-                <div class="h kt">
-                    <div class="tit">数字家谱</div>
-                </div>
-                <Genealogy/>
+            <div class="h">
+                <div class="cn">数字家谱</div>
+                <Divider class="en">Genealogy</Divider>
             </div>
+            <genealogy/>
         </div>
     </div>
 </template>
 <script>
-import Genealogy from "./list/genealogy.vue";
+import genealogy from "./list/genealogy";
 export default {
-    name: "Home",
     components: {
-        Genealogy
+        genealogy
     },
     data() {
         return {};
@@ -27,13 +25,14 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import "@/assets/css/var.scss";
-.sia {
-    padding: 16px 0;
-    .h {
-        height: 48px;
-        line-height: 48px;
-        font-size: 20px;
+.h {
+    text-align: center;
+    padding: 32px 0;
+    .cn {
+        font-size: 24px;
+    }
+    .en {
+        font-weight: 300;
     }
 }
 </style>
-

@@ -26,7 +26,7 @@ export default {
             menucurr: 0,
             apiData: {
                 index_architecture_pay_in: {},
-                index_charity_pay_out: {}
+                index_charity_pay_out: {},
             },
             list: []
         };
@@ -51,11 +51,10 @@ export default {
                 });
         },
         chgMenu(i) {
+            let keys = Object.keys(this.apiData);
             this.list = [];
             this.menucurr = i;
-            this.list = i
-                ? this.apiData.index_charity_pay_out
-                : this.apiData.index_architecture_pay_in;
+            this.list = this.apiData[keys[i]];
         }
     }
 };
@@ -79,47 +78,49 @@ export default {
             }
         }
     }
-    .item {
-        margin: 16px 0;
-        border-radius: 4px;
-        white-space: nowrap;
-        overflow: hidden;
-        .img {
-            height: 64px;
-            width: 64px;
-            background: whitesmoke;
-            float: left;
-            margin-right: 16px;
-        }
-        .date {
-            float: right;
-            background-color: $colorp;
-            color: #fff;
-            text-align: center;
-            height: 48px;
-            width: 48px;
-            margin: 8px 0 8px 16px;
-            padding: 8px 0;
-            line-height: 16px;
-            .year {
-                font-size: 16px;
-            }
-        }
-        .obj {
+    .b {
+        .item {
+            margin: 16px 0;
+            border-radius: 4px;
+            white-space: nowrap;
             overflow: hidden;
-            .tit {
-                height: 24px;
-                text-overflow: ellipsis;
-                overflow: hidden;
-                line-height: 24px;
+            .img {
+                height: 64px;
+                width: 64px;
+                background: whitesmoke;
+                float: left;
+                margin-right: 16px;
             }
-            .txt {
-                white-space: normal;
-                text-overflow: ellipsis;
+            .date {
+                float: right;
+                background-color: $colorp;
+                color: #fff;
+                text-align: center;
+                height: 48px;
+                width: 48px;
+                margin: 8px 0 8px 16px;
+                padding: 8px 0;
+                line-height: 16px;
+                .year {
+                    font-size: 16px;
+                }
+            }
+            .obj {
                 overflow: hidden;
-                line-height: 20px;
-                height: 40px;
-                color: #999;
+                .tit {
+                    height: 24px;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                    line-height: 24px;
+                }
+                .txt {
+                    white-space: normal;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                    line-height: 20px;
+                    height: 40px;
+                    color: #999;
+                }
             }
         }
     }

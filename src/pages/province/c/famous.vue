@@ -1,45 +1,35 @@
 <template>
-    <div class="inner">
-        <Row :gutter="32" class="grid">
-            <i-col :span="24">
-                <div class="h kt">
-                    <span class="more">更多</span>
-                    <div class="tit">文化</div>
-                </div>
-                <div class="b">
-                    <div class="item curr">文化发布</div>
-                    <div class="item">祖先名人</div>
-                    <div class="item">字派</div>
-                    <div class="item">迁徙之源</div>
-                </div>
-                <div class="f">
-                    <Row :gutter="32">
-                        <i-col :span="12" v-for="v in 6" :key="v">
-                            <div class="item">
-                                <div class="img"></div>
-                                <div class="obj">
-                                    <div class="tit">标题</div>
-                                    <div class="txt">扼要</div>
-                                </div>
-                            </div>
-                        </i-col>
-                    </Row>
-                </div>
-            </i-col>
-        </Row>
+    <div class="list">
+        <div class="h">
+            <span class="tit" v-for="(v,i) in menu" :key="i" :class="menucurr == i ? 'curr' : ''" @click="chgMenu(i)">{{v}}</span>
+        </div>
+        <div class="b"></div>
     </div>
 </template>
 <script>
 export default {
     data() {
-        return {};
+        return {
+            menu: ["祖先", "名人", "精英"],
+            menucurr: 0,
+            apiData: {
+                index_family_person_1: {},
+                index_family_person_2: {},
+                index_family_person_3: {}
+            },
+            list: []
+        };
     },
     computed: {
         apiList() {
             return this.$store.state.province.apiList;
         }
     },
-    mounted: function() {},
+    mounted: function() {
+        this.getApiData("index_family_person_1");
+        this.getApiData("index_family_person_2");
+        this.getApiData("index_family_person_3");
+    },
     methods: {
         getApiData(e) {
             this.api
@@ -49,6 +39,12 @@ export default {
                         this.apiData[e] = res.data;
                     }
                 });
+        },
+        chgMenu(i) {
+            let keys = Object.keys(this.apiData);
+            this.list = [];
+            this.menucurr = i;
+            this.list = this.apiData[keys[i]];
         }
     }
 };
@@ -56,66 +52,20 @@ export default {
 <style lang="scss" scoped>
 @import "@/assets/css/var.scss";
 
-.grid {
-    padding: 16px 0;
+.list {
     .h {
         height: 48px;
         line-height: 48px;
-        font-size: 20px;
-        .more {
-            float: right;
+        .tit {
             font-size: 14px;
-        }
-    }
-    .b {
-        overflow: hidden;
-        border-bottom: 1px solid #ddd;
-        .item {
-            float: left;
-            width: 120px;
-            line-height: 32px;
-            text-align: center;
+            padding: 8px 16px;
+            border-radius: 4px;
             cursor: pointer;
-            &.curr,
-            &:hover {
-                background: $colorp;
+            &.curr {
+                background: $color;
                 color: #fff;
             }
         }
-    }
-    .f {
-        .item {
-            padding: 8px 0;
-            white-space: nowrap;
-            overflow: hidden;
-            .img {
-                width: 90px;
-                height: 90px;
-                float: left;
-                margin-right: 16px;
-                background: whitesmoke no-repeat center / cover;
-            }
-            .obj {
-                overflow: hidden;
-                height: 90px;
-                .tit {
-                    line-height: 32px;
-                    font-size: 16px;
-                    color: $colorp;
-                }
-                .txt {
-                    margin-top: 10px;
-                    line-height: 16px;
-                    color: #999;
-                    white-space: normal;
-                    height: 80px;
-                    overflow: hidden;
-                }
-            }
-        }
-    }
-    .ivu-col:nth-child(2) .f .img {
-        width: 120px;
     }
 }
 </style>

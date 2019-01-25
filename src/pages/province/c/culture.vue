@@ -10,11 +10,12 @@
 export default {
     data() {
         return {
-            menu: ["联谊会发布", "个人发布"],
+            menu: ["家族祠堂", "字派", "迁徙之源"],
             menucurr: 0,
             apiData: {
-                aa: {},
-                index_fan_news_recommend: {}
+                index_family_culture: {},
+                index_zipai: {},
+                index_family_qianxi: {}
             },
             list: []
         };
@@ -25,7 +26,9 @@ export default {
         }
     },
     mounted: function() {
-        this.getApiData("index_fan_news_recommend");
+        this.getApiData("index_family_culture");
+        this.getApiData("index_zipai");
+        this.getApiData("index_family_qianxi");
     },
     methods: {
         getApiData(e) {
@@ -39,7 +42,7 @@ export default {
         },
         chgMenu(i) {
             let keys = Object.keys(this.apiData);
-            this.list = [];
+            this.list = {};
             this.menucurr = i;
             this.list = this.apiData[keys[i]];
         }

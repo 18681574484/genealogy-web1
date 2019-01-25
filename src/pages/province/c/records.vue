@@ -31,7 +31,9 @@ export default {
             return this.$store.state.province.apiList;
         }
     },
-    mounted: function() {},
+    mounted: function() {
+        this.getApiData("index_family_record2");
+    },
     methods: {
         getApiData(e) {
             this.api

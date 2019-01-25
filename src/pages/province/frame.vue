@@ -38,7 +38,7 @@ export default {
             this.api
                 .get(this.api.province.base + this.api.province.site_menus, {
                     siteId: this.$store.state.province.id,
-                    menuId: 5
+                    menuId: 7
                 })
                 .then(res => {
                     if (res.code == 200) {

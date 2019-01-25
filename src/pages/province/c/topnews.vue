@@ -15,7 +15,9 @@
 export default {
     data() {
         return {
-            apiData: {},
+            apiData: {
+                index_family_record1: {}
+            },
             list: []
         };
     },
@@ -24,7 +26,9 @@ export default {
             return this.$store.state.province.apiList;
         }
     },
-    mounted: function() {},
+    mounted: function() {
+        this.getApiData("index_family_record1");
+    },
     methods: {
         getApiData(e) {
             this.api
@@ -35,13 +39,6 @@ export default {
                     }
                 });
         },
-        chgMenu(i) {
-            this.list = [];
-            this.menucurr = i;
-            this.list = i
-                ? this.apiData.index_charity_pay_out
-                : this.apiData.index_architecture_pay_in;
-        }
     }
 };
 </script>

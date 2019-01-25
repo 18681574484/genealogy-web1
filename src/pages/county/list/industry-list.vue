@@ -1,6 +1,6 @@
 <template>
     <div class="newslist">
-        <router-link :to="'/c/detail?type=industry&id='+v.id" class="item" v-for="(v,i) in list" :key="i">
+        <router-link :to="'detail?type=industry&id='+v.id" class="item" v-for="(v,i) in list" :key="i">
             <div class="img" :style="v.newsUploadFileList.length? api.imgBG(v.newsUploadFileList[0].filePath):''"/>
             <div class="obj">
                 <div class="tit" v-html="v.newsTitle"></div>

@@ -7,7 +7,7 @@
         <div class="total">
             <div class="txt">
                 公益基金总金额：
-                <span>789012.00</span>元
+                <span>{{apiData.index_fund_1.remain}}</span>元
             </div>
         </div>
         <Row class="b" :gutter="16">
@@ -33,7 +33,8 @@ export default {
     data() {
         return {
             apiData: {
-                index_architecture_pay_in_person_3: {}
+                index_architecture_pay_in_person_3: {},
+                index_fund_1: {}
             },
             list: []
         };
@@ -45,6 +46,7 @@ export default {
     },
     mounted: function() {
         this.getApiData("index_architecture_pay_in_person_3");
+        this.getApiData("index_fund_1");
     },
     methods: {
         getApiData(e) {

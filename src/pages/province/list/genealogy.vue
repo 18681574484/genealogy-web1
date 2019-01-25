@@ -30,8 +30,15 @@
                     </div>
                 </i-col>
             </Row>
-            <Page :total="total" @on-change="chgPage" :page-size="8" v-if="total"/>
+            <Page :total="total" @on-change="chgPage" :page-size="12" v-if="total"/>
         </div>
+        <Modal v-model="toPass" title="输入密码" width="320px" @on-ok="toSubmit">
+            <Form :model="form">
+                <FormItem>
+                    <Input v-model="form.password" type="password" placeholder="输入密码" clearable :maxlength="20" @keyup.enter.native="toSubmit"/>
+                </FormItem>
+            </Form>
+        </Modal>
     </div>
 </template>
 <script>
@@ -45,7 +52,10 @@ export default {
             areacode: 0,
             list: [],
             page: 1,
-            total: 0
+            total: 0,
+            toPass: false,
+            curr: {},
+            form: {}
         };
     },
     computed: {},
@@ -57,6 +67,7 @@ export default {
             this.api
                 .get(this.api.province.base + this.api.province.genealogy_list, {
                     pageNo: this.page,
+                    pageSize: 12,
                     siteId: this.$store.state.province.id,
                     fileName: this.fileName,
                     status: this.status ? this.status : "",
@@ -73,7 +84,25 @@ export default {
             this.page = e;
             this.getList();
         },
-        openFile(e) {},
+        openFile(e) {
+            if (e.password) {
+                this.curr = e;
+                this.toPass = true;
+                return;
+            }
+            if (e.url) {
+                window.open(e.url, "_blank");
+            } else {
+                this.$Message.error("发生错误，请联系管理员");
+            }
+        },
+        toSubmit() {
+            if (this.curr.password == this.form.password) {
+                window.open(this.curr.url, "_blank");
+            } else {
+                this.$Message.error("密码错误");
+            }
+        },
         handleChange(e) {
             this.areacode = e.length ? e[2].code : "";
             this.getList();
