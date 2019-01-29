@@ -1,7 +1,7 @@
 <template>
     <div class="list">
         <div class="h">
-            <span class="tit" v-for="(v,i) in menu" :key="i" :class="menucurr == i ? 'curr' : ''" @click="chgMenu(i)">{{v}}</span>
+            <span class="tit" v-for="(v,i) in menu" :key="i" :class="v.orderIndex == menucurr.orderIndex ? 'curr' : ''" @click="chgMenu(i)">{{v.menuName}}</span>
         </div>
         <div class="b"></div>
     </div>
@@ -10,12 +10,9 @@
 export default {
     data() {
         return {
-            menu: ["家族长老", "家族栋梁"],
-            menucurr: 0,
-            apiData: {
-                index_architecture_pay_in: {},
-                index_charity_pay_out: {}
-            },
+            menu: [],
+            menucurr: {},
+            url: "",
             list: []
         };
     },
@@ -24,23 +21,35 @@ export default {
             return this.$store.state.province.apiList;
         }
     },
-    mounted: function() {},
+    mounted: function() {
+        this.getNav();
+    },
     methods: {
-        getApiData(e) {
+        getNav() {
             this.api
-                .get(this.api.province.base + this.apiList[e].apiUrl, {})
+                .get(this.api.province.base + this.api.province.site_menus, {
+                    siteId: this.$store.state.province.id,
+                    menuId: 7
+                })
                 .then(res => {
                     if (res.code == 200) {
-                        this.apiData[e] = res.data;
+                        this.menu = res.data;
+                        this.chgMenu(0);
                     }
                 });
         },
-        chgMenu(i) {
-            this.list = [];
-            this.menucurr = i;
-            this.list = i
-                ? this.apiData.index_charity_pay_out
-                : this.apiData.index_architecture_pay_in;
+        chgMenu(e) {
+            this.url = "";
+            this.menucurr = this.menu[e];
+            this.url = this.api.province.base + this.menucurr.apiUrl;
+            this.getList();
+        },
+        getList() {
+            this.api.get(this.url, {}).then(res => {
+                if (res.code == 200) {
+                    this.list = res.data.records;
+                }
+            });
         }
     }
 };

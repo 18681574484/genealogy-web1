@@ -45,7 +45,7 @@
     line-height: $lineHeight;
     overflow: hidden;
     height: $lineHeight * $line;
-    // stylelint-disable
+    word-break: break-all;
     display: -webkit-box;
     display: -moz-box;
     text-overflow: ellipsis;
@@ -54,7 +54,6 @@
     line-clamp: $line;
     -webkit-box-orient: vertical;
     -moz-box-orient: vertical;
-    // stylelint-enable
     box-orient: vertical;
 }
 

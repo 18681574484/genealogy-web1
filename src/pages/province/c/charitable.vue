@@ -4,17 +4,17 @@
             <span class="tit" v-for="(v,i) in menu" :key="i" :class="menucurr == i ? 'curr' : ''" @click="chgMenu(i)">{{v}}</span>
         </div>
         <div class="b">
-            <div class="item" v-for="v in list" :key="v.id">
-                <div class="img"></div>
+            <router-link tag="div" :to="'detail?type=charity&id='+v.id" class="item" v-for="v in list" :key="v.id">
+                <div class="img" :style="v.newsUploadFileList.length ? api.imgBG(v.newsUploadFileList[0].filePath):''"></div>
                 <div class="date">
-                    <div class="day">05/01</div>
-                    <div class="year">2018</div>
+                    <div class="year">{{dayjs(v.updateTime).format("YYYY")}}</div>
+                    <div class="day">{{dayjs(v.updateTime).format("MM-DD")}}</div>
                 </div>
                 <div class="obj">
-                    <div class="tit">标题</div>
-                    <div class="txt">描述</div>
+                    <div class="tit">{{v.newsTitle}}</div>
+                    <div class="txt">{{v.newsText}}</div>
                 </div>
-            </div>
+            </router-link>
         </div>
     </div>
 </template>
@@ -26,7 +26,7 @@ export default {
             menucurr: 0,
             apiData: {
                 index_architecture_pay_in: {},
-                index_charity_pay_out: {},
+                index_charity_pay_out: {}
             },
             list: []
         };
@@ -47,6 +47,7 @@ export default {
                 .then(res => {
                     if (res.code == 200) {
                         this.apiData[e] = res.data;
+                        this.chgMenu(this.menucurr);
                     }
                 });
         },
@@ -54,14 +55,13 @@ export default {
             let keys = Object.keys(this.apiData);
             this.list = [];
             this.menucurr = i;
-            this.list = this.apiData[keys[i]];
+            this.list = this.apiData[keys[i]].records;
         }
     }
 };
 </script>
 <style lang="scss" scoped>
 @import "@/assets/css/var.scss";
-
 .list {
     height: 480px;
     .h {
@@ -80,29 +80,36 @@ export default {
     }
     .b {
         .item {
-            margin: 16px 0;
-            border-radius: 4px;
+            padding: 8px;
+            border-bottom: 1px solid #eee;
             white-space: nowrap;
+            cursor: pointer;
             overflow: hidden;
             .img {
                 height: 64px;
                 width: 64px;
-                background: whitesmoke;
                 float: left;
-                margin-right: 16px;
+                margin-right: 12px;
+                background: whitesmoke no-repeat center / cover;
+                border-radius: 4px;
             }
             .date {
                 float: right;
                 background-color: $colorp;
-                color: #fff;
                 text-align: center;
-                height: 48px;
-                width: 48px;
-                margin: 8px 0 8px 16px;
+                height: 64px;
+                width: 64px;
+                margin-left: 12px;
                 padding: 8px 0;
-                line-height: 16px;
+                border-radius: 4px;
+                line-height: 24px;
+                font-size: 16px;
+                color: #fff;
                 .year {
-                    font-size: 16px;
+                    font-size: 18px;
+                    font-weight: 300;
+                    opacity: 0.6;
+                    line-height: 24px;
                 }
             }
             .obj {
@@ -115,10 +122,7 @@ export default {
                 }
                 .txt {
                     white-space: normal;
-                    text-overflow: ellipsis;
-                    overflow: hidden;
-                    line-height: 20px;
-                    height: 40px;
+                    @include text-multiLine-ellipsis(2, 20px);
                     color: #999;
                 }
             }

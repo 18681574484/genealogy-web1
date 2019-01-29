@@ -4,8 +4,8 @@
             <span class="more">更多</span>
             <span class="tit">家族头条</span>
         </div>
-        <Card class="b">
-            <div class="img">
+        <Card class="b" v-if="list.length">
+            <div class="img"> 
                 <div class="tit">标题标题</div>
             </div>
         </Card>

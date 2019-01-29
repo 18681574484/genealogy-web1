@@ -2,7 +2,7 @@
     <div class="main">
         <div class="inner">
             <Breadcrumb>
-                <BreadcrumbItem to="/c">首页</BreadcrumbItem>
+                <BreadcrumbItem to="home">首页</BreadcrumbItem>
                 <BreadcrumbItem>详情</BreadcrumbItem>
             </Breadcrumb>
         </div>

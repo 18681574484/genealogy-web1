@@ -146,15 +146,15 @@ const api = {
             famous_drft: 'genogram/admin/ProNewsFamous/addOrUpdatePersonDrft', //家族名人草稿
             famous_del: 'genogram/admin/ProNewsFamous/deletePersonById', //家族名人删除
 
-            record_list: 'genogram/admin/fanNewsFamilyRecord/selectRecort', //记录家族列表
-            record_info: 'genogram/admin/fanNewsFamilyRecord/getFamilyRecord', //记录家族详情
-            record_edit: 'genogram/admin/fanNewsFamilyRecord/addOrUpdateRecord', //记录家族修改
-            record_drft: 'genogram/admin/fanNewsFamilyRecord/addOrUpdateRecordDrft', //记录家族草稿
-            record_del: 'genogram/admin/fanNewsFamilyRecord/deleteRecordById', //记录家族删除
-            media_list: 'genogram/admin/fanNewsFamilyRecord/selectRecortVedioPage', //官方视频
-            media_info: 'genogram/admin/fanNewsFamilyRecord/getFamilyRecordVedioDetail', //信息
-            media_edit: 'genogram/admin/fanNewsFamilyRecord/addOrUpdateVedioRecord', //修改
-            media_del: 'genogram/admin/fanNewsFamilyRecord/deleteRecordVedioById', //删除
+            record_list: 'genogram/admin/proNewsFamilyRecord/selectRecort', //记录家族列表
+            record_info: 'genogram/admin/proNewsFamilyRecord/getProFamilyRecordDetail', //记录家族详情
+            record_edit: 'genogram/admin/proNewsFamilyRecord/addOrUpdateRecord', //记录家族修改
+            record_drft: 'genogram/admin/proNewsFamilyRecord/addOrUpdateRecordDrft', //记录家族草稿
+            record_del: 'genogram/admin/proNewsFamilyRecord/deleteProRecordById', //记录家族删除
+            media_list: 'genogram/admin/proNewsFamilyRecord/selectRecortVedioPage', //官方视频
+            media_info: 'genogram/admin/proNewsFamilyRecord/getFamilyRecordVedioDetail', //信息
+            media_edit: 'genogram/admin/proNewsFamilyRecord/addOrUpdateVedioRecord', //修改
+            media_del: 'genogram/admin/proNewsFamilyRecord/deleteRecordVedioById', //删除
         },
         county: {
             base: urls.admin.county,

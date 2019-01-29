@@ -5,38 +5,34 @@
             <span class="tit">捐款名人</span>
         </div>
         <div class="total">
-            <div class="txt">
+            <div class="txt" @click="handleTopay = true">
                 公益基金总金额：
                 <span>{{apiData.index_fund_1.remain}}</span>元
             </div>
         </div>
-        <Row class="b" :gutter="16">
-            <i-col :span="8" v-for="v in list" :key="v">
-                <Card class="item">
-                    <div class="img"></div>
-                    <div class="name">张三</div>
-                    <div class="count">
-                        捐款
-                        <span>1.00</span>元
-                    </div>
-                    <div class="link">
-                        <span>关注</span>
-                        <span>点赞</span>
-                    </div>
-                </Card>
-            </i-col>
-        </Row>
+        <div class="b">
+            <div class="item" v-for="(v,i) in apiData.index_architecture_pay_in_person_3.records" :key="i" :style="api.imgBG(v.allUserLogin.picSrc)"></div>
+            <router-link class="item more" to="/c/charity?ct=2">···</router-link>
+        </div>
+        <Modal v-model="handleTopay" width="480px" :footer-hide="true" class="g-pay">
+            <topay @reloadApi="reloadApi"/>
+        </Modal>
     </div>
 </template>
 <script>
+import topay from "_c/common/topay.vue";
 export default {
+    components: {
+        topay
+    },
     data() {
         return {
             apiData: {
                 index_architecture_pay_in_person_3: {},
                 index_fund_1: {}
             },
-            list: []
+            list: [],
+            handleTopay: false
         };
     },
     computed: {
@@ -49,6 +45,10 @@ export default {
         this.getApiData("index_fund_1");
     },
     methods: {
+        reloadApi() {
+            this.getApiData("index_architecture_pay_in_person_3");
+            this.getApiData("index_fund_1");
+        },
         getApiData(e) {
             this.api
                 .get(this.api.province.base + this.apiList[e].apiUrl, {})
@@ -83,6 +83,7 @@ export default {
     .total {
         text-align: center;
         font-size: 16px;
+        cursor: pointer;
         padding-right: 64px;
         background: url(../img/icon-help.png) no-repeat 90% center / auto 48px;
         span {

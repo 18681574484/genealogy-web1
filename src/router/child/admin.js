@@ -346,6 +346,16 @@ export default [{
                 type: [1, 2, 3]
             },
             component: () => import('@/pages/admin/record/video')
+        }, {
+            path: 'topnews',
+            name: 'topnews',
+            meta: {
+                icon: 'md-megaphone',
+                title: '家族头条',
+                role: [2, 3, 9],
+                type: [2, 3]
+            },
+            component: () => import('@/pages/admin/record/topnews')
         }]
     },
     {
@@ -401,7 +411,7 @@ export default [{
             icon: 'logo-buffer',
             title: '帮助',
             role: [9],
-            type: [1, 2, 3]
+            type: [3]
         },
         children: [{
             path: 'help',
@@ -410,7 +420,7 @@ export default [{
                 icon: 'md-help-circle',
                 title: '帮助',
                 role: [9],
-                type: [1, 2, 3]
+                type: [3]
             },
             component: () => import('@/pages/admin/home/help')
         }]

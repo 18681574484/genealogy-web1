@@ -3,7 +3,16 @@
         <div class="h">
             <span class="tit" v-for="(v,i) in menu" :key="i" :class="menucurr == i ? 'curr' : ''" @click="chgMenu(i)">{{v}}</span>
         </div>
-        <div class="b"></div>
+        <div class="b">
+            <router-link class="item" tag="div" :to="'detail?type=records&id='+v.id" v-for="(v,i) in list" :key="i">
+                <div class="img"></div>
+                <div class="obj">
+                    <div class="tit">{{v.newsTitle}}</div>
+                    <div class="intro">{{v.newsText}}</div>
+                    <div class="more">查看详情</div>
+                </div>
+            </router-link>
+        </div>
     </div>
 </template>
 <script>
@@ -13,7 +22,7 @@ export default {
             menu: ["联谊会发布", "个人发布"],
             menucurr: 0,
             apiData: {
-                aa: {},
+                index_fan_news_sodality_recommend: {},
                 index_fan_news_recommend: {}
             },
             list: []
@@ -25,7 +34,8 @@ export default {
         }
     },
     mounted: function() {
-        this.getApiData("index_fan_news_recommend");
+        this.getApiData("index_fan_news_sodality_recommend");
+        this.getApiData("index_fan_news_person_recommend");
     },
     methods: {
         getApiData(e) {
@@ -34,6 +44,7 @@ export default {
                 .then(res => {
                     if (res.code == 200) {
                         this.apiData[e] = res.data;
+                        this.chgMenu(this.menucurr);
                     }
                 });
         },
@@ -41,7 +52,7 @@ export default {
             let keys = Object.keys(this.apiData);
             this.list = [];
             this.menucurr = i;
-            this.list = this.apiData[keys[i]];
+            this.list = this.apiData[keys[i]].records;
         }
     }
 };
@@ -61,6 +72,43 @@ export default {
             &.curr {
                 background: $color;
                 color: #fff;
+            }
+        }
+    }
+    .b {
+        height: 400px;
+        .item {
+            overflow: hidden;
+            white-space: nowrap;
+            cursor: pointer;
+            .img {
+                float: left;
+                margin-right: 12px;
+                height: 90px;
+                width: 120px;
+                background: whitesmoke no-repeat center / cover;
+            }
+            .obj {
+                line-height: 24px;
+                overflow: hidden;
+                .tit {
+                    height: 24px;
+                    overflow: hidden;
+                    color: $color;
+                    font-size: 14px;
+                }
+                .intro {
+                    height: 48px;
+                    font-size: 12px;
+                    line-height: 24px;
+                    white-space: normal;
+                    color: #999;
+                }
+                .more {
+                    line-height: 16px;
+                    color: $color;
+                    font-size: 12px;
+                }
             }
         }
     }

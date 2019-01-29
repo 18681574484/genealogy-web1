@@ -3,28 +3,35 @@
         <div class="h">
             <span class="tit">省级公告</span>
         </div>
-        <Card class="b" dis-hover>
-            <Card class="headline">
+        <div class="b" v-if="list.length">
+            <router-link tag="div" :to="'detail?type=records&id='+list[0].id" class="headline">
                 <div class="tit">
                     <span class="flag">【置顶公告】</span>
-                    <span>标题</span>
+                    <span>{{list[0].newsTitle}}</span>
                 </div>
                 <div class="tag">
                     <iconfont name="newshot"/>
-                    <span>2018-10-10</span>
+                    <span>{{dayjs(list[0].updateTime).format("YYYY-MM-DD")}}</span>
                     <iconfont name="attention"/>
-                    <span>150</span>
+                    <span>{{list[0].visitNum}}</span>
                 </div>
-                <div class="txt">描述描述</div>
-            </Card>
-            <Card class="item" v-for="v in 3" :key="v">省级公告标题</Card>
-        </Card>
+                <div class="txt">{{list[0].newsText}}</div>
+            </router-link>
+            <div class="items">
+                <router-link :to="'detail?type=records&id='+v.id" tag="div" class="item" v-for="(v,i) in list" v-show="i > 0" :key="i">{{v.newsTitle}}</router-link>
+            </div>
+        </div>
     </div>
 </template>
 <script>
 export default {
     data() {
-        return {};
+        return {
+            apiData: {
+                index_family_record2: {}
+            },
+            list: []
+        };
     },
     computed: {
         apiList() {
@@ -37,10 +44,13 @@ export default {
     methods: {
         getApiData(e) {
             this.api
-                .get(this.api.province.base + this.apiList[e].apiUrl, {})
+                .get(this.api.province.base + this.apiList[e].apiUrl, {
+                    pageSize: 5
+                })
                 .then(res => {
                     if (res.code == 200) {
                         this.apiData[e] = res.data;
+                        this.list = res.data.records;
                     }
                 });
         }
@@ -66,33 +76,43 @@ export default {
             font-size: 12px;
         }
     }
-    .headline {
-        .tit {
-            line-height: 40px;
-            font-size: 16px;
-            .flag {
-                color: $colorp;
-                font-size: 20px;
+    .b {
+        .headline {
+            box-shadow: 0 1px 3px rgba(#000, 0.2);
+            padding: 8px 16px;
+            border-radius: 4px;
+            .tit {
+                line-height: 40px;
+                font-size: 16px;
+                .flag {
+                    color: $color;
+                }
+            }
+            .tag {
+                font-size: 12px;
+                color: #999;
+                span {
+                    margin-right: 16px;
+                }
+            }
+            .txt {
+                height: 50px;
+                line-height: 25px;
+                overflow: hidden;
+                white-space: normal;
+                color: #999;
+                display: block;
             }
         }
-        .tag {
-            font-size: 12px;
-            color: #999;
-            span {
-                margin-right: 16px;
+        .items {
+            margin-top: 16px;
+            .item {
+                box-shadow: 0 0px 3px rgba(#000, 0.2);
+                padding: 8px 16px;
+                border-radius: 4px;
+                margin-top: 16px;
             }
         }
-        .txt {
-            height: 50px;
-            line-height: 25px;
-            overflow: hidden;
-            white-space: normal;
-            color: #999;
-            display: block;
-        }
-    }
-    .item {
-        margin-top: 8px;
     }
 }
 </style>
