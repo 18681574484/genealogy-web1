@@ -5,7 +5,7 @@
         </div>
         <div class="b">
             <router-link class="item" tag="div" :to="'detail?type=records&id='+v.id" v-for="(v,i) in list" :key="i">
-                <div class="img" :style="v.proNewsUploadFilesList.length ? api.imgBG(v.proNewsUploadFilesList[0].filePath):''"></div>
+                <div class="img" :style="api.imgBG(v.picFileSrc)"></div>
                 <div class="obj">
                     <div class="tit">{{v.personName}}</div>
                     <div class="intro">{{v.personSummary}}</div>
@@ -55,7 +55,6 @@ export default {
             this.list = [];
             this.menucurr = i;
             this.list = this.apiData[keys[i]].records;
-            console.log(this.list); 
         }
     }
 };
@@ -97,7 +96,7 @@ export default {
             .img {
                 float: left;
                 margin-right: 12px;
-                height:120px;
+                height: 120px;
                 width: 90px;
                 background: whitesmoke no-repeat center / cover;
             }

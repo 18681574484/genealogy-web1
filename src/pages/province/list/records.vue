@@ -1,15 +1,14 @@
 <template>
     <div class="list">
         <div class="h">
-            <span class="tit" v-for="(v,i) in menu" :key="i" :class="v.orderIndex == menucurr.orderIndex ? 'curr' : ''" @click="chgMenu(i)">{{v.menuName}}</span>
+            <span class="tit" v-for="(v,i) in menu" :key="i" :class="v.orderIndex == menucurr.orderIndex ? 'curr':''" v-html="v.menuName" @click="chgMenu(i)" v-show="v.menuType != 'family_record_file'"></span>
         </div>
         <div class="b">
             <router-link class="item" tag="div" :to="'detail?type=records&id='+v.id" v-for="(v,i) in list" :key="i">
-                <div class="img" :style="api.imgBG(v.picFileSrc)"></div>
+                <div class="img" :style="v.newsUploadFiles.length ? api.imgBG(v.newsUploadFiles[0].filePath):''"></div>
                 <div class="obj">
-                    <div class="tit">{{v.personName}}</div>
-                    <div class="intro">{{v.personSummary}}</div>
-                    <div class="more">查看详情</div>
+                    <div class="tit">{{v.newsTitle}}</div>
+                    <div class="intro">{{v.newsText}}</div>
                 </div>
             </router-link>
         </div>
@@ -25,11 +24,6 @@ export default {
             list: []
         };
     },
-    computed: {
-        apiList() {
-            return this.$store.state.province.apiList;
-        }
-    },
     mounted: function() {
         this.getNav();
     },
@@ -38,7 +32,7 @@ export default {
             this.api
                 .get(this.api.province.base + this.api.province.site_menus, {
                     siteId: this.$store.state.province.id,
-                    menuId: 7
+                    menuId: 6
                 })
                 .then(res => {
                     if (res.code == 200) {
@@ -66,8 +60,8 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import "@/assets/css/var.scss";
-
 .list {
+    padding: 16px 0;
     .h {
         height: 48px;
         line-height: 48px;
@@ -84,22 +78,27 @@ export default {
     }
     .b {
         min-height: 400px;
+        display: flex;
+        flex-wrap: wrap;
+        flex: 2;
         .item {
-            float: left;
+            justify-content: space-between;
             width: 49%;
             overflow: hidden;
             white-space: nowrap;
             padding: 8px 0;
             cursor: pointer;
+            &:nth-child(2n + 1) {
+                margin-right: 2%;
+            }
             .img {
                 float: left;
-                height: 120px;
+                margin-right: 12px;
+                height: 90px;
                 width: 90px;
                 background: whitesmoke no-repeat center / cover;
             }
             .obj {
-                padding: 0 12px;
-                height: 120px;
                 line-height: 24px;
                 overflow: hidden;
                 .tit {
@@ -109,7 +108,7 @@ export default {
                     font-size: 14px;
                 }
                 .intro {
-                    height: 72px;
+                    height: 48px;
                     font-size: 12px;
                     line-height: 24px;
                     white-space: normal;
