@@ -38,6 +38,9 @@
             </div>
         </div>
         <div class="inner">
+            <div class="children"></div>
+        </div>
+        <div class="inner">
             <div class="card">
                 <Culture/>
             </div>
@@ -49,7 +52,6 @@
     </div>
 </template>
 <script>
-import { ChartMap } from "_c/charts";
 import Banner from "./c/banner.vue";
 import Charitable from "./c/charitable.vue";
 import Payers from "./c/payers.vue";
@@ -74,7 +76,6 @@ export default {
         Famous,
         Friends,
         Culture,
-        ChartMap
     },
     data() {
         return {};

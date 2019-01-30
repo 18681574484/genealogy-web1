@@ -40,7 +40,9 @@ export default {
     methods: {
         getApiData(e) {
             this.api
-                .get(this.api.province.base + this.apiList[e].apiUrl, {})
+                .get(this.api.province.base + this.apiList[e].apiUrl, {
+                    pageSize: 6
+                })
                 .then(res => {
                     if (res.code == 200) {
                         this.apiData[e] = res.data;
@@ -98,10 +100,9 @@ export default {
                     font-size: 14px;
                 }
                 .intro {
-                    height: 48px;
                     font-size: 12px;
-                    line-height: 24px;
                     white-space: normal;
+                    @include text-multiLine-ellipsis(2, 24px);
                     color: #999;
                 }
                 .more {

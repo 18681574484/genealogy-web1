@@ -67,7 +67,7 @@ export default {
     methods: {
         loopData() {
             this.api
-                .post(this.api.county.base + this.api.county.pay.wxorder, {
+                .post(this.api.province.base + this.api.province.pay.wxorder, {
                     outTradeNo: this.order_no
                 })
                 .then(res => {
@@ -101,8 +101,8 @@ export default {
             clearInterval(this.loop);
             if (this.form.paytype) {
                 this.api
-                    .post(this.api.county.base + this.api.county.pay.wx, {
-                        siteId: this.$store.state.county.id,
+                    .post(this.api.province.base + this.api.province.pay.wx, {
+                        siteId: this.$store.state.province.id,
                         payAmount: this.form.num,
                         anonymous: this.form.anonymous ? 1 : 0,
                         url: location.href + "?back=pay&"
@@ -118,8 +118,8 @@ export default {
                     });
             } else {
                 this.api
-                    .post(this.api.county.base + this.api.county.pay.ali, {
-                        siteId: this.$store.state.county.id,
+                    .post(this.api.province.base + this.api.province.pay.ali, {
+                        siteId: this.$store.state.province.id,
                         payAmount: this.form.num,
                         anonymous: this.form.anonymous ? 1 : 0,
                         url: location.href + "?back=pay&"
@@ -143,8 +143,7 @@ export default {
 @import "@/assets/css/var.scss";
 .g-pay {
     .ivu-modal-content {
-        background: #fff url(../../assets/img/paytop.jpg) no-repeat top center /
-            100% auto;
+        background: #fff url(../../../assets/img/paytop.jpg) no-repeat top center / 100% auto;
     }
 
     .ivu-modal-body {

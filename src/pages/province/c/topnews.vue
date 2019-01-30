@@ -4,10 +4,10 @@
             <span class="more">更多</span>
             <span class="tit">家族头条</span>
         </div>
-        <Card class="b" v-if="list.length">
-            <div class="img"> 
-                <div class="tit">标题标题</div>
-            </div>
+        <Card class="b" v-if="info.id">
+            <router-link tag="div" :to="'detail?type=records&id='+info.id" class="img" :style="info.newsUploadFiles.length ? api.imgBG(info.newsUploadFiles[0].filePath): ''">
+                <div class="tit">{{info.newsText}}</div>
+            </router-link>
         </Card>
     </div>
 </template>
@@ -18,7 +18,8 @@ export default {
             apiData: {
                 index_family_record1: {}
             },
-            list: []
+            list: [],
+            info: {}
         };
     },
     computed: {
@@ -32,13 +33,19 @@ export default {
     methods: {
         getApiData(e) {
             this.api
-                .get(this.api.province.base + this.apiList[e].apiUrl, {})
+                .get(this.api.province.base + this.apiList[e].apiUrl, {
+                    pageSize: 1})
                 .then(res => {
                     if (res.code == 200) {
                         this.apiData[e] = res.data;
+                        this.list = res.data.records;
+                        if (this.list.length) {
+                            this.info = this.list[0];
+                            console.log(this.info);
+                        }
                     }
                 });
-        },
+        }
     }
 };
 </script>
@@ -65,10 +72,11 @@ export default {
     }
     .b {
         .img {
+            cursor: pointer;
             width: 540px;
             height: 360px;
             position: relative;
-            background: #fff no-repeat center;
+            background: #fff no-repeat center / cover;
         }
         .tit {
             position: absolute;
@@ -78,6 +86,7 @@ export default {
             width: 100%;
             line-height: 40px;
             height: 40px;
+            overflow: hidden;
             background: rgba(0, 0, 0, 0.6);
             color: #fff;
             padding: 0 16px;

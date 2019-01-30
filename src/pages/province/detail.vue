@@ -142,23 +142,23 @@ export default {
                 this.api.province.detail[this.$route.query.type];
             switch (this.$route.query.type) {
                 case "culture":
-                    this.entity = "FanNewsCultureNews";
+                    this.entity = "ProNewsCultureNews";
                     this.navcurr = 2;
                     break;
                 case "charity":
-                    this.entity = "FanNewsCharityOut";
+                    this.entity = "ProNewsCharityOut";
                     this.navcurr = 3;
                     break;
                 case "industry":
-                    this.entity = "FanNewsIndustry";
+                    this.entity = "ProNewsIndustry";
                     this.navcurr = 4;
                     break;
                 case "famous":
-                    this.entity = "FanNewsFamousPerson";
+                    this.entity = "ProNewsFamousPerson";
                     this.navcurr = 5;
                     break;
                 case "records":
-                    this.entity = "FanNewsFamilyRecord";
+                    this.entity = "ProNewsFamilyRecord";
                     this.navcurr = 6;
                     break;
             }

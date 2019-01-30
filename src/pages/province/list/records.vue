@@ -5,7 +5,7 @@
         </div>
         <div class="b">
             <router-link class="item" tag="div" :to="'detail?type=records&id='+v.id" v-for="(v,i) in list" :key="i">
-                <div class="img" :style="v.newsUploadFiles.length ? api.imgBG(v.newsUploadFiles[0].filePath):''"></div>
+                <div class="img" v-if="menucurr.menuCode != 'index_family_record2'" :style="v.newsUploadFiles.length ? api.imgBG(v.newsUploadFiles[0].filePath):''"></div>
                 <div class="obj">
                     <div class="tit">{{v.newsTitle}}</div>
                     <div class="intro">{{v.newsText}}</div>

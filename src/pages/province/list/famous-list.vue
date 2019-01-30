@@ -1,6 +1,6 @@
 <template>
     <div class="humanlist">
-        <router-link class="item" v-for="(v,i) in list" :key="i" :to="'/c/detail?type=famous&id='+v.id">
+        <router-link class="item" v-for="(v,i) in list" :key="i" :to="'detail?type=famous&id='+v.id">
             <div class="img" :style="v.picFileSrc ? api.imgBG(v.picFileSrc):''"/>
             <div class="obj">
                 <div class="tit" v-html="v.personName"></div>

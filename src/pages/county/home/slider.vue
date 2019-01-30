@@ -53,7 +53,7 @@ export default {
 .item {
     width: 320px;
     padding: 16px;
-    padding-top: 64px;
+    padding-top: 32px;
     white-space: nowrap;
     position: relative;
     .img {
@@ -62,8 +62,7 @@ export default {
         height: 128px;
         width: 128px;
         top: 0;
-        left: 50%;
-        margin-left: -70px;
+        left: 0;
         border: 6px solid #fff;
         background: whitesmoke no-repeat center / cover;
     }
@@ -71,19 +70,19 @@ export default {
     .obj {
         overflow: hidden;
         color: #fff;
-        padding: 80px 16px 32px;
+        padding: 48px 16px 32px;
         background: #000 url(../img/bg-famous.jpg) no-repeat center / cover;
         box-shadow: 0 2px 5px rgba(#000, 0.5);
-        border-radius: 32px 1px 32px 1px;
+        border-radius: 0 8px 8px 8px;
         .tit {
-            text-align: center;
+            text-align: right;
             font-size: 16px;
             overflow: hidden;
             height: 32px;
             text-overflow: ellipsis;
         }
         .tag {
-            text-align: center;
+            text-align: right;
             font-size: 14px;
             overflow: hidden;
             height: 24px;

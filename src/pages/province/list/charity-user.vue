@@ -20,7 +20,7 @@
                     <div class="name">{{v.allUserLogin.nickName}}</div>
                     <div class="count">
                         捐款
-                        <span>{{v.fanNewsCharityPayIn.payAmount}}</span>元
+                        <span>{{v.proNewsCharityPayIn.payAmount}}</span>元
                     </div>
                 </Card>
             </i-col>

@@ -45,7 +45,7 @@ export default {
         getApiData(e) {
             this.api
                 .get(this.api.province.base + this.apiList[e].apiUrl, {
-                    pageSize: 5
+                    pageSize: 6
                 })
                 .then(res => {
                     if (res.code == 200) {
@@ -78,6 +78,7 @@ export default {
     }
     .b {
         .headline {
+            cursor: pointer;
             box-shadow: 0 1px 3px rgba(#000, 0.2);
             padding: 8px 16px;
             border-radius: 4px;
@@ -96,10 +97,8 @@ export default {
                 }
             }
             .txt {
-                height: 50px;
-                line-height: 25px;
-                overflow: hidden;
                 white-space: normal;
+                @include text-multiLine-ellipsis(2, 25px);
                 color: #999;
                 display: block;
             }
@@ -107,6 +106,7 @@ export default {
         .items {
             margin-top: 16px;
             .item {
+                cursor: pointer;
                 box-shadow: 0 0px 3px rgba(#000, 0.2);
                 padding: 8px 16px;
                 border-radius: 4px;

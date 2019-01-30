@@ -19,7 +19,7 @@
             </div>
         </div>
         <div class="b ba" v-else>
-            <router-link class="item" tag="div" :to="'detail?type=records&id='+v.id" v-for="(v,i) in list" :key="i">
+            <router-link class="item" tag="div" :to="'detail?type=culture&id='+v.id" v-for="(v,i) in list" :key="i" v-show="i<4">
                 <div class="img" :style="v.newsUploadFileList.length ? api.imgBG(v.newsUploadFileList[0].filePath):''"></div>
                 <div class="obj">
                     <div class="tit">{{v.newsTitle}}</div>
@@ -57,7 +57,9 @@ export default {
     methods: {
         getApiData(e) {
             this.api
-                .get(this.api.province.base + this.apiList[e].apiUrl, {})
+                .get(this.api.province.base + this.apiList[e].apiUrl, {
+                    pageSize: 6
+                })
                 .then(res => {
                     if (res.code == 200) {
                         this.apiData[e] = res.data;
@@ -137,10 +139,9 @@ export default {
                     font-size: 14px;
                 }
                 .intro {
-                    height: 48px;
                     font-size: 12px;
-                    line-height: 24px;
                     white-space: normal;
+                    @include text-multiLine-ellipsis(2, 24px);
                     color: #999;
                 }
                 .more {

@@ -4,7 +4,7 @@
             <span class="tit" v-for="(v,i) in menu" :key="i" :class="v.orderIndex == menucurr.orderIndex ? 'curr' : ''" @click="chgMenu(i)">{{v.menuName}}</span>
         </div>
         <div class="b">
-            <router-link class="item" tag="div" :to="'detail?type=records&id='+v.id" v-for="(v,i) in list" :key="i">
+            <router-link class="item" tag="div" :to="'detail?type=famous&id='+v.id" v-for="(v,i) in list" :key="i">
                 <div class="img" :style="api.imgBG(v.picFileSrc)"></div>
                 <div class="obj">
                     <div class="tit">{{v.personName}}</div>
@@ -54,7 +54,9 @@ export default {
         },
         getList() {
             this.api
-                .get(this.api.province.base + this.menucurr.apiUrl, {})
+                .get(this.api.province.base + this.menucurr.apiUrl, {
+                    pageSize: 6
+                })
                 .then(res => {
                     if (res.code == 200) {
                         this.list = res.data.records;
@@ -109,14 +111,12 @@ export default {
                     font-size: 14px;
                 }
                 .intro {
-                    height: 72px;
                     font-size: 12px;
-                    line-height: 24px;
                     white-space: normal;
+                    @include text-multiLine-ellipsis(3, 24px);
                     color: #999;
                 }
                 .more {
-                    line-height: 16px;
                     color: $color;
                     font-size: 12px;
                 }

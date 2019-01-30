@@ -140,11 +140,11 @@ const api = {
             genealogy_info: 'genogram/admin/proNewsUploadTreeFile/getProNewsUploadTreeFile', //电子家谱详情
             genealogy_edit: '/genogram/admin/proNewsUploadTreeFile/updateProNewsUploadTreeFile', //电子家谱修改
             genealogy_del: 'genogram/admin/proNewsUploadTreeFile/deleteProNewsUploadTreeFile', //电子家谱删除
-            famous_list: 'genogram/admin/proNewsFamous/getFamilyPersonPage', //家族名人列表
-            famous_info: 'genogram/admin/proNewsFamous/getFamilyPersonDetail', //家族名人详情
-            famous_edit: 'genogram/admin/proNewsFamous/addOrUpdatePerson', //家族名人修改
-            famous_drft: 'genogram/admin/proNewsFamous/addOrUpdatePersonDrft', //家族名人草稿
-            famous_del: 'genogram/admin/proNewsFamous/deletePersonById', //家族名人删除
+            famous_list: 'genogram/admin/ProNewsFamous/getFamilyPersonPage', //家族名人列表
+            famous_info: 'genogram/admin/ProNewsFamous/getFamilyPersonDetail', //家族名人详情
+            famous_edit: 'genogram/admin/ProNewsFamous/addOrUpdatePerson', //家族名人修改
+            famous_drft: 'genogram/admin/ProNewsFamous/addOrUpdatePersonDrft', //家族名人草稿
+            famous_del: 'genogram/admin/ProNewsFamous/deletePersonById', //家族名人删除
 
             record_list: 'genogram/admin/proNewsFamilyRecord/selectRecort', //记录家族列表
             record_info: 'genogram/admin/proNewsFamilyRecord/getProFamilyRecordDetail', //记录家族详情
@@ -225,6 +225,19 @@ const api = {
     adminUrl: function (e, i) {
         let type = ['users', 'county', 'province']
         return e.indexOf('/') > -1 ? this.admin[type[i]].base + e : this.admin[type[i]].base + this.admin[type[i]][e];
+    },
+    rootUrl: function (e, i) {
+        let url = '';
+        i *= 1;
+        switch (i) {
+            case 1:
+                url = this.county[e]
+                break;
+            case 2:
+                url = this.province[e]
+                break;
+        }
+        return url;
     },
     post: function (url, data, type) {
         if (!data.pageNo) {

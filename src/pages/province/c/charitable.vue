@@ -43,7 +43,9 @@ export default {
     methods: {
         getApiData(e) {
             this.api
-                .get(this.api.province.base + this.apiList[e].apiUrl, {})
+                .get(this.api.province.base + this.apiList[e].apiUrl, {
+                    pageSize: 4
+                })
                 .then(res => {
                     if (res.code == 200) {
                         this.apiData[e] = res.data;
@@ -122,6 +124,7 @@ export default {
                 }
                 .txt {
                     white-space: normal;
+                    overflow: hidden;
                     @include text-multiLine-ellipsis(2, 20px);
                     color: #999;
                 }

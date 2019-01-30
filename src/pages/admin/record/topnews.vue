@@ -1,14 +1,14 @@
 <template>
     <div>
-        <Notice :url="url" v-if="url.length" :menu="menucurr.menuType" :type="menucurr.showId"/>
+        <Rsslist :url="url" v-if="url.length" :menu="menucurr.menuType" :type="menucurr.showId"/>
     </div>
 </template>
 
 <script>
-import Notice from "./c/notice-list";
+import Rsslist from "./c/rss-list";
 export default {
     components: {
-        Notice
+        Rsslist
     },
     data() {
         return {

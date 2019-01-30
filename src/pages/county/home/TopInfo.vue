@@ -76,7 +76,7 @@
     </div>
 </template>
 <script>
-import topay from "_c/common/topay.vue";
+import topay from "./topay.vue";
 export default {
     name: "TopInfo",
     components: {
