@@ -39,8 +39,13 @@ export default {
     computed: {},
     mounted: function() {
         if (this.$route.query.code) {
-            this.$store.commit("updateCountyId", this.$route.query.code);
-            this.$router.replace("/c");
+            if (this.$route.query.type == "c") {
+                this.$store.commit("updateCountyId", this.$route.query.code);
+                this.$router.replace("/c");
+            } else if(this.$route.query.type == "p"){
+                this.$store.commit("updateProvinceId", this.$route.query.code);
+                this.$router.replace("/p");
+            }
         } else {
             this.getList();
         }

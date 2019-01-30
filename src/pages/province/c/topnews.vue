@@ -1,7 +1,7 @@
 <template>
     <div class="list">
         <div class="h">
-            <span class="more">更多</span>
+            <router-link to="record" tag="span" class="more">更多</router-link>
             <span class="tit">家族头条</span>
         </div>
         <Card class="b" v-if="info.id">

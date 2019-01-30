@@ -67,9 +67,9 @@
         <Modal v-model="visible" width="560" :footer-hide="true">
             <dl v-if="curr_model.id" style="fontSize:16px;">
                 <dt>pc端网址：</dt>
-                <dd>http://yhtpw.com/#/base?type=c&code={{curr_model.id}}</dd>
+                <dd>http://yhtpw.com/#/base?type={{data.type == 'fan' ? 'c' :'p'}}&code={{curr_model.id}}</dd>
                 <dt>移动端网址：</dt>
-                <dd>http://yhtpw.com/mobile/#/base?type=c&code={{curr_model.id}}</dd>
+                <dd>http://yhtpw.com/mobile/#/base?type={{data.type == 'fan' ? 'c' :'p'}}&code={{curr_model.id}}</dd>
                 <dd>
                     <qrcode :text="'http://yhtpw.com/mobile/#/base?type=c&code='+curr_model.id" style="marginTop:32px;"/>
                 </dd>
@@ -156,8 +156,11 @@ export default {
                                 },
                                 on: {
                                     click: () => {
-                                        this.curr_model = e.row;
-                                        this.visible = true;
+                                        this.curr_model = {};
+                                        setTimeout(() => {
+                                            this.curr_model = e.row;
+                                            this.visible = true;
+                                        }, 100);
                                     }
                                 }
                             })

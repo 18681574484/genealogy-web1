@@ -85,6 +85,7 @@ export default {
             .tit {
                 line-height: 40px;
                 font-size: 16px;
+                @include text-multiLine-ellipsis(1, 40px);
                 .flag {
                     color: $color;
                 }
