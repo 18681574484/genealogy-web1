@@ -1,9 +1,13 @@
 <template>
     <div class="zipai">
+        <div></div>
         <div class="item" v-for="v in list" :key="v.id">
             <div class="tit">
                 <span v-if="v.ziapiLocation">地域：{{v.ziapiLocation}}</span>
                 <span v-if="v.ancestorsName">祖先：{{v.ancestorsName}}</span>
+                <Alert type="warning" style="display:inline-block;font-size:13px;line-height:1.8">
+                    <div>红色代表近世：开基祖至本代的代数；蓝色代表历代：始祖至本代的代数</div>
+                </Alert>
             </div>
             <div class="intro">
                 <div class="itm" v-for="(itm,idx) in formatZipai(v.zipaiTxt)" :key="idx">

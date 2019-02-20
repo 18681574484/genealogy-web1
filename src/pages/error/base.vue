@@ -33,11 +33,15 @@ export default {
             list: {
                 county: [],
                 province: []
-            }
+            },
+            fm: null,
         };
     },
     computed: {},
     mounted: function() {
+        if (this.$route.query.fm) {
+            this.fm = this.$route.query.fm;
+        }
         if (this.$route.query.code) {
             if (this.$route.query.type == "c") {
                 this.$store.commit("updateCountyId", this.$route.query.code);
@@ -54,7 +58,8 @@ export default {
         getList() {
             this.api
                 .post(this.api.county.base + this.api.county.site_list, {
-                    siteType: "fan"
+                    siteType: "fan",
+                    familyCode: this.fm || ""
                 })
                 .then(res => {
                     if (res.code == 200) {
@@ -63,7 +68,8 @@ export default {
                 });
             this.api
                 .post(this.api.county.base + this.api.county.site_list, {
-                    siteType: "pro"
+                    siteType: "pro",
+                    familyCode: this.fm || ""
                 })
                 .then(res => {
                     if (res.code == 200) {
@@ -83,15 +89,9 @@ export default {
                     break;
             }
         },
-        toHome() {
-            if (!this.form.siteid) {
-                this.$Modal.warning({
-                    title: "提示",
-                    content: "请输入网站id"
-                });
-                return false;
-            }
-            this.$router.push("/c");
+        chgFm() {
+            this.fm = this.fm ? null : this.$route.query.fm;
+            this.getList();
         }
     }
 };

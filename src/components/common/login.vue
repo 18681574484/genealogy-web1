@@ -18,7 +18,7 @@
                 <a @click="$emit('urlToReg')">立即注册</a>
             </div>
             <div class="v">
-                <a href="javascript:void(0)">忘记密码？</a>
+                <a @click="$emit('urlToFoget')">忘记密码？</a>
             </div>
         </div>
     </div>

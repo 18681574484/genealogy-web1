@@ -24,6 +24,7 @@ const api = {
         login: 'genogram/userLogin/login', //登录
         reg: 'genogram/userLogin/signIn', //注册
         reset: 'genogram/userLogin/updatePassword', //修改密码
+        foget: 'genogram/userLogin/forgetPassword', //找回密码
         regcode: 'genogram/userLogin/sendVerificationCode', //注册验证码
 
         charitable_list: 'genogram/fanSysCharitableDeclare/getSysCharitableDeclare', //慈善帮扶

@@ -1,7 +1,7 @@
 <template>
     <div>
         <Form :model="formData" :label-width="80">
-            <FormItem label="网站名">
+            <FormItem label="平台名称">
                 <Row :gutter="16">
                     <i-col :span="12">
                         <Input v-model="formData.siteName" placeholder="网站名" :maxlength="10" @keyup.enter.native="toSubmit"/>
@@ -18,8 +18,8 @@
                 </Upload>
             </FormItem>
             <FormItem label="祖先描述">
-                <Input type="textarea" :rows="6" v-model="formData.description" placeholder="祖先描述" style="font-size:12px;" :maxlength="300" @keyup.enter.native="toSubmit"/>
-                {{formData.description?formData.description.length:0}} / 300
+                <Input type="textarea" :rows="6" v-model="formData.description" placeholder="祖先描述" style="font-size:12px;" :maxlength="1000" @keyup.enter.native="toSubmit"/>
+                {{formData.description?formData.description.length:0}} / 1000
             </FormItem>
             <FormItem label>
                 <Button type="primary" @click="toSubmit" style="margin-right:16px;">提交</Button>

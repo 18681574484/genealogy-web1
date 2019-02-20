@@ -21,22 +21,27 @@
                     </Dropdown>
                 </div>
             </div>
-
             <div class="user" v-else>
                 <span class="btn login" @click="islogin = true">登录</span>
                 <span>|</span>
                 <span class="btn reg" @click="isreg = true">注册</span>
             </div>
+            <!-- <router-link v-if="apiList && info && getApiData('index_summary')" :to="'base?fm='+info.familyCode" tag="div" class="chgbar">
+                <span>切换地区</span>
+            </router-link> -->
             <div class="welcome">
                 <span>欢迎进入「炎黄统谱网」</span>
                 <span style="color:red">平台错误反馈QQ群：130523229</span>
             </div>
         </div>
         <Modal v-model="islogin" width="480px" class="g-auth" :footer-hide="true">
-            <loginform @urlToReg="urlToReg" @closedialog="closedialog"/>
+            <loginform @urlToReg="urlToReg" @urlToFoget="urlToFoget" @closedialog="closedialog"/>
         </Modal>
         <Modal v-model="isreg" width="480px" class="g-auth" :footer-hide="true">
             <regform @urlToLogin="urlToLogin" @closedialog="closedialog"/>
+        </Modal>
+        <Modal v-model="isfoget" width="480px" class="g-auth" :footer-hide="true">
+            <fogetform @urlToLogin="urlToLogin" @closedialog="closedialog"/>
         </Modal>
         <Modal v-model="isreset" width="480px" class="g-auth" :footer-hide="true">
             <resetform @closedialog="closedialog"/>
@@ -48,6 +53,7 @@
 </template>
 <script>
 import loginform from "./login";
+import fogetform from "./foget";
 import regform from "./reg";
 import resetform from "./reset";
 import msgBox from "./msgBox";
@@ -57,6 +63,7 @@ export default {
         loginform,
         regform,
         resetform,
+        fogetform,
         msgBox
     },
     data() {
@@ -64,16 +71,21 @@ export default {
             isreg: false,
             islogin: false,
             isreset: false,
-            isMsgBox: false
+            isfoget: false,
+            isMsgBox: false,
+            info: null
         };
     },
     computed: {
+        apiList() {
+            return this.$store.state.apiList;
+        },
         user() {
             return this.$store.state.user;
         },
         admin() {
             return this.$store.state.admin;
-        }
+        },
     },
     mounted: function() {
         if (this.$route.query.back && sessionStorage.callback) {
@@ -148,21 +160,28 @@ export default {
             }
         },
         urlToReg() {
-            this.islogin = false;
+            this.closedialog();
             setTimeout(() => {
                 this.isreg = true;
             }, 300);
         },
         urlToLogin() {
-            this.isreg = false;
+            this.closedialog();
             setTimeout(() => {
                 this.islogin = true;
             }, 300);
         },
+        urlToFoget() {
+            this.closedialog();
+            setTimeout(() => {
+                this.isfoget = true;
+            }, 300);
+        },
         closedialog() {
-            this.islogin = false;
             this.isreg = false;
+            this.islogin = false;
             this.isreset = false;
+            this.isfoget = false;
             this.isMsgBox = false;
         }
     }

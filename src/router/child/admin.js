@@ -47,7 +47,7 @@ export default [{
             name: 'setting',
             meta: {
                 icon: 'md-settings',
-                title: '网站设置',
+                title: '平台首页',
                 role: [1, 2, 3, 9],
                 type: [1, 2, 3]
             },
@@ -131,7 +131,7 @@ export default [{
             name: 'culture-list',
             meta: {
                 icon: 'md-book',
-                title: '全部文章',
+                title: '全部功能',
                 role: [1, 2, 3, 9],
                 type: [1, 2, 3]
             },
@@ -321,7 +321,7 @@ export default [{
             name: 'notice',
             meta: {
                 icon: 'ios-bookmarks-outline',
-                title: '网站公告',
+                title: '家族公告',
                 role: [1, 2, 3, 9],
                 type: [1, 2, 3]
             },

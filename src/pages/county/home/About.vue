@@ -8,21 +8,23 @@
             </div>
             <div class="b" v-text="index_summary.description"></div>
             <div class="f">
-                <Carousel loop v-model="zipai" dots="none">
-                    <CarouselItem v-for="(v,i) in index_zipai" :key="i">
-                        <div class="info">
-                            <div class="tit">张氏本支字派：</div>
-                            <router-link to="/c/culture" class="more">更多>></router-link>
-                            <div class="list">
-                                <div class="item" v-for="(itm,idx) in v" :key="idx">
-                                    <div class="red sub">{{itm[0]}}</div>
-                                    <div class="blue sub">{{itm[1]}}</div>
-                                    <span>{{itm[2]}}</span>
+                <div class="info">
+                    <div class="tit">张氏本支字派：</div>
+                    <router-link to="/c/culture" class="more">更多>></router-link>
+                    <div class="slid">
+                        <Carousel loop :autoplay-speed="5000" :autoplay="true" v-model="zipai" dots="none">
+                            <CarouselItem v-for="(v,i) in index_zipai" :key="i">
+                                <div class="list">
+                                    <div class="item" v-for="(itm,idx) in v" :key="idx">
+                                        <div class="red sub">{{itm[0]}}</div>
+                                        <div class="blue sub">{{itm[1]}}</div>
+                                        <span>{{itm[2]}}</span>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                    </CarouselItem>
-                </Carousel>
+                            </CarouselItem>
+                        </Carousel>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -83,6 +85,12 @@ export default {
     }
 };
 </script>
+<style>
+.slid .ivu-icon {
+    display: block;
+}
+</style>
+
 <style lang="scss" scoped>
 @import "@/assets/css/var.scss";
 .about {
@@ -145,10 +153,15 @@ export default {
             font-weight: 700;
             float: left;
         }
-
+        .slid {
+            overflow: hidden;
+        }
         .list {
             overflow: hidden;
             text-align: center;
+            background: #fff;
+            white-space: nowrap;
+            word-wrap: break-word;
             height: 48px;
 
             .item {
