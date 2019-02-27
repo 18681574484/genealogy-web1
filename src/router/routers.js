@@ -12,7 +12,7 @@ export default [{
         meta: {
             title: '联谊会',
         },
-        component: () => import('@/pages/error/base')
+        component: () => import('@/pages/basic/base')
     },
     {
         path: '/a',
@@ -58,6 +58,6 @@ export default [{
             title: '404错误',
             hideInMenu: true
         },
-        component: () => import('@/pages/error/404.vue')
+        component: () => import('@/pages/basic/404.vue')
     }
 ]

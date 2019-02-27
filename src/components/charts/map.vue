@@ -4,7 +4,6 @@
 
 <script>
 import echarts from "echarts";
-import geoJson from "@/libs/geojson.json";
 import tdTheme from "./theme.json";
 import { on, off } from "@/libs/tools";
 echarts.registerTheme("tdTheme", tdTheme);
@@ -13,7 +12,9 @@ export default {
     props: {
         value: Array,
         text: String,
-        subtext: String
+        subtext: String,
+        map: Object,
+        geoname: String
     },
     data() {
         return {
@@ -26,18 +27,37 @@ export default {
         }
     },
     mounted() {
-        echarts.registerMap("china", geoJson);
         this.$nextTick(() => {
+            echarts.registerMap(this.geoname, this.map);
             let option = {
-                geo: {
-                    map: "china"
+                title: {
+                    text: this.geoname,
+                    left: "20%",
+                    top: 90,
+                    textStyle: {}
                 },
-                backgroundColor: "#f1f2f3",
+                tooltip: {},
+                geo: {
+                    type: "map",
+                    map: this.geoname,
+                    label: {
+                        show: true,
+                        position: ["50%", "50%"]
+                    },
+                    itemStyle: {
+                        areaColor: "#fff"
+                    }
+                },
                 series: []
             };
             this.dom = echarts.init(this.$refs.dom, "tdTheme");
+            this.dom.on("click", e => {
+                console.log(e);
+                this.$emit("resetGeo", e.name);
+            });
             this.dom.setOption(option);
             on(window, "resize", this.resize);
+            console.log(echarts);
         });
     },
     beforeDestroy() {
@@ -45,3 +65,9 @@ export default {
     }
 };
 </script>
+
+<style lang="scss">
+.charts {
+    height: 700px;
+}
+</style>
