@@ -1,7 +1,7 @@
 <template>
     <div>
         <van-list v-model="loading" :finished="finished" @load="onLoad" :offset="50" class="list">
-            <router-link :to="'blogdetail?type=records&id='+v.id" class="item" v-for="(v,i) in list" :key="i">
+            <router-link :to="'/user/blogdetail?type=records&id='+v.id" class="item" v-for="(v,i) in list" :key="i">
                 <div class="img" :style=" api.imgBG(v.newsFaceUrl)"/>
                 <div class="obj">
                     <div class="tit">{{v.title}}</div>

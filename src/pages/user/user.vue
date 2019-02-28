@@ -82,7 +82,7 @@ export default {
                 })
                 .then(() => {
                     this.$store.commit("updateUser", []);
-                    this.$router.replace("home");
+                    this.$router.replace("/login");
                 })
                 .catch(() => {});
         },
