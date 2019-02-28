@@ -22,7 +22,7 @@
 export default {
     data() {
         return {
-            menu: ["账本支出", "财务收益"],
+            menu: ["财务收益", "账本支出"],
             menucurr: 0,
             apiData: {
                 index_architecture_pay_in: {},

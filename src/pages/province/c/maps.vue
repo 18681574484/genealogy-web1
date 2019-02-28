@@ -4,7 +4,17 @@
             <ChartMap v-if="geojson.type" @resetGeo="resetGeo" :geoname="geoname" :map="geojson" style="height:600px;" text="下级分支"/>
         </div>
         <div class="list">
-            <div class="item" v-for="(v,i) in listcurr" :key="i">{{v.siteName}}</div>
+            <div class="h">
+                <div class="more" @click="listcurr = list">查看全部</div>
+                <span class="tit curr">下级联谊会</span>
+                <small>({{index_summary.familyName}}氏)</small>
+            </div>
+            <div class="b">
+                <div class="item" v-for="(v,i) in listcurr" :key="i" @click="link(v)">
+                    <div class="img" :style="api.imgBG(v.totemPicSrc)"></div>
+                    <div class="obj">{{v.name}}</div>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -117,10 +127,12 @@ export default {
                 return;
             }
             let areas = this.formatMap(e);
-            let newlist = list.filter
-            // for(let i in areas){
-            //     if()
-            // }
+            console.log(areas);
+            let newlist = list.filter(v => {
+                console.log(this.api.oneOf(v.regionCode, areas));
+                return this.api.oneOf(v.regionCode, areas);
+            });
+            this.listcurr = newlist || [];
         },
         get_index_summary() {
             this.api
@@ -151,6 +163,7 @@ export default {
                 .then(res => {
                     if (res.code == 200) {
                         this.list = res.data;
+                        this.listcurr = res.data;
                     }
                 });
         },
@@ -175,34 +188,17 @@ export default {
                 if (!i) {
                     b = v;
                 }
-                if (a[v] == e) {
+                if (pcaa[a][v] == e) {
                     b = v;
                 }
                 i++;
             }
-            return pcaa[b] || pcaa[a];
-            // console.log(procode[b][c]);
-            // if (pcaa[this.index_summary.regionCode][procode]) {
-            //     return pcaa[b][c];
-            // } else {
-            //     return pcaa[a][c];
-            // }
-
-            // let sitename = pca[86][v];
-            // let citys = {};
-            // let res = 0;
-            // for (let i in allpro) {
-            //     if (!allpro[i].indexOf(e)) {
-            //         citys = pcaa[i];
-            //         res = i;
-            //     }
-            // }
-            // for (let i in citys) {
-            //     if (citys[i] == t) {
-            //         res = i;
-            //     }
-            // }
-            // return res;
+            let res = pcaa[b] || pcaa[a];
+            return Object.keys(res);
+        },
+        link(e) {
+            this.$store.commit("updateCountyId", e.id);
+            this.$router.replace("/c");
         }
     }
 };
@@ -210,9 +206,63 @@ export default {
 <style lang="scss" scoped>
 @import "@/assets/css/var.scss";
 .map_card {
+    display: flex;
+    justify-content: space-between;
     .maps {
         width: 600px;
         height: 600px;
+    }
+}
+.list {
+    border: 1px solid #eee;
+    box-shadow: 1px 1px 3px rgba(#000, 0.2);
+    width: 40%;
+    margin: 16px;
+    height: 600px;
+    overflow: hidden;
+    .h {
+        padding: 0 16px;
+        height: 48px;
+        line-height: 48px;
+        box-shadow: 0 1px 3px rgba(#000, 0.1);
+        .tit {
+            font-size: 14px;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            background: $color;
+            color: #fff;
+            margin-right: 8px;
+        }
+        .more {
+            float: right;
+            cursor: pointer;
+        }
+    }
+    .b {
+        height: 550px;
+        overflow-y: auto;
+        .item {
+            line-height: 32px;
+            padding: 8px 16px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            clear: both;
+            .img {
+                height: 32px;
+                width: 32px;
+                background: no-repeat center / cover;
+                border-radius: 50%;
+                margin-right: 16px;
+            }
+            .obj {
+                font-size: 13px;
+            }
+            &:hover {
+                background: whitesmoke;
+                cursor: pointer;
+            }
+        }
     }
 }
 </style>
