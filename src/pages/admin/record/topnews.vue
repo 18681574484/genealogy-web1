@@ -43,6 +43,7 @@ export default {
                 this.menucurr.apiAdminUrl,
                 this.admin.step
             );
+            console.log(this.menucurr)
         }
     }
 };
