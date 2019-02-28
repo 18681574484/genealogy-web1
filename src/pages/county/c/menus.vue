@@ -2,45 +2,45 @@
     <div class="menus">
         <div class="row">
             <router-link to="notice" class="item">
-                <img src="../img/notice.png" alt>
+                <img src="../../../assets/menus/notice.png">
                 <p>家族公告</p>
             </router-link>
             <router-link to="records" class="item">
-                <img src="../img/dynamic.png" alt>
+                <img src="../../../assets/menus/dynamic.png">
                 <p>家族动态</p>
             </router-link>
             <router-link to="charity" class="item">
-                <img src="../img/charity.png" alt>
+                <img src="../../../assets/menus/charity.png">
                 <p>慈善公益</p>
             </router-link>
             <router-link to="culture" class="item">
-                <img src="../img/culture.png" alt>
+                <img src="../../../assets/menus/culture.png">
                 <p>家族文化</p>
             </router-link>
             <router-link to="video_fm" class="item">
-                <img src="../img/video.png" alt>
+                <img src="../../../assets/menus/video.png">
                 <p>家族视频</p>
             </router-link>
         </div>
         <div class="row">
             <router-link to="industry" class="item">
-                <img src="../img/industry.png" alt>
+                <img src="../../../assets/menus/industry.png">
                 <p>家族产业</p>
             </router-link>
             <router-link to="famous" class="item">
-                <img src="../img/famous.png" alt>
+                <img src="../../../assets/menus/famous.png">
                 <p>家族名人</p>
             </router-link>
             <router-link to="ancestors" class="item">
-                <img src="../img/ancestors.png" alt>
+                <img src="../../../assets/menus/ancestors.png">
                 <p>祖先分支</p>
             </router-link>
             <router-link to="help" class="item">
-                <img src="../img/help.png" alt>
+                <img src="../../../assets/menus/help.png">
                 <p>慈善帮扶</p>
             </router-link>
             <router-link to="genealogy" class="item">
-                <img src="../img/genealogy.png" alt>
+                <img src="../../../assets/menus/genealogy.png">
                 <p>数字家谱</p>
             </router-link>
         </div>

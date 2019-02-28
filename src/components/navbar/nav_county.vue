@@ -80,7 +80,15 @@ export default {
                     this.$router.push("/base?act=2&fm=" + this.info.familyCode);
                     break;
                 case 2:
-                    this.$router.push("/base?act=1&fm=" + this.info.familyCode);
+                    if (this.info.parentId) {
+                        this.$router.push(
+                            "/base?type=p&code=" + this.info.parentId
+                        );
+                    } else {
+                        this.$router.push(
+                            "/base?act=1&fm=" + this.info.familyCode
+                        );
+                    }
                     break;
                 case 3:
                     this.$router.push("/base?act=0&fm=" + this.info.familyCode);

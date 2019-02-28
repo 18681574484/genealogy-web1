@@ -1,6 +1,6 @@
 <template>
     <div class="sitename">
-        <span>{{info.siteName}}</span>
+        <div class="tit">{{info.siteName}}</div>
     </div>
 </template>
 
@@ -34,3 +34,24 @@ export default {
     }
 };
 </script>
+<style lang="less" scoped>
+.sitename {
+    background: #d2211b;
+    height: 70px;
+    position: relative;
+    .tit {
+        background: url("../../../assets/images/titlebg.png") no-repeat;
+        background-position: center;
+        background-size: auto 80%;
+        font-size: 14px;
+        line-height: 50px;
+        height: 50px;
+        color: #e3c793;
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100%;
+        z-index: 2;
+    }
+}
+</style>

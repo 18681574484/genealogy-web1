@@ -1,38 +1,30 @@
 <template>
     <div class="pages">
-        <Navbar title="家族产业链"></Navbar>
+        <Navbar title="家族头条"></Navbar>
         <div class="main">
-            <van-tabs v-model="active" @change="onChange">
-                <van-tab :title="v.menuName" v-for="(v,i) in menu" :key="i">
-                    <div v-if="menucurr && url">
-                        <Industry :url="url" v-if="menucurr && url.length"/>
-                    </div>
-                </van-tab>
-            </van-tabs>
+            <TopNews :url="url" v-if="url"/>
         </div>
     </div>
 </template>
+
 <script>
 import Navbar from "_c/navbar/navbar.vue";
-import Industry from "./list/industry.vue";
+import TopNews from "./list/topnews.vue";
 export default {
     name: "Page",
     components: {
         Navbar,
-        Industry
+        TopNews
     },
     data() {
         return {
-            active: 0,
+            active: 4,
             menu: [],
             menucurr: {},
             url: ""
         };
     },
     mounted: function() {
-        if (this.$route.query.ct) {
-            this.active = this.$route.query.ct;
-        }
         this.getNav();
     },
     methods: {
@@ -40,7 +32,7 @@ export default {
             this.api
                 .get(this.api.province.base + this.api.province.site_menus, {
                     siteId: this.$store.state.province_id,
-                    menuId: 4
+                    menuId: 6
                 })
                 .then(res => {
                     if (res.code == 200) {

@@ -2,7 +2,7 @@
     <div>
         <Title/>
         <Slider :isLoading="isLoading"/>
-        <TopNews/>
+        <TopRss/>
         <Fellowship :isLoading="isLoading"/>
         <Finance :isLoading="isLoading"/>
         <Flgure :isLoading="isLoading"/>
@@ -20,7 +20,7 @@ import Title from "./title.vue";
 import Menus from "./menus.vue";
 import Notice from "./notice.vue";
 import Fellowship from "./fellowship.vue";
-import TopNews from "../list/topnews.vue";
+import TopRss from "../list/toprss.vue";
 import Finance from "./finance.vue";
 import Flgure from "./flgure.vue";
 import Newslist from "./newslist.vue";
@@ -36,7 +36,7 @@ export default {
         Notice,
         Fellowship,
         Finance,
-        TopNews,
+        TopRss,
         Flgure,
         Newslist,
         Newsuser

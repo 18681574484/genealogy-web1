@@ -25,12 +25,12 @@
 
 <script>
 import Navbar from "_c/navbar/navbar.vue";
-import TopNews from "./list/topnews.vue";
+import TopRss from "./list/toprss.vue";
 export default {
     name: "Page",
     components: {
         Navbar,
-        TopNews
+        TopRss
     },
     data() {
         return {

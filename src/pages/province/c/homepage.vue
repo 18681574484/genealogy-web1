@@ -2,7 +2,7 @@
     <div>
         <Title/>
         <Slider :isLoading="isLoading"/>
-        <TopNews/>
+        <TopRss/>
         <Finance :isLoading="isLoading"/>
         <Flgure :isLoading="isLoading"/>
         <Menus/>
@@ -17,7 +17,7 @@ import Slider from "./slider.vue";
 import Title from "./title.vue";
 import Menus from "./menus.vue";
 import Notice from "./notice.vue";
-import TopNews from "../list/topnews.vue";
+import TopRss from "../list/toprss.vue";
 import Finance from "./finance.vue";
 import Flgure from "./flgure.vue";
 import Newslist from "./newslist.vue";
@@ -31,7 +31,7 @@ export default {
         Menus,
         Notice,
         Finance,
-        TopNews,
+        TopRss,
         Flgure,
         Newslist,
     },

@@ -48,12 +48,12 @@ export default [{
     },
     component: () => import('@/pages/province/culture'),
 }, {
-    path: '/p/industry',
+    path: '/p/topnews',
     meta: {
         title: '家族产业',
         keepAlive: false
     },
-    component: () => import('@/pages/province/industry'),
+    component: () => import('@/pages/province/topnews'),
 }, {
     path: '/p/ancestors',
     meta: {

@@ -73,7 +73,7 @@ export default {
     height: 2.5rem;
     margin: 0.1rem auto;
     border-radius: 0.1rem;
-    background: url(../img/bg_banlance.png) no-repeat center / cover;
+    background: url(../../../assets/images/bg_banlance.png) no-repeat center / cover;
     padding: 0.3rem 0.8rem;
     box-sizing: border-box;
     color: #fff;

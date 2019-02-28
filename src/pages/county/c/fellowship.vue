@@ -78,7 +78,7 @@ export default {
             position: relative;
             width: 95%;
             height: 100%;
-            background: url(../img/fellowship.png) no-repeat center / cover;
+            background: url(../../../assets/images/fellowship.png) no-repeat center / cover;
             border-radius: 0.1rem;
             display: block;
             .obj {

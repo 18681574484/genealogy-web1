@@ -2,7 +2,7 @@
     <div class="pages">
         <Navbar title="家族公告"></Navbar>
         <div class="main">
-            <TopNews/>
+            <TopRss/>
             <van-list v-model="loading" :finished="finished" @load="onLoad" :offset="50" class="list">
                 <None v-if="!list.length && isload"/>
                 <router-link :to="'detail?type=records&id='+v.id" class="item" v-for="(v,i) in list" :key="i" v-if="i">
@@ -25,12 +25,12 @@
 
 <script>
 import Navbar from "_c/navbar/navbar.vue";
-import TopNews from "./list/topnews.vue";
+import TopRss from "./list/toprss.vue";
 export default {
     name: "Page",
     components: {
         Navbar,
-        TopNews
+        TopRss
     },
     data() {
         return {

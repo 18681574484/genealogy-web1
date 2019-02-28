@@ -129,7 +129,7 @@ export default {
                 font-size: 0.32rem;
                 line-height: 1rem;
                 font-weight: 700;
-                background: url(../img/icon-fontbg.png) no-repeat center / 100%
+                background: url(../../../assets/images/icon-fontbg.png) no-repeat center / 100%
                     100%;
                 .tag {
                     font-size: 0.2rem;
