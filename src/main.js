@@ -1,20 +1,20 @@
-// The Vue build version to load with the `import` command
-// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
-import App from './App'
-import router from './router'
-// import axios from "./config/axios"
-
-import api from './config/api'
-import store from './store/index'
-
+import router from './router/'
+import store from './store/'
+import App from './App.vue'
+import api from './libs/api.js'
 import Vant from 'vant';
 import 'vant/lib/index.css';
-
+import '@/assets/icon/iconfont.css'
+import '@/assets/styles/app.less'
+import dayjs from 'dayjs'
+import 'dayjs/locale/zh-cn'
+dayjs.locale('zh-cn')
+import relativeTime from 'dayjs/plugin/relativeTime'
+dayjs.extend(relativeTime)
 Vue.use(Vant);
-Vue.config.productionTip = false
 Vue.prototype.api = api
-
+Vue.prototype.dayjs = dayjs
 new Vue({
     router,
     store,

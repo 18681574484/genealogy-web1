@@ -1,0 +1,173 @@
+@charset "UTF-8";
+@color: #d2211b;
+html {
+    font-size: calc(100vw / 7.5);
+}
+@media only screen and (max-width: 320px) {
+    html {
+        font-size: 42.8px;
+    }
+}
+@media only screen and (min-width: 480px) {
+    html {
+        font-size: 56.8px;
+    }
+}
+body {
+    background: #fff;
+}
+.pages {
+    font-size: 0.28rem;
+    .main {
+        padding-bottom: 1rem;
+    }
+    .navbar {
+        & ~ .main {
+            padding-top: 0.9rem;
+        }
+        &.navhome {
+            & ~ .main {
+                padding-top: 2.7rem;
+            }
+        }
+    }
+}
+.none {
+    text-align: center;
+    padding-top: 2rem;
+    .text {
+        font-size: 0.32rem;
+        color: #999;
+        line-height: 3;
+    }
+}
+p {
+    padding: 0;
+    margin: 0;
+}
+.van-tabs__wrap {
+    z-index: 0;
+}
+img {
+    max-width: 100% !important;
+}
+
+.van-nav-bar {
+    line-height: 0.9rem;
+    height: 0.9rem;
+    &.van-nav-bar--fixed {
+        background-color: #d2211b;
+        color: #fff;
+        z-index: 99 !important;
+        &.van-hairline--bottom::after {
+            display: none;
+        }
+        & + .van-nav-bar--fixed {
+            top: 0.9rem;
+            & + .van-nav-bar--fixed {
+                top: 1.8rem;
+            }
+        }
+    }
+    .van-nav-bar__title {
+        color: #fff;
+        font-size: 0.3rem;
+        font-weight: normal;
+    }
+    .van-icon {
+        color: #fff !important;
+    }
+}
+.tabbar .van-tabbar.van-tabbar--fixed {
+    z-index: 99 !important;
+}
+.van-cell-group {
+    .van-cell {
+        padding: 0.2rem 0.3rem;
+        line-height: 0.48rem;
+    }
+}
+.actions {
+    padding: 0.5rem 0.3rem;
+    .btn {
+        display: block;
+        text-align: center;
+        line-height: 0.72rem;
+        background: @color;
+        color: #fff;
+        border-radius: 0.1rem;
+        & + .btn {
+            margin-top: 0.3rem;
+        }
+        &.normal {
+            border: 1px solid #ddd;
+            background: #fff;
+            color: #333;
+        }
+    }
+}
+.upload {
+    height: 1.28rem;
+    width: 1.28rem;
+    line-height: 1.28rem;
+    text-align: center;
+    background: whitesmoke;
+    .img {
+        height: 100%;
+        width: 100%;
+        background: no-repeat center / cover;
+    }
+}
+
+.searchbar {
+    text-align: center;
+    background: rgba(#fff, 0.3);
+    border-radius: .3rem;
+    height: 0.6rem;
+    line-height: 0.6rem;
+    margin-top: 0.15rem;
+    font-size: 0.28rem;
+    .tit {
+        margin-left: 0.1rem;
+    }
+}
+.logo {
+    height: 0.8rem;
+    width: 0.8rem;
+    background: whitesmoke no-repeat center / cover;
+    border-radius: 100%;
+}
+.headtab {
+    .van-nav-bar__title {
+        width: 100%;
+        max-width: none;
+    }
+    .van-tabs__wrap {
+        &:after {
+            display: none;
+        }
+    }
+    .van-tabs__nav {
+        background: transparent;
+    }
+    .van-tab {
+        color: rgba(#fff, 0.8);
+        background: transparent;
+    }
+    .van-tabs__line {
+        display: none;
+    }
+    .van-tab--active {
+        color: #fff;
+    }
+}
+.sitename {
+    line-height: .9rem;
+    height: 1.8rem;
+    font-size: .36rem;
+    font-weight: 600;
+    background: #d2211b;
+    color: #fff;
+    text-align: center;
+    position: relative;
+}

@@ -1,35 +1,28 @@
 <template>
     <div id="app">
-        <!-- 头部固定搜索组件 -->
-        <!-- <HeaderTake></HeaderTake> -->
-        <router-view></router-view>
-        <Footer></Footer>
+        <transition name="router-fade" mode="out-in">
+            <keep-alive>
+                <router-view v-if="$route.meta.keepAlive"></router-view>
+            </keep-alive>
+        </transition>
+        <transition name="router-fade" mode="out-in">
+            <router-view v-if="!$route.meta.keepAlive"></router-view>
+        </transition>
     </div>
 </template>
-
 <script>
-import HeaderTake from "@/components/Header/HeaderTake.vue";
-import Footer from "@/components/footer/Footer.vue";
-export default {
-    name: "App",
-    components: {
-        Footer,
-        HeaderTake
-    }
-};
+import Vue from "vue";
+import None from "_c/none/none.vue";
+Vue.component("None", None);
+export default {};
 </script>
-
-<style scoped lang="less">
-#app {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    width: 100%;
-    height: 100%;
+<style>
+.router-fade-enter-active,
+.router-fade-leave-active {
+    transition: all 0.3s;
+}
+.router-fade-enter,
+.router-fade-leave-active {
+    opacity: 0;
 }
 </style>
