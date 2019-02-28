@@ -1,0 +1,54 @@
+{
+    "name": "test",
+    "version": "1.0.0",
+    "description": "A Vue.js project",
+    "author": "bestlzl <121489727@qq.com>",
+    "private": true,
+    "scripts": {
+        "start": "vue-cli-service serve",
+        "build": "vue-cli-service build"
+    },
+    "dependencies": {
+        "axios": "^0.18.0",
+        "vant": "^1.4.7",
+        "vue": "^2.5.2",
+        "vue-router": "^3.0.1",
+        "vuex": "^3.0.1"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.2.0",
+        "@vue/cli-plugin-babel": "^3.2.0",
+        "@vue/cli-plugin-eslint": "^3.2.1",
+        "@vue/cli-plugin-unit-mocha": "^3.2.0",
+        "@vue/cli-service": "^3.2.0",
+        "@vue/eslint-config-airbnb": "^4.0.0",
+        "@vue/eslint-config-standard": "^4.0.0",
+        "vue-template-compiler": "^2.5.17",
+        "eslint-plugin-cypress": "^2.1.2",
+        "eslint-plugin-vue": "^5.0.0",
+        "node-sass": "^4.10.0",
+        "sass-loader": "^7.1.0",
+        "less": "^3.9.0",
+        "less-loader": "^4.1.0"
+    },
+    "engines": {
+        "node": ">= 6.0.0",
+        "npm": ">= 3.0.0"
+    },
+    "repository": {
+        "type": "vue",
+        "url": ""
+    },
+    "browserslist": [
+        "> 1%",
+        "last 2 versions",
+        "not ie <= 8"
+    ],
+    "scaffoldConfig": {
+        "type": "vue",
+        "name": "",
+        "title": "",
+        "screenshot": ""
+    },
+    "title": "炎黄移动端"
+}
