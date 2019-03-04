@@ -28,8 +28,8 @@
             </div>
             <div class="welcome">
                 <router-link v-if="apiList && info" :to="'/base?fm='+info.familyCode" class="chgbar" style="margin-right:16px;">[切换]</router-link>
-                <router-link v-if="apiList && info" :to="'/base?fm='+info.familyCode" class="chgbar" style="margin-right:16px;">[省级{{info.familyName}}氏]</router-link>
-                <span>欢迎进入「{{info.siteName}}」</span>
+                <router-link v-if="apiList && info" :to="info.parentId ? '/base?type=p&code=' + this.info.parentId : '/base?fm='+info.familyCode" style="margin-right:16px;">[省级{{info.familyName}}氏]</router-link>
+                <span v-if="info">欢迎进入「{{info.siteName}}」</span>
                 <span style="color:red">平台错误反馈QQ群：130523229</span>
             </div>
         </div>
