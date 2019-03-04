@@ -193,8 +193,10 @@ export default {
                 }
                 i++;
             }
-            let res = pcaa[b] || pcaa[a];
-            return Object.keys(res);
+            let _res = pcaa[b] || pcaa[a];
+            let res = Object.keys(_res);
+            res.push(b);
+            return res;
         },
         link(e) {
             this.$store.commit("updateCountyId", e.id);
