@@ -1,7 +1,12 @@
 <template>
     <div class="content" v-if="this.list.county.length">
         <section>
-            <div class="h">县级联谊会</div>
+            <div class="h">
+                <span style="margin-right:16px;">县级联谊会</span>
+                <a v-if="$route.query.fm" @click="chgFm">
+                    <small>[{{fm ? '查看全部':title}}]</small>
+                </a>
+            </div>
             <div class="b">
                 <div class="item" @click="link(v,1)" v-for="(v,i) in list.county" :key="i">
                     <div class="img">
@@ -30,11 +35,13 @@ import { pca, pcaa } from "area-data";
 export default {
     data() {
         return {
+            title: "",
+            active: this.$route.query.act || 0,
             list: {
                 county: [],
                 province: []
             },
-            fm: null,
+            fm: null
         };
     },
     computed: {},
@@ -46,7 +53,7 @@ export default {
             if (this.$route.query.type == "c") {
                 this.$store.commit("updateCountyId", this.$route.query.code);
                 this.$router.replace("/c");
-            } else if(this.$route.query.type == "p"){
+            } else if (this.$route.query.type == "p") {
                 this.$store.commit("updateProvinceId", this.$route.query.code);
                 this.$router.replace("/p");
             }
@@ -64,6 +71,8 @@ export default {
                 .then(res => {
                     if (res.code == 200) {
                         this.list.county = res.data;
+                        this.title =
+                            "只看" + this.list.county[0].familyName + "氏";
                     }
                 });
             this.api
@@ -111,7 +120,7 @@ export default {
         max-width: 90%;
         margin-left: auto;
         margin-right: auto;
-        padding-top: 128px;
+        padding-top: 108px;
     }
     .h {
         font-size: 16px;
@@ -121,12 +130,13 @@ export default {
         border-left: 3px solid #ddd;
     }
     .b {
-        margin-bottom: 64px;
+        margin-bottom: 32px;
         display: flex;
+        flex: 8;
         flex-wrap: wrap;
         .item {
-            width: 192px;
-            padding: 32px 0;
+            width: 128px;
+            padding: 16px 0;
             text-align: center;
             margin-bottom: 16px;
             cursor: pointer;

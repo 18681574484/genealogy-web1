@@ -26,11 +26,10 @@
                 <span>|</span>
                 <span class="btn reg" @click="isreg = true">注册</span>
             </div>
-            <!-- <router-link v-if="apiList && info && getApiData('index_summary')" :to="'base?fm='+info.familyCode" tag="div" class="chgbar">
-                <span>切换地区</span>
-            </router-link> -->
             <div class="welcome">
-                <span>欢迎进入「炎黄统谱网」</span>
+                <router-link v-if="apiList && info" :to="'/base?fm='+info.familyCode" class="chgbar" style="margin-right:16px;">[切换]</router-link>
+                <router-link v-if="apiList && info" :to="'/base?fm='+info.familyCode" class="chgbar" style="margin-right:16px;">[省级{{info.familyName}}氏]</router-link>
+                <span>欢迎进入「{{info.siteName}}」</span>
                 <span style="color:red">平台错误反馈QQ群：130523229</span>
             </div>
         </div>
@@ -52,11 +51,11 @@
     </div>
 </template>
 <script>
-import loginform from "./login";
-import fogetform from "./foget";
-import regform from "./reg";
-import resetform from "./reset";
-import msgBox from "./msgBox";
+import loginform from "_c/common/login";
+import fogetform from "_c/common/foget";
+import regform from "_c/common/reg";
+import resetform from "_c/common/reset";
+import msgBox from "_c/common/msgBox";
 export default {
     name: "Topbar",
     components: {
@@ -78,21 +77,31 @@ export default {
     },
     computed: {
         apiList() {
-            return this.$store.state.apiList;
+            return this.$store.state.county.apiList;
         },
         user() {
             return this.$store.state.user;
         },
         admin() {
             return this.$store.state.admin;
-        },
+        }
     },
     mounted: function() {
         if (this.$route.query.back && sessionStorage.callback) {
             sessionStorage.removeItem("callback");
         }
+        this.getApiData("index_summary");
     },
     methods: {
+        getApiData(e) {
+            this.api
+                .get(this.api.county.base + this.apiList[e].apiUrl, {})
+                .then(res => {
+                    if (res.code == 200) {
+                        this.info = res.data;
+                    }
+                });
+        },
         handleClick(e) {
             switch (e) {
                 case "isMsgBox":
