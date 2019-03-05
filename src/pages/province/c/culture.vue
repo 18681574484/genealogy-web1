@@ -19,7 +19,7 @@
             </div>
         </div>
         <div class="b ba" v-else>
-            <router-link class="item" tag="div" :to="'detail?type=culture&id='+v.id" v-for="(v,i) in list" :key="i" v-show="i<4">
+            <router-link class="item" tag="div" :to="'detail?type=culture&id='+v.id" v-for="(v,i) in list" :key="i" v-show="i<6">
                 <div class="img" :style="v.newsUploadFileList.length ? api.imgBG(v.newsUploadFileList[0].filePath):''"></div>
                 <div class="obj">
                     <div class="tit">{{v.newsTitle}}</div>
@@ -39,7 +39,7 @@ export default {
             apiData: {
                 index_family_culture: {},
                 index_zipai: {},
-                index_family_qianxi: {}
+                index_family_culture3: {}
             },
             list: []
         };
@@ -52,7 +52,7 @@ export default {
     mounted: function() {
         this.getApiData("index_family_culture");
         this.getApiData("index_zipai");
-        this.getApiData("index_family_qianxi");
+        this.getApiData("index_family_culture3");
     },
     methods: {
         getApiData(e) {

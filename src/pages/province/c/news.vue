@@ -79,6 +79,9 @@ export default {
     }
     .b {
         height: 400px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
         .item {
             overflow: hidden;
             white-space: nowrap;
